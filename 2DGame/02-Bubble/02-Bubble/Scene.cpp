@@ -48,7 +48,22 @@ void Scene::update(int deltaTime)
 	float halfWidth = SCREEN_WIDTH / 2.0f;
 	float halfHeight = SCREEN_HEIGHT / 2.0f;
 
-	projection = glm::ortho(playerPos.x - halfWidth, playerPos.x + halfWidth, playerPos.y + halfHeight, playerPos.y - halfHeight);
+	// Calcular el ancho del mapa
+	float mapWidth = map->getMapSize().x * map->getTileSize(); // Método para obtener el tamaño del mapa
+
+															   // Calcular la posición de la cámara en el eje X
+	float cameraX = playerPos.x;
+
+	
+	if (cameraX < halfWidth) {
+		cameraX = halfWidth; 
+	}
+	else if (cameraX > mapWidth - halfWidth) {
+		cameraX = mapWidth - halfWidth; 
+	}
+
+	projection = glm::ortho(cameraX - halfWidth, cameraX + halfWidth,
+		playerPos.y + halfHeight, playerPos.y - halfHeight);
 }
 
 void Scene::render()

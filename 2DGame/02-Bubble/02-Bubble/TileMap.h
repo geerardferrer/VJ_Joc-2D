@@ -30,6 +30,8 @@ public:
 	void free();
 
 	int getTileSize() const { return tileSize; }
+	glm::ivec2 TileMap::getMapSize() const { return mapSize; }
+
 
 	bool collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) const;
 	bool collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size) const;
