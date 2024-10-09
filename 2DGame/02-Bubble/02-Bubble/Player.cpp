@@ -20,11 +20,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	bJumping = false;
 
-	if (!spritesheet.loadFromFile("images/Luigi_Sprites.png", TEXTURE_PIXEL_FORMAT_RGBA)) {
-		std::cerr << "Error en carregar Luigi_Sprites.png" << std::endl;
-		return;  // Aturar l'execució si no es carrega
-	}
-
+	spritesheet.loadFromFile("images/Luigi_Sprites.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(64, 64), glm::vec2(0.125f, 0.25f), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(4);
 
@@ -40,9 +36,9 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.25f, 0.f));
 
 	sprite->setAnimationSpeed(MOVE_RIGHT, 8);
-	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.375, 0.f));
-	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.5, 0.f));
-	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.625, 0.f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.375f, 0.f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.5f, 0.f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.625f, 0.f));
 
 	sprite->changeAnimation(0);
 	tileMapDispl = tileMapPos;
