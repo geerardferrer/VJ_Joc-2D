@@ -21,7 +21,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	bJumping = false;
 
 	spritesheet.loadFromFile("images/Luigi_Sprites.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(96, 96), glm::vec2(0.125f, 0.25f), &spritesheet, &shaderProgram);
+	sprite = Sprite::createSprite(glm::ivec2(64, 64), glm::vec2(0.125f, 0.25f), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(4);
 
 	sprite->setAnimationSpeed(STAND_LEFT, 8);
@@ -44,6 +44,8 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	tileMapDispl = tileMapPos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 
+	posCollision = glm::ivec2(16, 0);
+	sizeCollision = glm::ivec2(32, 64);
 }
 
 void Player::update(int deltaTime)
@@ -54,7 +56,7 @@ void Player::update(int deltaTime)
 		if (sprite->animation() != MOVE_LEFT)
 			sprite->changeAnimation(MOVE_LEFT);
 		posPlayer.x -= 6;
-		if (map->collisionMoveLeft(posPlayer + glm::ivec2(36, 0), glm::ivec2(48, 96)))
+		if (map->collisionMoveLeft(posPlayer + posCollision, sizeCollision))
 		{
 			posPlayer.x += 6;
 			sprite->changeAnimation(STAND_LEFT);
@@ -65,7 +67,7 @@ void Player::update(int deltaTime)
 		if (sprite->animation() != MOVE_RIGHT)
 			sprite->changeAnimation(MOVE_RIGHT);
 		posPlayer.x += 6;
-		if (map->collisionMoveRight(posPlayer + glm::ivec2(37.5, 0), glm::ivec2(48, 96)))
+		if (map->collisionMoveRight(posPlayer + posCollision, sizeCollision))
 		{
 			posPlayer.x -= 6;
 			sprite->changeAnimation(STAND_RIGHT);
@@ -89,7 +91,7 @@ void Player::update(int deltaTime)
 			posPlayer.y = int(startY - JUMP_HEIGHT * sin(3.14159f * jumpAngle / 180.f)); // Calcula la nueva posición Y
 
 			if (jumpAngle < 90) {  // Només ens interessa la col·lisió durant el moviment ascendent
-				if (map->collisionMoveUp(posPlayer, glm::ivec2(48, 96), &posPlayer.y)) {
+				if (map->collisionMoveUp(posPlayer + posCollision, sizeCollision, &posPlayer.y)) {
 					// Si hi ha col·lisió, para el salt i ajusta la posició
 					bJumping = false;
 					jumpAngle = 180;  // Força el final del salt
@@ -99,7 +101,7 @@ void Player::update(int deltaTime)
 
 			// Comprobar colisiones en la caída
 			if (jumpAngle > 90) {
-				if (map->collisionMoveDown(posPlayer, glm::ivec2(48, 96), &posPlayer.y)) {
+				if (map->collisionMoveDown(posPlayer + posCollision, sizeCollision, &posPlayer.y)) {
 					bJumping = false; // Si hay colisión, termina el salto
 					jumpAngle = 180; // Asegúrate de que el ángulo esté en 180
 				}
@@ -109,7 +111,7 @@ void Player::update(int deltaTime)
 	else {
 		posPlayer.y += FALL_STEP; // Si no está saltando, cae
 
-		if (map->collisionMoveDown(posPlayer, glm::ivec2(96, 96), &posPlayer.y)) {
+		if (map->collisionMoveDown(posPlayer + posCollision, sizeCollision, &posPlayer.y)) {
 			// Se detectó colisión al caer
 			if (Game::instance().getKey(GLFW_KEY_UP)) {
 				bJumping = true; // Inicia el salto si se presiona la tecla

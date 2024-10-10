@@ -25,6 +25,7 @@ public:
 private:
 	bool bJumping;
 	glm::ivec2 tileMapDispl, posPlayer;
+	glm::ivec2 posCollision, sizeCollision;
 	int jumpAngle, startY;
 	float velocityX, accelerationX, maxSpeedX; // Nuevas variables
 	Texture spritesheet;
