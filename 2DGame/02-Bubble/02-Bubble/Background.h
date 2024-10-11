@@ -14,21 +14,18 @@
 class Background
 {
 public:
-	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
+	static Background *createBackground(const string &filename, const glm::vec2 &size, ShaderProgram &shaderProgram);
 	void update(int deltaTime);
 	void render();
 
-	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
 
 	glm::vec2 getPosition() const;
 
 private:
-	bool bJumping;
-	glm::ivec2 tileMapDispl, posBackground;
+	glm::ivec2 posBackground;
 	Texture spritesheet;
 	Sprite *sprite;
-	TileMap *map;
 };
 
 #endif // _BACKGROUND_INCLUDE

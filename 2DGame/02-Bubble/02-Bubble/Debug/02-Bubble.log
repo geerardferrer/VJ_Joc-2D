@@ -1,4 +1,4 @@
-﻿Compilación iniciada a las 10/10/2024 18:58:57.
+﻿Compilación iniciada a las 11/10/2024 13:10:56.
      1>Proyecto "C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"..\..\..\libs\Simple OpenGL Image Library\src" /I"..\..\..\libs\glew-1.13.0\include" /I..\..\..\libs\glm /I"..\..\..\libs\glfw-3.3.8\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Background.cpp
@@ -14,14 +14,9 @@
          Debug\Sprite.obj
          Debug\Texture.obj
          Debug\TileMap.obj
-     1>LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
-     1>SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontr¾ PDB 'vc100.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
-     1>SOIL.lib(image_helper.obj) : warning LNK4099: no se encontr¾ PDB 'vc100.pdb' con 'SOIL.lib(image_helper.obj)' o en 'C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
-     1>SOIL.lib(SOIL.obj) : warning LNK4099: no se encontr¾ PDB 'vc100.pdb' con 'SOIL.lib(SOIL.obj)' o en 'C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
-     1>SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontr¾ PDB 'vc100.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
          02-Bubble.vcxproj -> C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe
      1>Compilación del proyecto terminada "C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" (Build destinos).
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:01.10
+Tiempo transcurrido 00:00:00.95

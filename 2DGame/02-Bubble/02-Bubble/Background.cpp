@@ -5,23 +5,21 @@
 #include "Game.h"
 
 
-void Background::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
-{
-	spritesheet.loadFromFile("images/Background.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(496, 272), glm::vec2(1.f, 1.f), &spritesheet, &shaderProgram);
-	spritesheet.setMagFilter(GL_NEAREST);
-	sprite->setNumberAnimations(0);
+Background *Background::createBackground(const string &filename, const glm::vec2 &size, ShaderProgram &shaderProgram) {
+	Background *bg = new Background();
 
-	sprite->changeAnimation(0);
-	tileMapDispl = tileMapPos;
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posBackground.x), float(tileMapDispl.y + posBackground.y)));
+	bg->spritesheet.loadFromFile(filename, TEXTURE_PIXEL_FORMAT_RGBA); 
+	bg->sprite = Sprite::createSprite(size, glm::vec2(1.f, 1.f), &bg->spritesheet, &shaderProgram);
+	bg->spritesheet.setMagFilter(GL_NEAREST);
+
+	return bg;
 }
 
 void Background::update(int deltaTime)
 {
 	sprite->update(deltaTime);
 
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posBackground.x), float(tileMapDispl.y + posBackground.y)));
+	sprite->setPosition(glm::vec2(float(posBackground.x), float(posBackground.y)));
 }
 
 void Background::render()
@@ -33,15 +31,10 @@ glm::vec2 Background::getPosition() const {
 	return posBackground;
 }
 
-void Background::setTileMap(TileMap *tileMap)
-{
-	map = tileMap;
-}
-
 void Background::setPosition(const glm::vec2 &pos)
 {
 	posBackground = pos;
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posBackground.x), float(tileMapDispl.y + posBackground.y)));
+	sprite->setPosition(glm::vec2(float(posBackground.x), float(posBackground.y)));
 }
 
 

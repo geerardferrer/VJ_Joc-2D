@@ -5,7 +5,7 @@
 #include "Game.h"
 
 
-#define SCREEN_X 32
+#define SCREEN_X 0
 #define SCREEN_Y 0
 
 #define INIT_PLAYER_X_TILES 4
@@ -16,6 +16,7 @@ Scene::Scene()
 {
 	map = NULL;
 	player = NULL;
+	background = NULL;
 }
 
 Scene::~Scene()
@@ -24,6 +25,8 @@ Scene::~Scene()
 		delete map;
 	if(player != NULL)
 		delete player;
+	if (background != NULL)
+		delete background;
 }
 
 
@@ -31,10 +34,15 @@ void Scene::init()
 {
 	initShaders();
 	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+
+	background = Background::createBackground("images/Background.png", glm::vec2(SCREEN_WIDTH, SCREEN_HEIGHT), texProgram);
+	background->setPosition(glm::vec2(4 * map->getTileSize(), 70 * map->getTileSize()));
+
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
+
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH), float(SCREEN_HEIGHT), 0.f);
 	currentTime = 0.0f;
 }
@@ -76,8 +84,10 @@ void Scene::render()
 	modelview = glm::mat4(1.0f);
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
+
 	map->render();
 	player->render();
+	background->render();
 }
 
 void Scene::initShaders()
