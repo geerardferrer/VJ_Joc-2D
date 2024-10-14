@@ -36,7 +36,7 @@ void Scene::init()
 	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 
 	background = Background::createBackground("images/Background.png", glm::vec2(SCREEN_WIDTH, SCREEN_HEIGHT), texProgram);
-	background->setPosition(glm::vec2(4 * map->getTileSize(), 70 * map->getTileSize()));
+	//background->setPosition(glm::vec2(4 * map->getTileSize(), 70 * map->getTileSize()));
 
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);

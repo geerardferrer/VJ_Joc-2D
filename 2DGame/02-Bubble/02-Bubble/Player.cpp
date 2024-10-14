@@ -14,9 +14,9 @@ enum PlayerAnims
 {
 	STAND_LEFT, STAND_RIGHT, //FET
 	MOVE_LEFT, MOVE_RIGHT,  //FET
-	CROUCH_LEFT, CROUCH_RIGHT, //FET (FALTA MIRAR QUE NOMÉS S'HA D'AJUPIR QUAN ESTÀ AL TERRA)
-	JUMP_LEFT, JUMP_RIGHT, 
-	FALL_ASS_LEFT, FALL_ASS_RIGHT, 
+	CROUCH_LEFT, CROUCH_RIGHT, //FET 
+	JUMP_LEFT, JUMP_RIGHT, //FET (POTSER FALTA ARREGLAR ALGUN BUG)
+	FALL_ASS_LEFT, FALL_ASS_RIGHT, //NO FUNCIONA AL CAURE D'UNA PLATAFORMA (SI SALTA SI, SI CAU NO)
 	DRIFT_LEFT, DRIFT_RIGHT, 
 	STAND_OBJ_LEFT, STAND_OBJ_RIGHT, 
 	MOVE_OBJ_LEFT, MOVE_OBJ_RIGHT, 
@@ -29,6 +29,7 @@ enum PlayerAnims
 void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	bJumping = false;
+	bFalling = false;
 
 	spritesheet.loadFromFile("images/Luigi_Sprites.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(96, 96), glm::vec2(0.125f, 0.25f), &spritesheet, &shaderProgram);
@@ -57,6 +58,19 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->setAnimationSpeed(CROUCH_RIGHT, 8);
 	sprite->addKeyframe(CROUCH_RIGHT, glm::vec2(0.125f, 0.75f));
 
+	sprite->setAnimationSpeed(JUMP_LEFT, 8);
+	sprite->addKeyframe(JUMP_LEFT, glm::vec2(0.f, 0.f));
+
+	sprite->setAnimationSpeed(JUMP_RIGHT, 8);
+	sprite->addKeyframe(JUMP_RIGHT, glm::vec2(0.375f, 0.f)); 
+
+	sprite->setAnimationSpeed(FALL_ASS_LEFT, 8);
+	sprite->addKeyframe(FALL_ASS_LEFT, glm::vec2(0.5f, 0.5f));
+
+	sprite->setAnimationSpeed(FALL_ASS_RIGHT, 8);
+	sprite->addKeyframe(FALL_ASS_RIGHT, glm::vec2(0.625f, 0.5f));
+
+
 
 
 	sprite->changeAnimation(0);
@@ -72,35 +86,64 @@ void Player::update(int deltaTime)
 	sprite->update(deltaTime);
 	if (Game::instance().getKey(GLFW_KEY_LEFT))
 	{
-		if (sprite->animation() != MOVE_LEFT)
-			sprite->changeAnimation(MOVE_LEFT);
+		if (bJumping)
+		{
+			if (sprite->animation() != JUMP_LEFT)
+				sprite->changeAnimation(JUMP_LEFT);
+		}
+		else
+		{
+			if (sprite->animation() != MOVE_LEFT)
+				sprite->changeAnimation(MOVE_LEFT);
+		}
 		posPlayer.x -= 4;
 		if (map->collisionMoveLeft(posPlayer + posCollision, sizeCollision))
 		{
 			posPlayer.x += 4;
-			sprite->changeAnimation(STAND_LEFT);
+			if (!bJumping)
+				sprite->changeAnimation(STAND_LEFT);
 		}
 	}
 	else if (Game::instance().getKey(GLFW_KEY_RIGHT))
 	{
-		if (sprite->animation() != MOVE_RIGHT)
-			sprite->changeAnimation(MOVE_RIGHT);
+		if (bJumping) {
+			if (sprite->animation() != JUMP_RIGHT)
+				sprite->changeAnimation(JUMP_RIGHT);
+		}
+		else {
+			if (sprite->animation() != MOVE_RIGHT)
+				sprite->changeAnimation(MOVE_RIGHT);
+		}
 		posPlayer.x += 4;
 		if (map->collisionMoveRight(posPlayer + posCollision, sizeCollision))
 		{
 			posPlayer.x -= 4;
-			sprite->changeAnimation(STAND_RIGHT);
+			if (!bJumping)
+				sprite->changeAnimation(STAND_RIGHT);
 		}
 	}
 	else if (Game::instance().getKey(GLFW_KEY_DOWN))
 	{
-		if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) {
-			std::cout << "Ha entrat al LEFT" << endl;
-			sprite->changeAnimation(CROUCH_LEFT);
+		// Si está en el aire, aplicar la animación de caída en picado
+		if (bJumping || bFalling) {
+			if (sprite->animation() == JUMP_LEFT || sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) {
+				sprite->changeAnimation(FALL_ASS_LEFT);
+			}
+			else if (sprite->animation() == JUMP_RIGHT || sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) {
+				sprite->changeAnimation(FALL_ASS_RIGHT);
+			}
+
+			// Aumentar la velocidad de caída para simular la caída en picado
+			posPlayer.y += FALL_STEP * 2;  // Incrementa la velocidad de caída
 		}
-		else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) {
-			std::cout << "Ha entrat al RIGHT" << endl;
-			sprite->changeAnimation(CROUCH_RIGHT);
+		else // En el suelo, animación de agacharse normal
+		{
+			if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) {
+				sprite->changeAnimation(CROUCH_LEFT);
+			}
+			else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) {
+				sprite->changeAnimation(CROUCH_RIGHT);
+			}
 		}
 	}
 	else
@@ -116,33 +159,85 @@ void Player::update(int deltaTime)
 		if (jumpAngle >= 180) {
 			bJumping = false; // Termina el salto
 			jumpAngle = 180; // Asegúrate de que el ángulo esté en 180
+
+			if (!bJumping)
+			{
+				if (sprite->animation() == JUMP_LEFT) {
+					sprite->changeAnimation(STAND_LEFT);
+				}
+				else if (sprite->animation() == JUMP_RIGHT) {
+					sprite->changeAnimation(STAND_RIGHT);
+				}
+			}
 		}
 		else {
 			posPlayer.y = int(startY - JUMP_HEIGHT * sin(3.14159f * jumpAngle / 180.f)); // Calcula la nueva posición Y
-
+			 // Forzar animación de salto si no se presionan teclas
+            if (sprite->animation() != JUMP_LEFT && sprite->animation() != JUMP_RIGHT) {
+                if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) {
+                    sprite->changeAnimation(JUMP_LEFT);
+                } else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) {
+                    sprite->changeAnimation(JUMP_RIGHT);
+                }
+            }
 			if (jumpAngle < 90) {  // Només ens interessa la col·lisió durant el moviment ascendent
 				if (map->collisionMoveUp(posPlayer + posCollision, sizeCollision, &posPlayer.y)) {
 					// Si hi ha col·lisió, para el salt i ajusta la posició
 					bJumping = false;
 					jumpAngle = 180;  // Força el final del salt
 					posPlayer.y += 1; // Ajusta lleugerament la posició perquè no quedi "enganxat"
+
+					if (!bJumping)
+					{
+						if (sprite->animation() == JUMP_LEFT) {
+							sprite->changeAnimation(STAND_LEFT);
+						}
+						else if (sprite->animation() == JUMP_RIGHT) {
+							sprite->changeAnimation(STAND_RIGHT);
+						}
+					}
 				}
 			}
 
 			// Comprobar colisiones en la caída
 			if (jumpAngle > 90) {
+				bFalling = true;
 				if (map->collisionMoveDown(posPlayer + posCollision, sizeCollision, &posPlayer.y)) {
 					bJumping = false; // Si hay colisión, termina el salto
 					jumpAngle = 180; // Asegúrate de que el ángulo esté en 180
 				}
+				if (!bJumping)
+				{
+					if (sprite->animation() == JUMP_LEFT) {
+						sprite->changeAnimation(STAND_LEFT);
+					}
+					else if (sprite->animation() == JUMP_RIGHT) {
+						sprite->changeAnimation(STAND_RIGHT);
+					}
+				}
+				
 			}
 		}
 	}
 	else {
 		posPlayer.y += FALL_STEP; // Si no está saltando, cae
 
+		if (bFalling)
+		{
+			std::cout << "Cau" << endl;
+			if (sprite->animation() == MOVE_LEFT) {
+				std::cout << "Cau left" << endl;
+				sprite->changeAnimation(JUMP_LEFT);
+			}
+
+			else if (sprite->animation() == MOVE_RIGHT) {
+				std::cout << "Cau right" << endl;
+				sprite->changeAnimation(JUMP_RIGHT);
+			}
+		}
 		if (map->collisionMoveDown(posPlayer + posCollision, sizeCollision, &posPlayer.y)) {
 			// Se detectó colisión al caer
+			bFalling = false;
 			if (Game::instance().getKey(GLFW_KEY_UP)) {
 				bJumping = true; // Inicia el salto si se presiona la tecla
 				jumpAngle = 0;

@@ -23,7 +23,7 @@ public:
 	glm::vec2 getPosition() const;
 
 private:
-	bool bJumping;
+	bool bJumping, bFalling;
 	glm::ivec2 tileMapDispl, posPlayer;
 	glm::ivec2 posCollision, sizeCollision;
 	int jumpAngle, startY;
