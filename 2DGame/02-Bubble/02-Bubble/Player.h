@@ -23,11 +23,17 @@ public:
 	glm::vec2 getPosition() const;
 
 private:
-	bool bJumping, bFalling;
-	glm::ivec2 tileMapDispl, posPlayer;
-	glm::ivec2 posCollision, sizeCollision;
-	int jumpAngle, startY;
-	float velocityX, accelerationX, maxSpeedX; // Nuevas variables
+	const float acceleration = 0.3f;
+	const float frictionForce = 0.9f;
+	const float maxVelPlayer = 6.f;
+	const float gravity = 0.4f;
+	const float jumpForce = 11.f;
+
+	bool isGrounded;
+	glm::fvec2 posPlayer, velPlayer, posCollision;
+	glm::ivec2 sizeCollision;
+	glm::ivec2 tileMapDispl;
+
 	Texture spritesheet;
 	Sprite *sprite;
 	TileMap *map;
