@@ -24,7 +24,7 @@ public:
 
 private:
 	glm::fvec2 posEnemy, posCollision;
-	int moveSpeed;
+	float moveSpeed;
 	int moveDirection; // 1 para derecha, -1 para izquierda
 	glm::ivec2 sizeCollision;
 	glm::ivec2 tileMapDispl;

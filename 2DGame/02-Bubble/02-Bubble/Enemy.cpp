@@ -16,6 +16,9 @@ enum EnemyAnims
 
 void Enemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
+	moveSpeed = 0.5;        // Velocidad de movimiento del enemigo
+	moveDirection = -1;
+
 	spritesheet.loadFromFile("images/Enemy_Sprites.png", TEXTURE_PIXEL_FORMAT_RGBA); // Asegúrate de tener esta textura
 	sprite = Sprite::createSprite(glm::ivec2(64, 64), glm::vec2(0.125f, 0.5f), &spritesheet, &shaderProgram);
 	spritesheet.setMagFilter(GL_NEAREST);
@@ -34,8 +37,8 @@ void Enemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	tileMapDispl = tileMapPos;
 
 	// Ajustamos la hitbox del enemigo
-	posCollision = glm::vec2(33, 0); // Ajusta según la forma del sprite (igual que en el player)
-	sizeCollision = glm::ivec2(30, 64); // Tamaño de la hitbox (ajustado a 30x96)
+	posCollision = glm::vec2(22, 0); // Ajusta según la forma del sprite (igual que en el player)
+	sizeCollision = glm::ivec2(22, 64); // Tamaño de la hitbox (ajustado a 30x96)
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
 }
