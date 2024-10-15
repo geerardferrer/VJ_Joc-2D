@@ -172,6 +172,8 @@ void Player::update(int deltaTime)
 		else
 		{
 			velPlayer.y += gravity; // Caída normal
+
+			if (velPlayer.y > maxFallPlayer) velPlayer.y = maxFallPlayer;
 		}
 	}
 
