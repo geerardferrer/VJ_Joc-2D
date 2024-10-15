@@ -15,14 +15,14 @@ enum PlayerAnims
 	STAND_LEFT, STAND_RIGHT, //FET
 	MOVE_LEFT, MOVE_RIGHT,  //FET
 	CROUCH_LEFT, CROUCH_RIGHT, //FET 
-	JUMP_LEFT, JUMP_RIGHT, //FET (POTSER FALTA ARREGLAR ALGUN BUG)
-	FALL_ASS_LEFT, FALL_ASS_RIGHT, //NO FUNCIONA AL CAURE D'UNA PLATAFORMA (SI SALTA SI, SI CAU NO)
-	DRIFT_LEFT, DRIFT_RIGHT, 
-	STAND_OBJ_LEFT, STAND_OBJ_RIGHT, 
-	MOVE_OBJ_LEFT, MOVE_OBJ_RIGHT, 
-	JUMP_OBJ_LEFT, JUMP_OBJ_RIGHT, 
-	CLIMB, 
-	VICTORY_STAND
+	JUMP_LEFT, JUMP_RIGHT, //FET 
+	FALL_ASS_LEFT, FALL_ASS_RIGHT, //Quan es prem down i s'esta a l'aire cau de cul, pero si arriba al terra i encara s'esta prement la tecla down, fa CROUCH 
+	DRIFT_LEFT, DRIFT_RIGHT, //NO HE SAPIGUT FER-HO
+	STAND_OBJ_LEFT, STAND_OBJ_RIGHT, //NO FET
+	MOVE_OBJ_LEFT, MOVE_OBJ_RIGHT, //NO FET
+	JUMP_OBJ_LEFT, JUMP_OBJ_RIGHT, //NO FET
+	CLIMB, //NO FET
+	VICTORY_STAND //NO FET
 };
 
 
@@ -81,7 +81,7 @@ void Player::update(int deltaTime)
 {
 	sprite->update(deltaTime);
 
-	cout << isGrounded << endl;
+	//cout << isGrounded << endl;
 
 	// MOVIMENT HORITZONTAL
 	if (Game::instance().getKey(GLFW_KEY_LEFT))
@@ -91,7 +91,13 @@ void Player::update(int deltaTime)
 		
 		if (velPlayer.x < -maxVelPlayer) velPlayer.x = -maxVelPlayer;
 
-		if (sprite->animation() != MOVE_LEFT) sprite->changeAnimation(MOVE_LEFT);
+		
+		if (isGrounded) {
+			if (sprite->animation() != MOVE_LEFT) sprite->changeAnimation(MOVE_LEFT);
+		}
+		else {
+			if (sprite->animation() != JUMP_LEFT) sprite->changeAnimation(JUMP_LEFT);
+		}
 	}
 	else if (Game::instance().getKey(GLFW_KEY_RIGHT))
 	{
@@ -100,15 +106,23 @@ void Player::update(int deltaTime)
 		
 		if (velPlayer.x > maxVelPlayer) velPlayer.x = maxVelPlayer;
 
-		if (sprite->animation() != MOVE_RIGHT) sprite->changeAnimation(MOVE_RIGHT);
+		
+		if (isGrounded) {
+			if (sprite->animation() != MOVE_RIGHT) sprite->changeAnimation(MOVE_RIGHT);
+		}
+		else {
+			if (sprite->animation() != JUMP_RIGHT) sprite->changeAnimation(JUMP_RIGHT);
+		}
 	}
 	else
 	{
 		velPlayer.x *= frictionForce;
 		if (fabs(velPlayer.x) < 0.1f) velPlayer.x = 0.f;
 
-		if (sprite->animation() == MOVE_LEFT) sprite->changeAnimation(STAND_LEFT);
-		else if (sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(STAND_RIGHT);
+		if (isGrounded) {
+			if (sprite->animation() == MOVE_LEFT) sprite->changeAnimation(STAND_LEFT);
+			else if (sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(STAND_RIGHT);
+		}
 	}
 
 	posPlayer.x += velPlayer.x;
@@ -131,19 +145,33 @@ void Player::update(int deltaTime)
 			velPlayer.y = -jumpForce;
 			isGrounded = false;
 
-			if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) sprite->changeAnimation(JUMP_LEFT);
+			if (sprite->animation() == CROUCH_LEFT) sprite->changeAnimation(JUMP_LEFT);
+			else if (sprite->animation() == CROUCH_RIGHT) sprite->changeAnimation(JUMP_RIGHT);
+			else if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) sprite->changeAnimation(JUMP_LEFT);
 			else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(JUMP_RIGHT);
 		}
+		else if (Game::instance().getKey(GLFW_KEY_DOWN))
+		{
+			if (sprite->animation() != FALL_ASS_LEFT && sprite->animation() != FALL_ASS_RIGHT)
+			{
+				if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) sprite->changeAnimation(CROUCH_LEFT);
+				else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(CROUCH_RIGHT);
+			}
+		}
 	}
-	else if (!isGrounded)
+	else
 	{
+		// Si estamos en el aire y se presiona la tecla DOWN, cambia a la animación de caer de culo
 		if (Game::instance().getKey(GLFW_KEY_DOWN))
 		{
-			velPlayer.y += gravity*5;
+			if (sprite->animation() == JUMP_LEFT || sprite->animation() == MOVE_LEFT) sprite->changeAnimation(FALL_ASS_LEFT);
+			else if (sprite->animation() == JUMP_RIGHT || sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(FALL_ASS_RIGHT);
+
+			velPlayer.y += gravity * 5; // Caída más rápida si se presiona DOWN
 		}
 		else
 		{
-			velPlayer.y += gravity;
+			velPlayer.y += gravity; // Caída normal
 		}
 	}
 
@@ -158,6 +186,15 @@ void Player::update(int deltaTime)
 	{
 		velPlayer.y = 0;
 		isGrounded = true;
+
+		if (sprite->animation() == JUMP_LEFT || sprite->animation() == FALL_ASS_LEFT)
+		{
+			sprite->changeAnimation(STAND_LEFT);
+		}
+		else if (sprite->animation() == JUMP_RIGHT || sprite->animation() == FALL_ASS_RIGHT)
+		{
+			sprite->changeAnimation(STAND_RIGHT);
+		}
 	}
 	else if (isGrounded && !map->collisionMoveDown(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision))
 	{

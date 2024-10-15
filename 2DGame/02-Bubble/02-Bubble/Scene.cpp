@@ -17,6 +17,7 @@ Scene::Scene()
 	map = NULL;
 	player = NULL;
 	background = NULL;
+	enemy = NULL;
 }
 
 Scene::~Scene()
@@ -27,6 +28,8 @@ Scene::~Scene()
 		delete player;
 	if (background != NULL)
 		delete background;
+	if (enemy != NULL)
+		delete enemy;
 }
 
 
@@ -43,6 +46,12 @@ void Scene::init()
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
 
+	enemy = new Enemy();
+	enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	enemy->setPosition(glm::vec2((INIT_PLAYER_X_TILES + 10) * map->getTileSize(), (INIT_PLAYER_Y_TILES * map->getTileSize())));
+	enemy->setTileMap(map);
+
+
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH), float(SCREEN_HEIGHT), 0.f);
 	currentTime = 0.0f;
 }
@@ -51,6 +60,7 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	player->update(deltaTime);
+	enemy->update(deltaTime);
 
 	glm::vec2 playerPos = player->getPosition();
 	float halfWidth = SCREEN_WIDTH / 2.0f;
@@ -87,6 +97,7 @@ void Scene::render()
 
 	map->render();
 	player->render();
+	enemy->render();
 	background->render();
 }
 
