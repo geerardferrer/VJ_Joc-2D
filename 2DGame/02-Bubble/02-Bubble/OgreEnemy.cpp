@@ -94,7 +94,7 @@ void OgreEnemy::update(int deltaTime)
 
 	// Aplicar gravedad para que el enemigo caiga si no está sobre una plataforma
 	posEnemy.y += FALL_STEP;
-	if (map->collisionMoveDown(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision));
+	if (map->collisionMoveDown(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision))
 	{
 		// Si está en el suelo, no hacemos nada
 	}

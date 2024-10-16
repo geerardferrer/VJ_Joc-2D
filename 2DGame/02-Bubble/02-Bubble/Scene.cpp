@@ -43,10 +43,22 @@ void Scene::init()
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
 
-	//ogre[0] = new OgreEnemy();
-	//ogre[0]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	//ogre[0]->setPosition(glm::vec2((INIT_PLAYER_X_TILES + 10) * map->getTileSize(), ((INIT_PLAYER_Y_TILES)* map->getTileSize())));
-	//ogre[0]->setTileMap(map);
+	for (int i = 0; i < NUM_ROCKS; ++i) rock.push_back(new Rock());
+
+	for (int i = 0; i < rock.size(); ++i)
+	{
+		rock[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+		rock[i]->setTileMap(map);
+	}
+	
+	rock[0]->setPosition(glm::vec2(37 * map->getTileSize(), (72 * map->getTileSize())));
+	rock[1]->setPosition(glm::vec2(56 * map->getTileSize(), (76 * map->getTileSize())));
+	rock[2]->setPosition(glm::vec2(77 * map->getTileSize(), (75 * map->getTileSize())));
+	rock[3]->setPosition(glm::vec2(71 * map->getTileSize(), (94 * map->getTileSize())));
+	rock[4]->setPosition(glm::vec2(118 * map->getTileSize(), (70 * map->getTileSize())));
+	rock[5]->setPosition(glm::vec2(150 * map->getTileSize(), (118 * map->getTileSize())));
+	rock[6]->setPosition(glm::vec2(142 * map->getTileSize(), (118 * map->getTileSize())));
+	rock[7]->setPosition(glm::vec2(44 * map->getTileSize(), (161 * map->getTileSize())));
 
 	for (int i = 0; i < NUM_OGRES; ++i) ogre.push_back(new OgreEnemy());
 
@@ -56,14 +68,14 @@ void Scene::init()
 		ogre[i]->setTileMap(map);
 	}
 
-	ogre[0]->setPosition(glm::vec2(36 * map->getTileSize(), (71 * map->getTileSize())));
-	ogre[1]->setPosition(glm::vec2(55 * map->getTileSize(), (75 * map->getTileSize())));
-	ogre[2]->setPosition(glm::vec2(76 * map->getTileSize(), (74 * map->getTileSize())));
-	ogre[3]->setPosition(glm::vec2(70 * map->getTileSize(), (93 * map->getTileSize())));
-	ogre[4]->setPosition(glm::vec2(117 * map->getTileSize(), (69 * map->getTileSize())));
-	ogre[5]->setPosition(glm::vec2(149 * map->getTileSize(), (117 * map->getTileSize())));
-	ogre[6]->setPosition(glm::vec2(141 * map->getTileSize(), (117 * map->getTileSize())));
-	ogre[7]->setPosition(glm::vec2(43 * map->getTileSize(), (160 * map->getTileSize())));
+	ogre[0]->setPosition(glm::vec2(37 * map->getTileSize(), (73 * map->getTileSize())));
+	ogre[1]->setPosition(glm::vec2(56 * map->getTileSize(), (77 * map->getTileSize())));
+	ogre[2]->setPosition(glm::vec2(77 * map->getTileSize(), (76 * map->getTileSize())));
+	ogre[3]->setPosition(glm::vec2(71 * map->getTileSize(), (95 * map->getTileSize())));
+	ogre[4]->setPosition(glm::vec2(118 * map->getTileSize(), (71 * map->getTileSize())));
+	ogre[5]->setPosition(glm::vec2(150 * map->getTileSize(), (119 * map->getTileSize())));
+	ogre[6]->setPosition(glm::vec2(142 * map->getTileSize(), (119 * map->getTileSize())));
+	ogre[7]->setPosition(glm::vec2(44 * map->getTileSize(), (162 * map->getTileSize())));
 
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH), float(SCREEN_HEIGHT), 0.f);
 	currentTime = 0.0f;
@@ -73,6 +85,7 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	player->update(deltaTime);
+	for (int i = 0; i < rock.size(); ++i) rock[i]->update(deltaTime);
 	for (int i = 0; i < ogre.size(); ++i) ogre[i]->update(deltaTime);
 
 	glm::vec2 playerPos = player->getPosition();
@@ -110,6 +123,7 @@ void Scene::render()
 
 	map->render();
 	//background->render();
+	for (int i = 0; i < rock.size(); ++i) rock[i]->render();
 	player->render();
 	for (int i = 0; i < ogre.size(); ++i) ogre[i]->render();
 	ogre[0]->render();
