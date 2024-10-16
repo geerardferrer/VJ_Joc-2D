@@ -3,6 +3,7 @@
 
 
 #include <glm/glm.hpp>
+#include <vector>
 #include "ShaderProgram.h"
 #include "TileMap.h"
 #include "Background.h"
@@ -13,6 +14,7 @@
 // Scene contains all the entities of our game.
 // It is responsible for updating and render them.
 
+#define NUM_OGRES 8
 
 class Scene
 {
@@ -31,7 +33,7 @@ private:
 private:
 	TileMap *map;
 	Player *player;
-	OgreEnemy *enemy;
+	vector<OgreEnemy*> ogre;
 	Background *background;
 	ShaderProgram texProgram;
 	float currentTime;

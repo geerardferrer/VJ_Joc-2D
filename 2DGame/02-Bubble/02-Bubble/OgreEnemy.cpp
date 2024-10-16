@@ -17,7 +17,7 @@ enum OgreEnemyAnims
 
 void OgreEnemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
-	moveSpeed = 3;        // Velocidad de movimiento del enemigo
+	moveSpeed = 2;        // Velocidad de movimiento del enemigo
 	moveDirection = -1;
 
 	spritesheet.loadFromFile("images/Enemy_Ogre_Sprites.png", TEXTURE_PIXEL_FORMAT_RGBA); // Asegúrate de tener esta textura

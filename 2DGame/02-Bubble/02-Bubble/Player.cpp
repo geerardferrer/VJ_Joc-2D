@@ -220,7 +220,7 @@ void Player::update(int deltaTime)
 		isGrounded = false;
 	}
 
-	cout << velPlayer.y << endl;
+	cout << posPlayer.x / map->getTileSize() << " " << posPlayer.y / map->getTileSize() << endl;
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }

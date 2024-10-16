@@ -17,7 +17,6 @@ Scene::Scene()
 	map = NULL;
 	player = NULL;
 	background = NULL;
-	enemy = NULL;
 }
 
 Scene::~Scene()
@@ -28,8 +27,6 @@ Scene::~Scene()
 		delete player;
 	if (background != NULL)
 		delete background;
-	if (enemy != NULL)
-		delete enemy;
 }
 
 
@@ -46,11 +43,27 @@ void Scene::init()
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
 
-	enemy = new OgreEnemy();
-	enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	enemy->setPosition(glm::vec2((INIT_PLAYER_X_TILES + 10) * map->getTileSize(), (INIT_PLAYER_Y_TILES * map->getTileSize())));
-	enemy->setTileMap(map);
+	//ogre[0] = new OgreEnemy();
+	//ogre[0]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	//ogre[0]->setPosition(glm::vec2((INIT_PLAYER_X_TILES + 10) * map->getTileSize(), ((INIT_PLAYER_Y_TILES)* map->getTileSize())));
+	//ogre[0]->setTileMap(map);
 
+	for (int i = 0; i < NUM_OGRES; ++i) ogre.push_back(new OgreEnemy());
+
+	for (int i = 0; i < ogre.size(); ++i)
+	{
+		ogre[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+		ogre[i]->setTileMap(map);
+	}
+
+	ogre[0]->setPosition(glm::vec2(36 * map->getTileSize(), (71 * map->getTileSize())));
+	ogre[1]->setPosition(glm::vec2(55 * map->getTileSize(), (75 * map->getTileSize())));
+	ogre[2]->setPosition(glm::vec2(76 * map->getTileSize(), (74 * map->getTileSize())));
+	ogre[3]->setPosition(glm::vec2(70 * map->getTileSize(), (93 * map->getTileSize())));
+	ogre[4]->setPosition(glm::vec2(117 * map->getTileSize(), (69 * map->getTileSize())));
+	ogre[5]->setPosition(glm::vec2(149 * map->getTileSize(), (117 * map->getTileSize())));
+	ogre[6]->setPosition(glm::vec2(141 * map->getTileSize(), (117 * map->getTileSize())));
+	ogre[7]->setPosition(glm::vec2(43 * map->getTileSize(), (160 * map->getTileSize())));
 
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH), float(SCREEN_HEIGHT), 0.f);
 	currentTime = 0.0f;
@@ -60,7 +73,7 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	player->update(deltaTime);
-	enemy->update(deltaTime);
+	for (int i = 0; i < ogre.size(); ++i) ogre[i]->update(deltaTime);
 
 	glm::vec2 playerPos = player->getPosition();
 	float halfWidth = SCREEN_WIDTH / 2.0f;
@@ -98,7 +111,8 @@ void Scene::render()
 	map->render();
 	//background->render();
 	player->render();
-	enemy->render();
+	for (int i = 0; i < ogre.size(); ++i) ogre[i]->render();
+	ogre[0]->render();
 }
 
 void Scene::initShaders()
