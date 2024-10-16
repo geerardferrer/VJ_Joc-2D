@@ -20,11 +20,18 @@ public:
 	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
 
+	void setPlayerPosition(const glm::vec2 &playerPos);
+	void startDeathAnimation(const std::string &direction);
+
 	glm::vec2 getPosition() const;
+	glm::vec2 getPosCollision() const;
+	glm::vec2 getSizeCollision() const;
 
 private:
-	glm::fvec2 posEnemy, posCollision;
-	float moveSpeed;
+	glm::fvec2 posEnemy, posCollision; 
+	glm::vec2 playerPos; //guardem la posicio del Player per calcular la distancia
+	bool isDead;
+	float moveSpeed, distanceToPlayer, deathTime;
 	int moveDirection; // 1 para derecha, -1 para izquierda
 	glm::ivec2 sizeCollision;
 	glm::ivec2 tileMapDispl;

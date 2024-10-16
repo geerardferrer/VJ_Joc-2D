@@ -15,7 +15,7 @@
 // Scene contains all the entities of our game.
 // It is responsible for updating and render them.
 
-#define NUM_ROCKS 8
+#define NUM_ROCKS 12
 #define NUM_OGRES 8
 
 class Scene
@@ -30,6 +30,10 @@ public:
 	void render();
 
 private:
+	bool checkCollision(const glm::fvec2 &playerPos, const glm::fvec2 &playerCollision, const glm::ivec2 &playerSize,
+		const glm::fvec2 &enemyPos, const glm::fvec2 &enemyCollision, const glm::ivec2 &enemySize);
+	void manageCollision(int enemyIndex);
+
 	void initShaders();
 
 private:

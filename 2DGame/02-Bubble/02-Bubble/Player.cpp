@@ -220,7 +220,7 @@ void Player::update(int deltaTime)
 		isGrounded = false;
 	}
 
-	cout << posPlayer.x / map->getTileSize() << " " << posPlayer.y / map->getTileSize() << endl;
+	//cout << posPlayer.x / map->getTileSize() << " " << posPlayer.y / map->getTileSize() << endl;
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
@@ -247,6 +247,15 @@ void Player::setPosition(const glm::vec2 &pos)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
+glm::vec2 Player::getPosCollision() const
+{
+	return posCollision;
+}
+
+glm::vec2 Player::getSizeCollision() const
+{
+	return sizeCollision;
+}
 
 
 
