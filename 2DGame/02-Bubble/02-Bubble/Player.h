@@ -23,16 +23,8 @@ public:
 	glm::vec2 getPosition() const;
 
 private:
-	int fallAssTimer;
-	const float fallAssDuration = 0.5; 
-	const float acceleration = 0.3f;
-	const float frictionForce = 0.9f;
-	const float maxVelPlayer = 6.f;
-	const float gravity = 0.4f;
-	const float jumpForce = 11.f;
-	const float maxFallPlayer = 10.f;
 
-	bool isGrounded, justLandedFromFallAss;
+	bool isGrounded;
 	glm::fvec2 posPlayer, velPlayer, posCollision;
 	glm::ivec2 sizeCollision;
 	glm::ivec2 tileMapDispl;

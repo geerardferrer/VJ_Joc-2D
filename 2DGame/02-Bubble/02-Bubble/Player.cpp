@@ -81,55 +81,66 @@ void Player::update(int deltaTime)
 {
 	sprite->update(deltaTime);
 
+	const float acceleration = 0.3f;
+	const float frictionForce = 0.9f;
+	const float maxVelPlayer = 6.f;
+	const float gravity = 0.4f;
+	const float jumpForce = 11.f;
+	const float maxFallPlayer = 30.f;
+
 
 	// MOVIMENT HORITZONTAL
-	if (!Game::instance().getKey(GLFW_KEY_DOWN))  // Solo permite moverse si NO está agachado
+	if (Game::instance().getKey(GLFW_KEY_LEFT) && !(Game::instance().getKey(GLFW_KEY_DOWN)))
 	{
-		if (Game::instance().getKey(GLFW_KEY_LEFT))
+		if (velPlayer.x > 0) velPlayer.x -= acceleration * 2;
+		else velPlayer.x -= acceleration;
+
+		if (velPlayer.x < -maxVelPlayer) velPlayer.x = -maxVelPlayer;
+
+		if (isGrounded)
 		{
-			if (velPlayer.x > 0) velPlayer.x -= acceleration * 2;
-			else velPlayer.x -= acceleration;
-
-			if (velPlayer.x < -maxVelPlayer) velPlayer.x = -maxVelPlayer;
-
-			if (isGrounded) {
-				if (sprite->animation() != MOVE_LEFT) sprite->changeAnimation(MOVE_LEFT);
-			}
-			else {
-				if (sprite->animation() != JUMP_LEFT) sprite->changeAnimation(JUMP_LEFT);
-			}
-		}
-		else if (Game::instance().getKey(GLFW_KEY_RIGHT))
-		{
-			if (velPlayer.x < 0) velPlayer.x += acceleration * 2;
-			else velPlayer.x += acceleration;
-
-			if (velPlayer.x > maxVelPlayer) velPlayer.x = maxVelPlayer;
-
-			if (isGrounded) {
-				if (sprite->animation() != MOVE_RIGHT) sprite->changeAnimation(MOVE_RIGHT);
-			}
-			else {
-				if (sprite->animation() != JUMP_RIGHT) sprite->changeAnimation(JUMP_RIGHT);
-			}
+			if (sprite->animation() != MOVE_LEFT) sprite->changeAnimation(MOVE_LEFT);
 		}
 		else
 		{
-			velPlayer.x *= frictionForce;
-			if (fabs(velPlayer.x) < 0.1f) velPlayer.x = 0.f;
+			if (sprite->animation() != JUMP_LEFT) sprite->changeAnimation(JUMP_LEFT);
+		}
+	}
+	else if (Game::instance().getKey(GLFW_KEY_RIGHT) && !(Game::instance().getKey(GLFW_KEY_DOWN)))
+	{
+		if (velPlayer.x < 0) velPlayer.x += acceleration * 2;
+		else velPlayer.x += acceleration;
 
-			if (isGrounded) {
-				if (sprite->animation() == MOVE_LEFT) sprite->changeAnimation(STAND_LEFT);
-				else if (sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(STAND_RIGHT);
+		if (velPlayer.x > maxVelPlayer) velPlayer.x = maxVelPlayer;
+
+		if (isGrounded)
+		{
+			if (sprite->animation() != MOVE_RIGHT) sprite->changeAnimation(MOVE_RIGHT);
+		}
+		else
+		{
+			if (sprite->animation() != JUMP_RIGHT) sprite->changeAnimation(JUMP_RIGHT);
+		}
+	}
+	else
+	{
+		velPlayer.x *= frictionForce;
+		if (fabs(velPlayer.x) < 0.1f) velPlayer.x = 0.f;
+
+		if (isGrounded)
+		{
+			if (Game::instance().getKey(GLFW_KEY_DOWN))
+			{
+				if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) sprite->changeAnimation(CROUCH_LEFT);
+				else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(CROUCH_RIGHT);
+			}
+			else
+			{
+				if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT || sprite->animation() == CROUCH_LEFT) sprite->changeAnimation(STAND_LEFT);
+				else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT || sprite->animation() == CROUCH_RIGHT) sprite->changeAnimation(STAND_RIGHT);
 			}
 		}
 	}
-	 else  // Si está agachado, frenar el movimiento horizontal
-    {
-        velPlayer.x *= 0.8f;  // Aplicamos una pequeña fricción para que el jugador se detenga suavemente
-        if (fabs(velPlayer.x) < 0.1f) velPlayer.x = 0.f;  // Si la velocidad es muy baja, la dejamos en 0 para que se detenga por completo
-    }
-
 
 	posPlayer.x += velPlayer.x;
 
@@ -150,19 +161,6 @@ void Player::update(int deltaTime)
 		{
 			velPlayer.y = -jumpForce;
 			isGrounded = false;
-
-			if (sprite->animation() == CROUCH_LEFT) sprite->changeAnimation(JUMP_LEFT);
-			else if (sprite->animation() == CROUCH_RIGHT) sprite->changeAnimation(JUMP_RIGHT);
-			else if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) sprite->changeAnimation(JUMP_LEFT);
-			else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(JUMP_RIGHT);
-		}
-		else if (Game::instance().getKey(GLFW_KEY_DOWN))
-		{
-			if (sprite->animation() != FALL_ASS_LEFT && sprite->animation() != FALL_ASS_RIGHT)
-			{
-				if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) sprite->changeAnimation(CROUCH_LEFT);
-				else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(CROUCH_RIGHT);
-			}
 		}
 	}
 	else
@@ -170,16 +168,21 @@ void Player::update(int deltaTime)
 		// Si estamos en el aire y se presiona la tecla DOWN, cambia a la animación de caer de culo
 		if (Game::instance().getKey(GLFW_KEY_DOWN))
 		{
+			velPlayer.y += gravity * 5; // Caída más rápida si se presiona DOWN
+
+			if (velPlayer.y > maxFallPlayer) velPlayer.y = maxFallPlayer;
+
 			if (sprite->animation() == JUMP_LEFT || sprite->animation() == MOVE_LEFT) sprite->changeAnimation(FALL_ASS_LEFT);
 			else if (sprite->animation() == JUMP_RIGHT || sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(FALL_ASS_RIGHT);
-
-			velPlayer.y += gravity * 5; // Caída más rápida si se presiona DOWN
 		}
 		else
 		{
 			velPlayer.y += gravity; // Caída normal
 
 			if (velPlayer.y > maxFallPlayer) velPlayer.y = maxFallPlayer;
+
+			if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT || sprite->animation() == CROUCH_LEFT || sprite->animation() == FALL_ASS_LEFT) sprite->changeAnimation(JUMP_LEFT);
+			else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT || sprite->animation() == CROUCH_RIGHT || sprite->animation() == FALL_ASS_RIGHT) sprite->changeAnimation(JUMP_RIGHT);
 		}
 
 	}
@@ -210,6 +213,8 @@ void Player::update(int deltaTime)
 		isGrounded = false;
 	}
 
+	cout << velPlayer.y << endl;
+
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
@@ -218,7 +223,8 @@ void Player::render()
 	sprite->render();
 }
 
-glm::vec2 Player::getPosition() const {
+glm::vec2 Player::getPosition() const
+{
 	return posPlayer;
 }
 
