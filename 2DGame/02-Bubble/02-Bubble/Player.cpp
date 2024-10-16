@@ -67,6 +67,12 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->setAnimationSpeed(FALL_ASS_RIGHT, 8);
 	sprite->addKeyframe(FALL_ASS_RIGHT, glm::vec2(0.625f, 0.5f));
 
+	sprite->setAnimationSpeed(CLIMB, 8);
+	sprite->addKeyframe(CLIMB, glm::vec2(0.f, 0.5f));
+	sprite->addKeyframe(CLIMB, glm::vec2(0.125f, 0.5f));
+	sprite->addKeyframe(CLIMB, glm::vec2(0.25f, 0.5f));
+	sprite->addKeyframe(CLIMB, glm::vec2(0.375f, 0.5f));
+
 	sprite->changeAnimation(0);
 	tileMapDispl = tileMapPos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
@@ -125,6 +131,7 @@ void Player::update(int deltaTime)
 	else
 	{
 		velPlayer.x *= frictionForce;
+
 		if (fabs(velPlayer.x) < 0.1f) velPlayer.x = 0.f;
 
 		if (isGrounded)

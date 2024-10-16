@@ -7,7 +7,7 @@
 #include "TileMap.h"
 #include "Background.h"
 #include "Player.h"
-#include "Enemy.h"
+#include "OgreEnemy.h"
 
 
 // Scene contains all the entities of our game.
@@ -31,7 +31,7 @@ private:
 private:
 	TileMap *map;
 	Player *player;
-	Enemy *enemy;
+	OgreEnemy *enemy;
 	Background *background;
 	ShaderProgram texProgram;
 	float currentTime;

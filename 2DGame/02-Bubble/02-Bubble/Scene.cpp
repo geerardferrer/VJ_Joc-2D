@@ -46,7 +46,7 @@ void Scene::init()
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
 
-	enemy = new Enemy();
+	enemy = new OgreEnemy();
 	enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	enemy->setPosition(glm::vec2((INIT_PLAYER_X_TILES + 10) * map->getTileSize(), (INIT_PLAYER_Y_TILES * map->getTileSize())));
 	enemy->setTileMap(map);
