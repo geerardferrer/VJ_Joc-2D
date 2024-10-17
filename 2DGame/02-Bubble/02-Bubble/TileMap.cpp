@@ -148,12 +148,7 @@ int TileMap::getTileAt(const glm::fvec2 &pos) const {
 	int tileX = pos.x / tileSize;
 	int tileY = pos.y / tileSize;
 
-	if (tileX >= 0 && tileX < mapSize.x && tileY >= 0 && tileY < mapSize.y)
-	{
-		return map[tileY * mapSize.x + tileX] - 1;
-	}
-
-	return -1;
+	return map[tileY * mapSize.x + tileX] - 1;
 }
 
 bool TileMap::tileIsTravessable(int tile) const {

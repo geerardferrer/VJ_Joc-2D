@@ -280,12 +280,12 @@ void Scene::manageCollision()
 
 			if (dir == BOTTOM_COLLISION)
 			{
-				// ogre[i] mor
+				ogre[i]->die();
 				// aplica salt al player
 			}
 			else
 			{
-				// player perd una vida
+				if (player->canTakeDamage()) player->takeDamage();
 			}
 		}
 	}

@@ -12,17 +12,17 @@
 
 enum PlayerAnims
 {
-	STAND_LEFT, STAND_RIGHT, //FET
-	MOVE_LEFT, MOVE_RIGHT,  //FET
-	CROUCH_LEFT, CROUCH_RIGHT, //FET 
-	JUMP_LEFT, JUMP_RIGHT, //FET 
-	FALL_ASS_LEFT, FALL_ASS_RIGHT, //Quan es prem down i s'esta a l'aire cau de cul, pero si arriba al terra i encara s'esta prement la tecla down, fa CROUCH 
-	DRIFT_LEFT, DRIFT_RIGHT, //NO HE SAPIGUT FER-HO
-	STAND_OBJ_LEFT, STAND_OBJ_RIGHT, //NO FET
-	MOVE_OBJ_LEFT, MOVE_OBJ_RIGHT, //NO FET
-	JUMP_OBJ_LEFT, JUMP_OBJ_RIGHT, //NO FET
-	CLIMB, //NO FET
-	VICTORY_STAND //NO FET
+	STAND_LEFT, STAND_RIGHT,
+	MOVE_LEFT, MOVE_RIGHT,
+	CROUCH_LEFT, CROUCH_RIGHT,
+	JUMP_LEFT, JUMP_RIGHT,
+	FALL_ASS_LEFT, FALL_ASS_RIGHT,
+	DRIFT_LEFT, DRIFT_RIGHT,
+	STAND_OBJ_LEFT, STAND_OBJ_RIGHT,
+	MOVE_OBJ_LEFT, MOVE_OBJ_RIGHT,
+	JUMP_OBJ_LEFT, JUMP_OBJ_RIGHT,
+	CLIMB,
+	VICTORY_STAND
 };
 
 
@@ -73,6 +73,9 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->addKeyframe(CLIMB, glm::vec2(0.25f, 0.5f));
 	sprite->addKeyframe(CLIMB, glm::vec2(0.375f, 0.5f));
 
+	sprite->setAnimationSpeed(VICTORY_STAND, 8);
+	sprite->addKeyframe(VICTORY_STAND, glm::vec2(0.5f, 0.75f));
+
 	sprite->changeAnimation(0);
 	tileMapDispl = tileMapPos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
@@ -81,10 +84,18 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sizeCollision = glm::vec2(30, 96);
 
 	isGrounded = false;
+	lives = 3;
+	damageTakenTime = 0.f;
 }
 
 void Player::update(int deltaTime)
 {
+	if (lives <= 0)
+	{
+		sprite->changeAnimation(VICTORY_STAND);
+		return;
+	}
+
 	sprite->update(deltaTime);
 
 	const float acceleration = 0.3f;
@@ -93,7 +104,6 @@ void Player::update(int deltaTime)
 	const float gravity = 0.4f;
 	const float jumpForce = 11.f;
 	const float maxFallPlayer = 30.f;
-
 
 	// MOVIMENT HORITZONTAL
 	if (Game::instance().getKey(GLFW_KEY_LEFT) && !(Game::instance().getKey(GLFW_KEY_DOWN)))
@@ -220,9 +230,31 @@ void Player::update(int deltaTime)
 		isGrounded = false;
 	}
 
-	//cout << posPlayer.x / map->getTileSize() << " " << posPlayer.y / map->getTileSize() << endl;
+	if (damageTakenTime > 0.f)
+	{
+		damageTakenTime -= deltaTime / 1000.f;
+	}
+	else if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 22)
+	{
+		takeDamage();
+	}
+
+	//cout << map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) << endl;
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
+}
+
+
+void Player::takeDamage()
+{
+	--lives;
+	damageTakenTime = 2.f;
+	cout << lives << endl;
+}
+
+bool Player::canTakeDamage()
+{
+	return damageTakenTime <= 0.f;
 }
 
 void Player::render()
@@ -256,6 +288,3 @@ glm::vec2 Player::getSizeCollision() const
 {
 	return sizeCollision;
 }
-
-
-

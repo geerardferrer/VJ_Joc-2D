@@ -16,8 +16,6 @@ enum OgreEnemyAnims
 	DIE_LEFT, DIE_RIGHT,
 };
 
-
-
 void OgreEnemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	//moveSpeed = 2;        // Velocidad de movimiento del enemigo
@@ -164,6 +162,11 @@ void OgreEnemy::update(int deltaTime)
 
 	// Actualitzem la posició del sprite en funció de la posició de l'enemic
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
+}
+
+void OgreEnemy::die()
+{
+	isDead = true;
 }
 
 

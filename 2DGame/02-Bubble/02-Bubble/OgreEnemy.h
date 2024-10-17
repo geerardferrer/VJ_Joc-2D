@@ -27,6 +27,8 @@ public:
 	glm::vec2 getPosCollision() const;
 	glm::vec2 getSizeCollision() const;
 
+	void die();
+
 private:
 	glm::fvec2 posEnemy, posCollision; 
 	glm::vec2 playerPos; //guardem la posicio del Player per calcular la distancia

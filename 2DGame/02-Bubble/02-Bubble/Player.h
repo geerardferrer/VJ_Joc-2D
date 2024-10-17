@@ -24,12 +24,17 @@ public:
 	glm::vec2 getPosCollision() const;
 	glm::vec2 getSizeCollision() const;
 
-private:
+	void takeDamage();
+	bool canTakeDamage();
 
+private:
 	bool isGrounded;
 	glm::fvec2 posPlayer, velPlayer, posCollision;
 	glm::ivec2 sizeCollision;
 	glm::ivec2 tileMapDispl;
+
+	int lives;
+	float damageTakenTime;
 
 	Texture spritesheet;
 	Sprite *sprite;
