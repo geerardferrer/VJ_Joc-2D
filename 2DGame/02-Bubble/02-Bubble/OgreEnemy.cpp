@@ -63,9 +63,9 @@ void OgreEnemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->addKeyframe(DIE_LEFT, glm::vec2(0.75f, 0.5f));
 	sprite->addKeyframe(DIE_LEFT, glm::vec2(0.875f, 0.5f));
 	sprite->addKeyframe(DIE_LEFT, glm::vec2(0.75f, 0.75f));
-	sprite->addKeyframe(DIE_LEFT, glm::vec2(0.875f, 0.75f));
-	sprite->addKeyframe(DIE_LEFT, glm::vec2(0.875f, 0.75f));
-	sprite->addKeyframe(DIE_LEFT, glm::vec2(0.875f, 0.75f));
+	sprite->addKeyframe(DIE_LEFT, glm::vec2(0.75f, 0.75f));
+	sprite->addKeyframe(DIE_LEFT, glm::vec2(0.75f, 0.75f));
+	sprite->addKeyframe(DIE_LEFT, glm::vec2(0.75f, 0.75f));
 
 	sprite->setAnimationSpeed(DIE_RIGHT, 4);
 	sprite->addKeyframe(DIE_RIGHT, glm::vec2(0.0f, 0.75f));
@@ -73,9 +73,9 @@ void OgreEnemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->addKeyframe(DIE_RIGHT, glm::vec2(0.25f, 0.75f));
 	sprite->addKeyframe(DIE_RIGHT, glm::vec2(0.375f, 0.75f));
 	sprite->addKeyframe(DIE_RIGHT, glm::vec2(0.5f, 0.75f));
-	sprite->addKeyframe(DIE_RIGHT, glm::vec2(0.625f, 0.75f));
-	sprite->addKeyframe(DIE_RIGHT, glm::vec2(0.625f, 0.75f));
-	sprite->addKeyframe(DIE_RIGHT, glm::vec2(0.625f, 0.75f));
+	sprite->addKeyframe(DIE_RIGHT, glm::vec2(0.5f, 0.75f));
+	sprite->addKeyframe(DIE_RIGHT, glm::vec2(0.5f, 0.75f));
+	sprite->addKeyframe(DIE_RIGHT, glm::vec2(0.5f, 0.75f));
 
 	sprite->changeAnimation(IDLE_LEFT);  // Iniciamos con la animación de movimiento a la izquierda
 
