@@ -144,6 +144,18 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 	texCoordLocation = program.bindVertexAttribute("texCoord", 2, 4 * sizeof(float), (void *)(2 * sizeof(float)));
 }
 
+int TileMap::getTileAt(const glm::fvec2 &pos) const {
+	int tileX = pos.x / tileSize;
+	int tileY = pos.y / tileSize;
+
+	if (tileX >= 0 && tileX < mapSize.x && tileY >= 0 && tileY < mapSize.y)
+	{
+		return map[tileY * mapSize.x + tileX] - 1;
+	}
+
+	return -1;
+}
+
 bool TileMap::tileIsTravessable(int tile) const {
 	return !(travessableTiles.find(tile) == travessableTiles.end());
 }
