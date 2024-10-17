@@ -21,6 +21,8 @@ public:
 	void setPosition(const glm::vec2 &pos);
 
 	glm::vec2 getPosition() const;
+	glm::vec2 getPosCollision() const;
+	glm::vec2 getSizeCollision() const;
 
 private:
 	glm::fvec2 posEnemy, posCollision;

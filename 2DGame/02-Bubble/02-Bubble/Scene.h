@@ -18,6 +18,11 @@
 #define NUM_ROCKS 12
 #define NUM_OGRES 8
 
+enum CollisionDir
+{
+	NO_COLLISION, LEFT_COLLISION, RIGHT_COLLISION, TOP_COLLISION, BOTTOM_COLLISION
+};
+
 class Scene
 {
 
@@ -30,9 +35,8 @@ public:
 	void render();
 
 private:
-	bool checkCollision(const glm::fvec2 &playerPos, const glm::fvec2 &playerCollision, const glm::ivec2 &playerSize,
-		const glm::fvec2 &enemyPos, const glm::fvec2 &enemyCollision, const glm::ivec2 &enemySize);
-	void manageCollision(int enemyIndex);
+	CollisionDir checkCollision(const glm::fvec2 &entityPos1, const glm::fvec2 &entityCollision1, const glm::ivec2 &entitySize1, const glm::fvec2 &entityPos2, const glm::fvec2 &entityCollision2, const glm::ivec2 &entitySize2);
+	void manageCollision();
 
 	void initShaders();
 

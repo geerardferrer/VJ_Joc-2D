@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <algorithm>
 #include <glm/gtc/matrix_transform.hpp>
 #include "Scene.h"
 #include "Game.h"
@@ -10,6 +11,7 @@
 
 #define INIT_PLAYER_X_TILES 4
 #define INIT_PLAYER_Y_TILES 70
+
 
 
 Scene::Scene()
@@ -33,16 +35,21 @@ Scene::~Scene()
 void Scene::init()
 {
 	initShaders();
+
+	// TILEMAP
 	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 
+	// BACKGROUND
 	background = Background::createBackground("images/Background.png", glm::vec2(SCREEN_WIDTH, SCREEN_HEIGHT), texProgram);
 	background->setPosition(glm::vec2(4 * map->getTileSize(), 70 * map->getTileSize()));
 
+	// PLAYER
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
 
+	// ROCKS
 	for (int i = 0; i < NUM_ROCKS; ++i) rock.push_back(new Rock());
 
 	for (int i = 0; i < rock.size(); ++i)
@@ -64,7 +71,7 @@ void Scene::init()
 	rock[10]->setPosition(glm::vec2(22 * map->getTileSize(), (150 * map->getTileSize())));
 	rock[11]->setPosition(glm::vec2(61 * map->getTileSize(), (176 * map->getTileSize())));
 
-
+	// OGRES
 	for (int i = 0; i < NUM_OGRES; ++i) ogre.push_back(new OgreEnemy());
 
 	for (int i = 0; i < ogre.size(); ++i)
@@ -89,19 +96,16 @@ void Scene::init()
 void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
+
+	manageCollision();
+
 	player->update(deltaTime);
-	glm::vec2 playerPos = player->getPosition();
 
 	for (int i = 0; i < rock.size(); ++i) rock[i]->update(deltaTime);
-	for (int i = 0; i < ogre.size(); ++i) {
-		ogre[i]->setPlayerPosition(playerPos);
-		ogre[i]->update(deltaTime);
 
-		//COLLISION PLAYER/OGRE
-		if (checkCollision(playerPos, player->getPosCollision(), player->getSizeCollision(), ogre[i]->getPosition(), ogre[i]->getPosCollision(), ogre[i]->getSizeCollision()))
-		{
-			manageCollision(i);
-		}
+	for (int i = 0; i < ogre.size(); ++i) {
+		ogre[i]->setPlayerPosition(player->getPosition());
+		ogre[i]->update(deltaTime);
 	}
 
 
@@ -111,7 +115,9 @@ void Scene::update(int deltaTime)
 	// Calcular el ancho del mapa
 	float mapWidth = map->getMapSize().x * map->getTileSize(); // Método para obtener el tamaño del mapa
 
-															   // Calcular la posición de la cámara en el eje X
+
+	glm::vec2 playerPos = player->getPosition();
+
 	float cameraX = playerPos.x;
 
 	
@@ -122,8 +128,7 @@ void Scene::update(int deltaTime)
 		cameraX = mapWidth - halfWidth; 
 	}
 
-	projection = glm::ortho(cameraX - halfWidth, cameraX + halfWidth,
-		playerPos.y + halfHeight, playerPos.y - halfHeight);
+	projection = glm::ortho(cameraX - halfWidth, cameraX + halfWidth, playerPos.y + halfHeight, playerPos.y - halfHeight);
 }
 
 void Scene::render()
@@ -131,6 +136,9 @@ void Scene::render()
 	glm::mat4 modelview;
 
 	texProgram.use();
+
+	//background->render();
+
 	texProgram.setUniformMatrix4f("projection", projection);
 	texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
 	modelview = glm::mat4(1.0f);
@@ -138,7 +146,7 @@ void Scene::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 
 	map->render();
-	//background->render();
+
 	for (int i = 0; i < rock.size(); ++i) rock[i]->render();
 	player->render();
 	for (int i = 0; i < ogre.size(); ++i) ogre[i]->render();
@@ -175,53 +183,112 @@ void Scene::initShaders()
 	fShader.free();
 }
 
-bool Scene::checkCollision(const glm::fvec2 &playerPos, const glm::fvec2 &playerCollision, const glm::ivec2 &playerSize,
-	const glm::fvec2 &enemyPos, const glm::fvec2 &enemyCollision, const glm::ivec2 &enemySize)
+CollisionDir Scene::checkCollision(const glm::fvec2 &entityPos1, const glm::fvec2 &entityCollision1, const glm::ivec2 &entitySize1, const glm::fvec2 &entityPos2, const glm::fvec2 &entityCollision2, const glm::ivec2 &entitySize2)
 {
-	// Càlcul de les posicions de la hitbox del player i l'enemic
-	glm::fvec2 playerHitboxPos = playerPos + playerCollision;
-	glm::fvec2 enemyHitboxPos = enemyPos + enemyCollision;
+	float left1 = entityPos1.x + entityCollision1.x;
+	float right1 = left1 + float(entitySize1.x);
+	float top1 = entityPos1.y + entityCollision1.y;
+	float bottom1 = top1 + float(entitySize1.y);
 
-	// Comprovació de col·lisió en l'eix X
-	bool collisionX = (playerHitboxPos.x + playerSize.x > enemyHitboxPos.x) && (enemyHitboxPos.x + enemySize.x > playerHitboxPos.x);
+	float left2 = entityPos2.x + entityCollision2.x;
+	float right2 = left2 + float(entitySize2.x);
+	float top2 = entityPos2.y + entityCollision2.y;
+	float bottom2 = top2 + float(entitySize2.y);
 
-	// Comprovació de col·lisió en l'eix Y
-	bool collisionY = (playerHitboxPos.y + playerSize.y > enemyHitboxPos.y) && (enemyHitboxPos.y + enemySize.y > playerHitboxPos.y);
+	bool collisionX = (right1 >= left2) && (left1 <= right2);
+	bool collisionY = (bottom1 >= top2) && (top1 <= bottom2);
 
-	// Si hi ha col·lisió en els dos eixos, retorna true
-	return collisionX && collisionY;
-}
+	if (collisionX && collisionY)
+	{
+		float overlapX = std::min(right1 - left2, right2 - left1);
+		float overlapY = std::min(bottom1 - top2, bottom2 - top1);
 
-
-void Scene::manageCollision(int enemyIndex)
-{
-	glm::vec2 playerPos = player->getPosition();
-	glm::vec2 enemyPos = ogre[enemyIndex]->getPosition();
-
-	// Comprovem si el jugador ha caigut sobre l'enemic
-	//if (playerPos.y + player->getSize().y <= enemyPos.y + 10) // Ajust segons sigui necessari
-	//{
-		// El jugador cau sobre l'enemic -> l'enemic mor
-		//ogre[enemyIndex]->die();
-
-		// Determinar si és LEFT o RIGHT en funció de la posició del jugador
-		if (playerPos.x < enemyPos.x)
+		if (overlapX < overlapY)
 		{
-			
-			ogre[enemyIndex]->startDeathAnimation("LEFT");
+			return (right1 - left2 < right2 - left1) ? RIGHT_COLLISION : LEFT_COLLISION;
 		}
 		else
 		{
-			ogre[enemyIndex]->startDeathAnimation("RIGHT");
+			return (bottom1 - top2 < bottom2 - top1) ? BOTTOM_COLLISION : TOP_COLLISION;
 		}
+	}
+	return NO_COLLISION;
+}
 
-		//player->jump(); // El jugador fa un salt després de matar l'enemic
-	//}
-	//else
-	//{
-		// Si no ha caigut sobre l'enemic, el jugador perd una vida
-		//player->loseLife();
-	//}
+
+void Scene::manageCollision()
+{
+	// PLAYER x ROCK
+	for (int i = 0; i < rock.size(); ++i) {
+		CollisionDir dir;
+
+		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), rock[i]->getPosition(), rock[i]->getPosCollision(), rock[i]->getSizeCollision()))
+		{
+			switch (dir)
+			{
+			case LEFT_COLLISION:
+				cout << "LEFT_COLLISION" << endl;
+				break;
+			case RIGHT_COLLISION:
+				cout << "RIGHT_COLLISION" << endl;
+				break;
+			case TOP_COLLISION:
+				cout << "TOP_COLLISION" << endl;
+				break;
+			case BOTTOM_COLLISION:
+				cout << "BOTTOM_COLLISION" << endl;
+				break;
+			default:
+				break;
+			}
+
+			if (dir == BOTTOM_COLLISION)
+			{
+				// ogre[i] mor
+				// aplica salt al player
+			}
+			else
+			{
+				// player perd una vida
+			}
+		}
+	}
+
+	// PLAYER x OGRE
+	for (int i = 0; i < ogre.size(); ++i) {
+		CollisionDir dir;
+
+		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), ogre[i]->getPosition(), ogre[i]->getPosCollision(), ogre[i]->getSizeCollision()))
+		{
+			switch (dir)
+			{
+			case LEFT_COLLISION:
+				cout << "LEFT_COLLISION" << endl;
+				break;
+			case RIGHT_COLLISION:
+				cout << "RIGHT_COLLISION" << endl;
+				break;
+			case TOP_COLLISION:
+				cout << "TOP_COLLISION" << endl;
+				break;
+			case BOTTOM_COLLISION:
+				cout << "BOTTOM_COLLISION" << endl;
+				break;
+			default:
+				break;
+			}
+
+			if (dir == BOTTOM_COLLISION)
+			{
+				// ogre[i] mor
+				// aplica salt al player
+			}
+			else
+			{
+				// player perd una vida
+			}
+		}
+	}
 }
 
 
