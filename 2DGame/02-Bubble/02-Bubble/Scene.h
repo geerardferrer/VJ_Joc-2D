@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "Rock.h"
 #include "OgreEnemy.h"
+#include "BatEnemy.h"
 
 
 // Scene contains all the entities of our game.
@@ -17,6 +18,7 @@
 
 #define NUM_ROCKS 12
 #define NUM_OGRES 8
+#define NUM_BATS 4
 
 enum CollisionDir
 {
@@ -45,6 +47,7 @@ private:
 	Player *player;
 	vector<Rock*> rock;
 	vector<OgreEnemy*> ogre;
+	vector<BatEnemy*> bat;
 	Background *background;
 	ShaderProgram texProgram;
 	float currentTime;

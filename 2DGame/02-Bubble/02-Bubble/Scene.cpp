@@ -91,6 +91,23 @@ void Scene::init()
 
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH), float(SCREEN_HEIGHT), 0.f);
 	currentTime = 0.0f;
+
+	//BATS
+	for (int i = 0; i < NUM_BATS; ++i) bat.push_back(new BatEnemy());
+
+	for (int i = 0; i < bat.size(); ++i)
+	{
+		bat[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+		bat[i]->setTileMap(map);
+	}
+
+	bat[0]->setPosition(glm::vec2(134 * map->getTileSize(), (57 * map->getTileSize())));
+	bat[1]->setPosition(glm::vec2(96 * map->getTileSize(), (57 * map->getTileSize())));
+	bat[2]->setPosition(glm::vec2(131 * map->getTileSize(), (43 * map->getTileSize())));
+	bat[3]->setPosition(glm::vec2(136 * map->getTileSize(), (43 * map->getTileSize())));
+
+	projection = glm::ortho(0.f, float(SCREEN_WIDTH), float(SCREEN_HEIGHT), 0.f);
+	currentTime = 0.0f;
 }
 
 void Scene::update(int deltaTime)
@@ -106,6 +123,11 @@ void Scene::update(int deltaTime)
 	for (int i = 0; i < ogre.size(); ++i) {
 		ogre[i]->setPlayerPosition(player->getPosition());
 		ogre[i]->update(deltaTime);
+	}
+
+	for (int i = 0; i < bat.size(); ++i) {
+		bat[i]->setPlayerPosition(player->getPosition());
+		bat[i]->update(deltaTime);
 	}
 
 
@@ -150,7 +172,7 @@ void Scene::render()
 	for (int i = 0; i < rock.size(); ++i) rock[i]->render();
 	player->render();
 	for (int i = 0; i < ogre.size(); ++i) ogre[i]->render();
-	ogre[0]->render();
+	for (int i = 0; i < bat.size(); ++i) bat[i]->render();
 }
 
 void Scene::initShaders()

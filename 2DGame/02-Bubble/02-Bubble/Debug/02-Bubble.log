@@ -1,24 +1,23 @@
-﻿Compilación iniciada a las 22/10/2024 18:18:06.
-     1>Proyecto "C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" en el nodo 2 (Build destinos).
+﻿Compilación iniciada a las 22/10/2024 19:15:24.
+     1>Proyecto "C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"..\..\..\libs\Simple OpenGL Image Library\src" /I"..\..\..\libs\glew-1.13.0\include" /I..\..\..\libs\glm /I"..\..\..\libs\glfw-3.3.8\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt TileMap.cpp
-         TileMap.cpp
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(148): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(149): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(173): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(174): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(175): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(207): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(208): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(209): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(241): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(242): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(243): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(275): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(276): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(277): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"..\..\..\libs\Simple OpenGL Image Library\src" /I"..\..\..\libs\glew-1.13.0\include" /I..\..\..\libs\glm /I"..\..\..\libs\glfw-3.3.8\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Scene.cpp
+         Scene.cpp
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(55): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(77): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(98): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(121): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(123): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(128): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(138): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(172): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(174): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(175): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(244): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(280): warning C4018: '<': no coinciden signed/unsigned
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\..\libs\Simple OpenGL Image Library\projects\VC9\Debug" /LIBPATH:"..\..\..\libs\glew-1.13.0\lib\Release\Win32" /LIBPATH:"..\..\..\libs\glfw-3.3.8\lib-vc2015" SOIL.lib glew32.lib glfw3.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.lib" /MACHINE:X86 Debug\Game.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\..\libs\Simple OpenGL Image Library\projects\VC9\Debug" /LIBPATH:"..\..\..\libs\glew-1.13.0\lib\Release\Win32" /LIBPATH:"..\..\..\libs\glfw-3.3.8\lib-vc2015" SOIL.lib glew32.lib glfw3.lib opengl32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.lib" /MACHINE:X86 Debug\BatEnemy.obj
+         Debug\Game.obj
          Debug\main.obj
          Debug\Player.obj
          Debug\Rock.obj
@@ -30,8 +29,8 @@
          Debug\Sprite.obj
          Debug\Texture.obj
          Debug\TileMap.obj
-         02-Bubble.vcxproj -> C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe
-     1>Compilación del proyecto terminada "C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" (Build destinos).
+         02-Bubble.vcxproj -> C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe
+     1>Compilación del proyecto terminada "C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" (Build destinos).
 
 Compilación correcta.
 

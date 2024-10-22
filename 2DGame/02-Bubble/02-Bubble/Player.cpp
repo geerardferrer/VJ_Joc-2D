@@ -234,7 +234,7 @@ void Player::update(int deltaTime)
 	{
 		damageTakenTime -= deltaTime / 1000.f;
 	}
-	else if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 22)
+	else if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 22 || map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 38)
 	{
 		takeDamage();
 	}

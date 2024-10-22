@@ -90,12 +90,11 @@ void OgreEnemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 void OgreEnemy::update(int deltaTime)
 {
+
+	sprite->update(deltaTime);
 	// Comprovem si l'enemic està mort
 	if (isDead)
 	{
-		// Actualitzem l'animació de mort
-		sprite->update(deltaTime);
-
 		// Incrementem el temporitzador de la mort
 		deathTime += deltaTime / 1000.0f; 
 
@@ -108,7 +107,7 @@ void OgreEnemy::update(int deltaTime)
 	}
 
 	// Si no està mort, actualitzem la lògica normal de moviment i col·lisions
-	sprite->update(deltaTime);
+	
 
 	if (moveSpeed == 0)
 	{
