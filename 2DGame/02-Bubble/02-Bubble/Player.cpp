@@ -162,11 +162,11 @@ void Player::update(int deltaTime)
 	posPlayer.x += velPlayer.x;
 
 	// COLISIONS HORITZONTALS
-	if (velPlayer.x < 0 && map->collisionMoveLeft(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision))
+	if (velPlayer.x < 0 && map->collisionMoveLeft(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision, PlayerType))
 	{
 		if (sprite->animation() == MOVE_LEFT) sprite->changeAnimation(STAND_LEFT);
 	}
-	else if (velPlayer.x > 0 && map->collisionMoveRight(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision))
+	else if (velPlayer.x > 0 && map->collisionMoveRight(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision, PlayerType))
 	{
 		if (sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(STAND_RIGHT);
 	}
@@ -207,11 +207,11 @@ void Player::update(int deltaTime)
 	posPlayer.y += velPlayer.y;
 
 	// COLISIONS VERTICALS
-	if (velPlayer.y < 0 && map->collisionMoveUp(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision)) // Es mou cap a dalt
+	if (velPlayer.y < 0 && map->collisionMoveUp(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision, PlayerType)) // Es mou cap a dalt
 	{
 		velPlayer.y = 0;
 	}
-	else if (velPlayer.y > 0 && map->collisionMoveDown(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision)) // Es mou cap a baix
+	else if (velPlayer.y > 0 && map->collisionMoveDown(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision, PlayerType)) // Es mou cap a baix
 	{
 		velPlayer.y = 0;
 		isGrounded = true;
@@ -225,7 +225,7 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(STAND_RIGHT);
 		}
 	}
-	else if (isGrounded && !map->collisionMoveDown(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision))
+	else if (isGrounded && !map->collisionMoveDown(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision, PlayerType))
 	{
 		isGrounded = false;
 	}
@@ -244,6 +244,10 @@ void Player::update(int deltaTime)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
+bool Player::isFallingAss() const {
+	return (sprite->animation() == FALL_ASS_LEFT || sprite->animation() == FALL_ASS_RIGHT);
+}
+
 
 void Player::takeDamage()
 {
@@ -252,7 +256,7 @@ void Player::takeDamage()
 	cout << lives << endl;
 }
 
-bool Player::canTakeDamage()
+bool Player::canTakeDamage() const
 {
 	return damageTakenTime <= 0.f;
 }

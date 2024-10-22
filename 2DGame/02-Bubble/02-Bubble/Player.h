@@ -24,8 +24,10 @@ public:
 	glm::vec2 getPosCollision() const;
 	glm::vec2 getSizeCollision() const;
 
+	bool isFallingAss() const;
+
 	void takeDamage();
-	bool canTakeDamage();
+	bool canTakeDamage() const;
 
 private:
 	bool isGrounded;

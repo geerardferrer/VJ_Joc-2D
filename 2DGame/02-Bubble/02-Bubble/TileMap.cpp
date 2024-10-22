@@ -50,7 +50,7 @@ bool TileMap::loadLevel(const string &levelFile)
 	stringstream sstream;
 	string tile;
 
-	travessableTiles = { 0,4,5,12,23,30,31,32,39,41,42,46,48,52,53,54,55,56,57,60,61,62,63,65,67,68,69,70,71,72,73,76,77,78,79,81,83,84,85,86,87,88,89,94,95,100,101,102,103,104,105,109,110,111,112,113,114,115,116,117,118,120 };
+	travessableTiles = { 0,4,5,12,23,30,31,32,39,41,42,46,48,52,53,54,55,56,57,60,61,62,63,65,67,68,69,70,71,72,73,76,77,78,79,81,83,84,85,86,87,88,89,94,95,100,101,102,103,104,105,109,110,111,112,113,114,115,116,117,118,120,128 };
 	travessableTopTiles = { 14,15,16,27,43,44,45,91,92,107,108 };
 
 	fin.open(levelFile.c_str());
@@ -164,7 +164,7 @@ bool TileMap::tileIsTopTravessable(int tile) const {
 // Method collisionMoveDown also corrects Y coordinate if the box is
 // already intersecting a tile below.
 
-bool TileMap::collisionMoveLeft(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize) const
+bool TileMap::collisionMoveLeft(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const
 {
 	int x, y0, y1;
 
@@ -177,17 +177,28 @@ bool TileMap::collisionMoveLeft(glm::fvec2 &entityPos, const glm::fvec2 &collide
 	for (int y = y0; y <= y1; y++)
 	{
 		int tile = map[y * mapSize.x + x];
-		if (!tileIsTravessable(tile) && !tileIsTopTravessable(tile)) {
-			entityPos.x = (x + 1) * tileSize - colliderPos.x;
-			return true;
+		
+		switch (entity)
+		{
+		case EnemyType:
+			if (!tileIsTravessable(tile) && !tileIsTopTravessable(tile) || tile == 128) {
+				entityPos.x = (x + 1) * tileSize - colliderPos.x;
+				return true;
+			}
+			break;
+		default:
+			if (!tileIsTravessable(tile) && !tileIsTopTravessable(tile)) {
+				entityPos.x = (x + 1) * tileSize - colliderPos.x;
+				return true;
+			}
+			break;
 		}
-
 	}
 
 	return false;
 }
 
-bool TileMap::collisionMoveRight(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize) const
+bool TileMap::collisionMoveRight(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const
 {
 	int x, y0, y1;
 
@@ -200,17 +211,28 @@ bool TileMap::collisionMoveRight(glm::fvec2 &entityPos, const glm::fvec2 &collid
 	for (int y = y0; y <= y1; y++)
 	{
 		int tile = map[y * mapSize.x + x];
-		if (!tileIsTravessable(tile) && !tileIsTopTravessable(tile)) {
-			entityPos.x = tileSize * x - entitySize.x + colliderPos.x;
-			return true;
+		
+		switch (entity)
+		{
+		case EnemyType:
+			if (!tileIsTravessable(tile) && !tileIsTopTravessable(tile) || tile == 128) {
+				entityPos.x = tileSize * x - entitySize.x + colliderPos.x;
+				return true;
+			}
+			break;
+		default:
+			if (!tileIsTravessable(tile) && !tileIsTopTravessable(tile)) {
+				entityPos.x = tileSize * x - entitySize.x + colliderPos.x;
+				return true;
+			}
+			break;
 		}
-
 	}
 
 	return false;
 }
 
-bool TileMap::collisionMoveDown(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize) const
+bool TileMap::collisionMoveDown(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const
 {
 	int x0, x1, y;
 
@@ -223,17 +245,28 @@ bool TileMap::collisionMoveDown(glm::fvec2 &entityPos, const glm::fvec2 &collide
 	for (int x = x0; x <= x1; x++)
 	{
 		int tile = map[y * mapSize.x + x];
-		if (!tileIsTravessable(tile)) {
-			entityPos.y = tileSize * y - entitySize.y + colliderPos.y;
-			return true;
-		}
 
+		switch (entity)
+		{
+		case EnemyType:
+			if (!tileIsTravessable(tile) || tile == 128) {
+				entityPos.y = tileSize * y - entitySize.y + colliderPos.y;
+				return true;
+			}
+			break;
+		default:
+			if (!tileIsTravessable(tile)) {
+				entityPos.y = tileSize * y - entitySize.y + colliderPos.y;
+				return true;
+			}
+			break;
+		}
 	}
 
 	return false;
 }
 
-bool TileMap::collisionMoveUp(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize) const
+bool TileMap::collisionMoveUp(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const
 {
 	int x0, x1, y;
 
@@ -246,11 +279,22 @@ bool TileMap::collisionMoveUp(glm::fvec2 &entityPos, const glm::fvec2 &colliderP
 	for (int x = x0; x <= x1; x++)
 	{
 		int tile = map[y * mapSize.x + x];
-		if (!tileIsTravessable(tile) && !tileIsTopTravessable(tile)) {
-			entityPos.y = (y + 1) * tileSize - colliderPos.y;
-			return true;
-		}
 
+		switch (entity)
+		{
+		case EnemyType:
+			if (!tileIsTravessable(tile) && !tileIsTopTravessable(tile) || tile == 128) {
+				entityPos.y = (y + 1) * tileSize - colliderPos.y;
+				return true;
+			}
+			break;
+		default:
+			if (!tileIsTravessable(tile) && !tileIsTopTravessable(tile)) {
+				entityPos.y = (y + 1) * tileSize - colliderPos.y;
+				return true;
+			}
+			break;
+		}
 	}
 
 	return false;

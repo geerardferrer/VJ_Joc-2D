@@ -137,7 +137,7 @@ void OgreEnemy::update(int deltaTime)
 		// Detectar col·lisions i canviar de direcció si és necessari
 		if (moveDirection == -1) // Moviment a l'esquerra
 		{
-			if (map->collisionMoveLeft(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision))
+			if (map->collisionMoveLeft(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision, EnemyType))
 			{
 				posEnemy.x += moveSpeed;  // Revertir el moviment
 				moveDirection = 1;        // Canviar direcció cap a la dreta
@@ -146,7 +146,7 @@ void OgreEnemy::update(int deltaTime)
 		}
 		else // Moviment a la dreta
 		{
-			if (map->collisionMoveRight(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision))
+			if (map->collisionMoveRight(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision, EnemyType))
 			{
 				posEnemy.x -= moveSpeed;  // Revertir el moviment
 				moveDirection = -1;       // Canviar direcció cap a l'esquerra
@@ -155,7 +155,7 @@ void OgreEnemy::update(int deltaTime)
 		}
 	}
 	posEnemy.y += FALL_STEP;
-	if (map->collisionMoveDown(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision))
+	if (map->collisionMoveDown(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision, EnemyType))
 	{
 		// Si está en el suelo, no hacemos nada
 	}
@@ -167,12 +167,18 @@ void OgreEnemy::update(int deltaTime)
 void OgreEnemy::die()
 {
 	isDead = true;
+	startDeathAnimation();
+}
+
+bool OgreEnemy::isEnemyDead()
+{
+	return isDead;
 }
 
 
 void OgreEnemy::render()
 {
-	if (!isDead || deathTime < 2.0f)
+	if (!isDead || deathTime < 1.75f)
 	{
 		sprite->render(); // Només renderitzem si no ha acabat l'animació de mort
 	}
@@ -205,23 +211,18 @@ glm::vec2 OgreEnemy::getSizeCollision() const {
 	return sizeCollision;
 }
 
-void OgreEnemy::startDeathAnimation(const std::string &direction)
+void OgreEnemy::startDeathAnimation()
 {
-	// Si l'enemic encara no està mort, comença l'animació de mort
-	if (!isDead) {
-		isDead = true; // Marquem que l'enemic ha mort
-
-		if (direction == "LEFT")
-		{
-			cout << "Ha entrat a fer la DIE_LEFT" << endl;
-			sprite->changeAnimation(DIE_LEFT); // Reprodueix l'animació de mort cap a l'esquerra
-		}
-		else if (direction == "RIGHT")
-		{
-			cout << "Ha entrat a fer la DIE_RIGHT" << endl;
-			sprite->changeAnimation(DIE_RIGHT); // Reprodueix l'animació de mort cap a la dreta
-		}
-
-		deathTime = 0.0f; // Inicialitza el temporitzador per eliminar l'enemic després de la mort
+	if (sprite->animation() == MOVE_LEFT)
+	{
+		cout << "Ha entrat a fer la DIE_LEFT" << endl;
+		sprite->changeAnimation(DIE_LEFT); // Reprodueix l'animació de mort cap a l'esquerra
 	}
+	else if (sprite->animation() == MOVE_RIGHT)
+	{
+		cout << "Ha entrat a fer la DIE_RIGHT" << endl;
+		sprite->changeAnimation(DIE_RIGHT); // Reprodueix l'animació de mort cap a la dreta
+	}
+
+	deathTime = 0.0f; // Inicialitza el temporitzador per eliminar l'enemic després de la mort
 }

@@ -21,13 +21,14 @@ public:
 	void setPosition(const glm::vec2 &pos);
 
 	void setPlayerPosition(const glm::vec2 &playerPos);
-	void startDeathAnimation(const std::string &direction);
+	void startDeathAnimation();
 
 	glm::vec2 getPosition() const;
 	glm::vec2 getPosCollision() const;
 	glm::vec2 getSizeCollision() const;
 
 	void die();
+	bool isEnemyDead();
 
 private:
 	glm::fvec2 posEnemy, posCollision; 

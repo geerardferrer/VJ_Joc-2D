@@ -201,7 +201,7 @@ CollisionDir Scene::checkCollision(const glm::fvec2 &entityPos1, const glm::fvec
 	if (collisionX && collisionY)
 	{
 		float overlapX = std::min(right1 - left2, right2 - left1);
-		float overlapY = std::min(bottom1 - top2, bottom2 - top1);
+		float overlapY = std::min(bottom1 - top2, bottom2 - top1) * 0.5f; // factor para priorizar caidas por encima/debajo
 
 		if (overlapX < overlapY)
 		{
@@ -278,14 +278,14 @@ void Scene::manageCollision()
 				break;
 			}
 
-			if (dir == BOTTOM_COLLISION)
+			if (dir == BOTTOM_COLLISION && player->isFallingAss())
 			{
 				ogre[i]->die();
 				// aplica salt al player
 			}
 			else
 			{
-				if (player->canTakeDamage()) player->takeDamage();
+				if (player->canTakeDamage() && !ogre[i]->isEnemyDead()) player->takeDamage();
 			}
 		}
 	}
