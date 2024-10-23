@@ -33,10 +33,24 @@ public:
 	void applyJump();
 	void hasGrounded();
 
+	bool leftKeyPressed() const;
+	bool rightKeyPressed() const;
+	bool downKeyPressed() const;
+	bool upKeyPressed() const;
+	bool interactKeyPressed() const;
+
 private:
+	const float acceleration = 0.3f;
+	const float frictionForce = 0.9f;
+	const float maxVelPlayer = 6.f;
+	const float gravity = 0.4f;
+	const float jumpForce = 11.f;
+	const float maxFallPlayer = 30.f;
+
 	bool isGrounded;
 	glm::fvec2 posPlayer, velPlayer, posCollision;
 	glm::ivec2 sizeCollision;
+
 	glm::ivec2 tileMapDispl;
 
 	bool hasAppliedJump;

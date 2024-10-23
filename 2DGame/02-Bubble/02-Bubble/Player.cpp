@@ -4,12 +4,6 @@
 #include "Player.h"
 #include "Game.h"
 
-
-#define JUMP_ANGLE_STEP 6
-#define JUMP_HEIGHT 150
-#define FALL_STEP 9
-
-
 enum PlayerAnims
 {
 	STAND_LEFT, STAND_RIGHT,
@@ -98,15 +92,8 @@ void Player::update(int deltaTime)
 
 	sprite->update(deltaTime);
 
-	const float acceleration = 0.3f;
-	const float frictionForce = 0.9f;
-	const float maxVelPlayer = 6.f;
-	const float gravity = 0.4f;
-	const float jumpForce = 11.f;
-	const float maxFallPlayer = 30.f;
-
 	// MOVIMENT HORITZONTAL
-	if ((Game::instance().getKey(GLFW_KEY_LEFT) || Game::instance().getKey(GLFW_KEY_A)) && !((Game::instance().getKey(GLFW_KEY_DOWN) || Game::instance().getKey(GLFW_KEY_S))))
+	if (leftKeyPressed() && !downKeyPressed())
 	{
 		if (velPlayer.x > 0) velPlayer.x -= acceleration * 2;
 		else velPlayer.x -= acceleration;
@@ -122,7 +109,7 @@ void Player::update(int deltaTime)
 			if (sprite->animation() != JUMP_LEFT) sprite->changeAnimation(JUMP_LEFT);
 		}
 	}
-	else if ((Game::instance().getKey(GLFW_KEY_RIGHT) || Game::instance().getKey(GLFW_KEY_D)) && !((Game::instance().getKey(GLFW_KEY_DOWN) || Game::instance().getKey(GLFW_KEY_S))))
+	else if (rightKeyPressed() && !downKeyPressed())
 	{
 		if (velPlayer.x < 0) velPlayer.x += acceleration * 2;
 		else velPlayer.x += acceleration;
@@ -146,7 +133,7 @@ void Player::update(int deltaTime)
 
 		if (isGrounded)
 		{
-			if (Game::instance().getKey(GLFW_KEY_DOWN) || Game::instance().getKey(GLFW_KEY_S))
+			if (downKeyPressed())
 			{
 				if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) sprite->changeAnimation(CROUCH_LEFT);
 				else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(CROUCH_RIGHT);
@@ -174,7 +161,7 @@ void Player::update(int deltaTime)
 	// MOVIMENT VERTICAL
 	if (isGrounded)
 	{
-		if (Game::instance().getKey(GLFW_KEY_UP) || Game::instance().getKey(GLFW_KEY_W))
+		if (upKeyPressed())
 		{
 			velPlayer.y = -jumpForce;
 			isGrounded = false;
@@ -183,7 +170,7 @@ void Player::update(int deltaTime)
 	else
 	{
 		// Si estamos en el aire y se presiona la tecla DOWN, cambia a la animación de caer de culo
-		if ((Game::instance().getKey(GLFW_KEY_DOWN) || Game::instance().getKey(GLFW_KEY_S)) && !hasAppliedJump)
+		if (downKeyPressed() && !hasAppliedJump)
 		{
 			velPlayer.y += gravity * 5; // Caída más rápida si se presiona DOWN
 
@@ -284,6 +271,31 @@ void Player::hasGrounded()
 void Player::render()
 {
 	sprite->render();
+}
+
+bool Player::leftKeyPressed() const
+{
+	return (Game::instance().getKey(GLFW_KEY_LEFT) || Game::instance().getKey(GLFW_KEY_A));
+}
+
+bool Player::rightKeyPressed() const
+{
+	return (Game::instance().getKey(GLFW_KEY_RIGHT) || Game::instance().getKey(GLFW_KEY_D));
+}
+
+bool Player::downKeyPressed() const
+{
+	return (Game::instance().getKey(GLFW_KEY_DOWN) || Game::instance().getKey(GLFW_KEY_S));
+}
+
+bool Player::upKeyPressed() const
+{
+	return (Game::instance().getKey(GLFW_KEY_UP) || Game::instance().getKey(GLFW_KEY_W));
+}
+
+bool Player::interactKeyPressed() const
+{
+	return (Game::instance().getKey(GLFW_KEY_SPACE));
 }
 
 glm::vec2 Player::getPosition() const
