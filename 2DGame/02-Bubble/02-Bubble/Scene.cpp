@@ -246,7 +246,7 @@ void Scene::manageCollision()
 	for (int i = 0; i < rock.size(); ++i) {
 		CollisionDir dir;
 
-		cout << player->getVelocity().x << " " << player->getVelocity().y << " | ";
+		//cout << player->getVelocity().x << " " << player->getVelocity().y << " | ";
 
 		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), rock[i]->getPosition(), rock[i]->getPosCollision(), rock[i]->getSizeCollision()))
 		{
@@ -313,41 +313,48 @@ void Scene::manageCollision()
 					break;
 			}
 		}
-		cout << player->getVelocity().x << " " << player->getVelocity().y << endl;
+		//cout << player->getVelocity().x << " " << player->getVelocity().y << endl;
 	}
 
 	// PLAYER x OGRE
 	for (int i = 0; i < ogre.size(); ++i) {
-		CollisionDir dir;
+		if (!ogre[i]->isEnemyDead()) {
+			CollisionDir dir;
 
-		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), ogre[i]->getPosition(), ogre[i]->getPosCollision(), ogre[i]->getSizeCollision()))
-		{
-			if (dir == BOTTOM_COLLISION && player->isFallingAss())
+			if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), ogre[i]->getPosition(), ogre[i]->getPosCollision(), ogre[i]->getSizeCollision()))
 			{
-				ogre[i]->die();
-				player->applyJump();
-			}
-			else
-			{
-				if (player->canTakeDamage() && !ogre[i]->isEnemyDead()) player->takeDamage();
+				if (dir == BOTTOM_COLLISION && player->isFallingAss())
+				{
+					ogre[i]->die();
+					player->applyJump();
+				}
+				else
+				{
+					if (player->canTakeDamage() && !ogre[i]->isEnemyDead()) player->takeDamage();
+				}
 			}
 		}
+		
 	}
 
 	// PLAYER x BAT
 	for (int i = 0; i < bat.size(); ++i) {
-		CollisionDir dir;
 
-		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), bat[i]->getPosition(), bat[i]->getPosCollision(), bat[i]->getSizeCollision()))
-		{
-			if (dir == BOTTOM_COLLISION && player->isFallingAss())
+		if (!bat[i]->isEnemyDead()) {
+			CollisionDir dir;
+
+			if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), bat[i]->getPosition(), bat[i]->getPosCollision(), bat[i]->getSizeCollision()))
 			{
-				bat[i]->die();
-				player->applyJump();
-			}
-			else
-			{
-				if (player->canTakeDamage() && !bat[i]->isEnemyDead()) player->takeDamage();
+				if (dir == BOTTOM_COLLISION && player->isFallingAss())
+				{
+					bat[i]->die();
+					player->applyJump();
+				}
+				else
+				{
+					cout << "COLLISION" << endl;
+					if (player->canTakeDamage() && !bat[i]->isEnemyDead()) player->takeDamage();
+				}
 			}
 		}
 	}

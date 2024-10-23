@@ -47,7 +47,7 @@ private:
 	const float jumpForce = 11.f;
 	const float maxFallPlayer = 30.f;
 
-	bool isGrounded;
+	bool isGrounded, isVisible;
 	glm::fvec2 posPlayer, velPlayer, posCollision;
 	glm::ivec2 sizeCollision;
 

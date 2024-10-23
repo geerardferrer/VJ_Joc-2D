@@ -221,16 +221,34 @@ void Player::update(int deltaTime)
 	if (damageTakenTime > 0.f)
 	{
 		damageTakenTime -= deltaTime / 1000.f;
+
+		// Alternar visibilidad basado en damageTakenTime para hacer que "parpadee"
+		if (int(damageTakenTime * 10) % 2 == 0)
+		{
+			isVisible = false;  // Ocultar temporalmente al jugador
+		}
+		else
+		{
+			isVisible = true;   // Mostrar al jugador
+		}
 	}
-	else if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 22 || map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 38)
+	else
 	{
-		takeDamage();
+		isVisible = true;  // Siempre visible si no está en estado de daño
+
+						   // Verifica si el jugador está en un tile que causa daño
+		if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 22 || map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 38)
+		{
+			takeDamage();  // Solo toma daño cuando damageTakenTime es 0 (invulnerabilidad ha terminado)
+		}
 	}
 
+	// Verifica si el jugador ha llegado a un tile específico (ejemplo de final de juego)
 	if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 119)
 	{
 		lives = 0;
 	}
+
 
 	//cout << map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) << endl;
 
@@ -270,7 +288,10 @@ void Player::hasGrounded()
 
 void Player::render()
 {
-	sprite->render();
+	if (isVisible)
+	{
+		sprite->render();
+	}
 }
 
 bool Player::leftKeyPressed() const

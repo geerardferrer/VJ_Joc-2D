@@ -27,7 +27,7 @@ private:
 	glm::fvec2 posEnemy, posCollision;
 	glm::vec2 playerPos; // Emmagatzema la posició del jugador per calcular la distància
 	bool isDead;
-	float moveSpeed, flySpeed, distanceToPlayer, deathTime;
+	float moveSpeed, maxDisplacement, currentDisplacement, deathTime;
 	int moveDirection; // 1 cap a la dreta, -1 cap a l'esquerra
 	glm::ivec2 sizeCollision;
 	glm::ivec2 tileMapDispl;

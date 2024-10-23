@@ -14,7 +14,9 @@ enum BatEnemyAnims
 
 void BatEnemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
-	moveSpeed = 0.0f; // Velocitat de moviment
+	moveSpeed = 3.5f;
+	maxDisplacement = 200.0f;
+	currentDisplacement = 0.0f;
 	moveDirection = -1;
 
 	spritesheet.loadFromFile("images/Enemy_Bat_Sprites.png", TEXTURE_PIXEL_FORMAT_RGBA); // Textura del bat
@@ -48,8 +50,8 @@ void BatEnemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	isDead = false;
 	deathTime = 0.0f;
 
-	posCollision = glm::vec2(10, 10);  
-	sizeCollision = glm::ivec2(44, 44); 
+	posCollision = glm::vec2(10, 20);  
+	sizeCollision = glm::ivec2(44, 24); 
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
 }
@@ -61,30 +63,22 @@ void BatEnemy::update(int deltaTime)
 	if (isDead) {
 		deathTime += deltaTime / 1000.0f;
 
-		if (deathTime >= 2.0f)moveSpeed = 0;
-
+		if (deathTime >= 2.0f) {
+			moveSpeed = 0;
+			return;
+		}
 		return;
 	}
 
 	posEnemy.y += moveDirection * moveSpeed;
+	currentDisplacement += moveSpeed;
 
-	// Moviment a dalt
-	if (moveDirection == -1) {
-		if (map->collisionMoveUp(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision, EnemyType))
-		{
-			posEnemy.y += moveSpeed;  // Revertir el moviment
-			moveDirection = 1;        // Canviar direcció cap a la dreta
-		
-		}
-	}
-	// Moviment a baix
-	else {
-		if (map->collisionMoveDown(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision, EnemyType)) {
-			posEnemy.y -= moveSpeed;  // Revertir el moviment
-			moveDirection = -1;       // Canviar direcció cap a l'esquerra
-		}
+	if (currentDisplacement >= maxDisplacement) {
+		moveDirection *= -1; 
+		currentDisplacement = 0.0f; 
 	}
 
+	// Actualizar la posición del sprite
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
 }
 
@@ -101,7 +95,7 @@ bool BatEnemy::isEnemyDead()
 
 void BatEnemy::render()
 {
-	if (!isDead || deathTime < 1.75f)
+	if (!isDead || deathTime < 1.0f)
 		sprite->render();
 }
 
