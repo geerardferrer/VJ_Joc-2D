@@ -37,10 +37,10 @@ public:
 	int getTileSize() const { return tileSize; }
 	glm::ivec2 TileMap::getMapSize() const { return mapSize; }
 
-	bool collisionMoveLeft(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const;
-	bool collisionMoveRight(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const;
-	bool collisionMoveDown(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const;
-	bool collisionMoveUp(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const;
+	bool collisionMoveLeft(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &colliderSize, EntityType entity) const;
+	bool collisionMoveRight(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &colliderSize, EntityType entity) const;
+	bool collisionMoveDown(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &colliderSize, EntityType entity) const;
+	bool collisionMoveUp(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &colliderSize, EntityType entity) const;
 
 	int getTileAt(const glm::fvec2 &pos) const;
 

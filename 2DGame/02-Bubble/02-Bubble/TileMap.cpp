@@ -164,7 +164,7 @@ bool TileMap::tileIsTopTravessable(int tile) const {
 // Method collisionMoveDown also corrects Y coordinate if the box is
 // already intersecting a tile below.
 
-bool TileMap::collisionMoveLeft(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const
+bool TileMap::collisionMoveLeft(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &colliderSize, EntityType entity) const
 {
 	int x, y0, y1;
 
@@ -198,7 +198,7 @@ bool TileMap::collisionMoveLeft(glm::fvec2 &entityPos, const glm::fvec2 &collide
 	return false;
 }
 
-bool TileMap::collisionMoveRight(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const
+bool TileMap::collisionMoveRight(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &colliderSize, EntityType entity) const
 {
 	int x, y0, y1;
 
@@ -216,13 +216,13 @@ bool TileMap::collisionMoveRight(glm::fvec2 &entityPos, const glm::fvec2 &collid
 		{
 		case EnemyType:
 			if (!tileIsTravessable(tile) && !tileIsTopTravessable(tile) || tile == 128) {
-				entityPos.x = tileSize * x - entitySize.x + colliderPos.x;
+				entityPos.x = tileSize * x - (colliderPos.x + colliderSize.x);
 				return true;
 			}
 			break;
 		default:
 			if (!tileIsTravessable(tile) && !tileIsTopTravessable(tile)) {
-				entityPos.x = tileSize * x - entitySize.x + colliderPos.x;
+				entityPos.x = tileSize * x - (colliderPos.x + colliderSize.x);
 				return true;
 			}
 			break;
@@ -232,7 +232,7 @@ bool TileMap::collisionMoveRight(glm::fvec2 &entityPos, const glm::fvec2 &collid
 	return false;
 }
 
-bool TileMap::collisionMoveDown(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const
+bool TileMap::collisionMoveDown(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &colliderSize, EntityType entity) const
 {
 	int x0, x1, y;
 
@@ -250,13 +250,13 @@ bool TileMap::collisionMoveDown(glm::fvec2 &entityPos, const glm::fvec2 &collide
 		{
 		case EnemyType:
 			if (!tileIsTravessable(tile) || tile == 128) {
-				entityPos.y = tileSize * y - entitySize.y + colliderPos.y;
+				entityPos.y = tileSize * y - (colliderPos.y + colliderSize.y);
 				return true;
 			}
 			break;
 		default:
 			if (!tileIsTravessable(tile)) {
-				entityPos.y = tileSize * y - entitySize.y + colliderPos.y;
+				entityPos.y = tileSize * y - (colliderPos.y + colliderSize.y);
 				return true;
 			}
 			break;
@@ -266,7 +266,7 @@ bool TileMap::collisionMoveDown(glm::fvec2 &entityPos, const glm::fvec2 &collide
 	return false;
 }
 
-bool TileMap::collisionMoveUp(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &entitySize, const glm::ivec2 &colliderSize, EntityType entity) const
+bool TileMap::collisionMoveUp(glm::fvec2 &entityPos, const glm::fvec2 &colliderPos, const glm::ivec2 &colliderSize, EntityType entity) const
 {
 	int x0, x1, y;
 

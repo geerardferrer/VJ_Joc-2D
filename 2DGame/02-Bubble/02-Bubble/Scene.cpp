@@ -56,20 +56,21 @@ void Scene::init()
 	{
 		rock[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 		rock[i]->setTileMap(map);
+		rock[i]->setPlayer(player);
 	}
 	
-	rock[0]->setPosition(glm::vec2(12 * map->getTileSize(), (75 * map->getTileSize())));
-	rock[1]->setPosition(glm::vec2(28 * map->getTileSize(), (73 * map->getTileSize())));
-	rock[2]->setPosition(glm::vec2(81 * map->getTileSize(), (89 * map->getTileSize())));
-	rock[3]->setPosition(glm::vec2(115 * map->getTileSize(), (91 * map->getTileSize())));
-	rock[4]->setPosition(glm::vec2(157 * map->getTileSize(), (119 * map->getTileSize())));
-	rock[5]->setPosition(glm::vec2(105 * map->getTileSize(), (131 * map->getTileSize())));
-	rock[6]->setPosition(glm::vec2(69 * map->getTileSize(), (157 * map->getTileSize())));
-	rock[7]->setPosition(glm::vec2(48 * map->getTileSize(), (162 * map->getTileSize())));
-	rock[8]->setPosition(glm::vec2(48 * map->getTileSize(), (161 * map->getTileSize())));
-	rock[9]->setPosition(glm::vec2(48 * map->getTileSize(), (160 * map->getTileSize())));
-	rock[10]->setPosition(glm::vec2(22 * map->getTileSize(), (150 * map->getTileSize())));
-	rock[11]->setPosition(glm::vec2(61 * map->getTileSize(), (176 * map->getTileSize())));
+	rock[0]->setPosition(glm::vec2(18 * map->getTileSize(), (70 * map->getTileSize())));
+	//rock[1]->setPosition(glm::vec2(28 * map->getTileSize(), (73 * map->getTileSize())));
+	//rock[2]->setPosition(glm::vec2(81 * map->getTileSize(), (89 * map->getTileSize())));
+	//rock[3]->setPosition(glm::vec2(115 * map->getTileSize(), (91 * map->getTileSize())));
+	//rock[4]->setPosition(glm::vec2(157 * map->getTileSize(), (119 * map->getTileSize())));
+	//rock[5]->setPosition(glm::vec2(105 * map->getTileSize(), (131 * map->getTileSize())));
+	//rock[6]->setPosition(glm::vec2(69 * map->getTileSize(), (157 * map->getTileSize())));
+	//rock[7]->setPosition(glm::vec2(48 * map->getTileSize(), (162 * map->getTileSize())));
+	//rock[8]->setPosition(glm::vec2(48 * map->getTileSize(), (161 * map->getTileSize())));
+	//rock[9]->setPosition(glm::vec2(48 * map->getTileSize(), (160 * map->getTileSize())));
+	//rock[10]->setPosition(glm::vec2(22 * map->getTileSize(), (150 * map->getTileSize())));
+	//rock[11]->setPosition(glm::vec2(61 * map->getTileSize(), (176 * map->getTileSize())));
 
 	// OGRES
 	for (int i = 0; i < NUM_OGRES; ++i) ogre.push_back(new OgreEnemy());
@@ -171,10 +172,10 @@ void Scene::render()
 
 	map->render();
 
-	for (int i = 0; i < rock.size(); ++i) rock[i]->render();
 	player->render();
 	for (int i = 0; i < ogre.size(); ++i) ogre[i]->render();
 	for (int i = 0; i < bat.size(); ++i) bat[i]->render();
+	for (int i = 0; i < rock.size(); ++i) rock[i]->render();
 }
 
 void Scene::initShaders()
@@ -243,6 +244,7 @@ CollisionDir Scene::checkCollision(const glm::fvec2 &entityPos1, const glm::fvec
 void Scene::manageCollision()
 {
 	// PLAYER x ROCK
+	/*
 	for (int i = 0; i < rock.size(); ++i) {
 		CollisionDir dir;
 
@@ -315,7 +317,7 @@ void Scene::manageCollision()
 		}
 		//cout << player->getVelocity().x << " " << player->getVelocity().y << endl;
 	}
-
+	*/
 	// PLAYER x OGRE
 	for (int i = 0; i < ogre.size(); ++i) {
 		if (!ogre[i]->isEnemyDead()) {

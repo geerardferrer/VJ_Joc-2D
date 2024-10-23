@@ -16,19 +16,51 @@ void Rock::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 	tileMapDispl = tileMapPos;
 
-	// Ajustamos la hitbox del enemigo
-	posCollision = glm::vec2(0, 0); // Ajusta según la forma del sprite (igual que en el player)
-	sizeCollision = glm::ivec2(32, 32); // Tamaño de la hitbox (ajustado a 30x96)
+	posCollision = glm::vec2(0, 0);
+	sizeCollision = glm::ivec2(32, 32);
 
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
+	velRock = glm::fvec2(0.f, 0.f);
+
+	isThrown = false;
+	isPickedUp = true;
+
+	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posRock.x), float(tileMapDispl.y + posRock.y)));
 }
 
 void Rock::update(int deltaTime)
 {
 	sprite->update(deltaTime);
 
-	// Actualizamos la posición del sprite
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
+	if (isThrown) {
+		velRock.x += 0.9f;
+
+		posRock.x += velRock.x;
+
+		if (velRock.x < 0 && map->collisionMoveLeft(posRock, posCollision, sizeCollision, PlayerType)) {
+
+		}
+		if (velRock.x > 0 && map->collisionMoveRight(posRock, posCollision, sizeCollision, PlayerType)) {
+
+		}
+
+		velRock.y += 0.4f;
+
+		posRock.y += velRock.y;
+
+		if (velRock.y > 0 && map->collisionMoveDown(posRock, posCollision, sizeCollision, PlayerType)) {
+			velRock.y = 0;
+			isThrown = false;
+		}
+
+	}
+	else if (isPickedUp) {
+		FaceDir playerDir = player->getFacingDir();
+
+		if (playerDir == LEFT) posRock = player->getPosition() + glm::vec2(8, 48);
+		else if (playerDir == RIGHT) posRock = player->getPosition() + glm::vec2(56, 48);
+	}
+
+	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posRock.x), float(tileMapDispl.y + posRock.y)));
 }
 
 void Rock::render()
@@ -41,10 +73,15 @@ void Rock::setTileMap(TileMap *tileMap)
 	map = tileMap;
 }
 
+void Rock::setPlayer(Player *p)
+{
+	player = p;
+}
+
 void Rock::setPosition(const glm::vec2 &pos)
 {
-	posEnemy = pos;
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
+	posRock = pos;
+	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posRock.x), float(tileMapDispl.y + posRock.y)));
 }
 
 glm::vec2 Rock::getPosCollision() const
@@ -59,6 +96,6 @@ glm::vec2 Rock::getSizeCollision() const
 
 glm::vec2 Rock::getPosition() const
 {
-	return posEnemy;
+	return posRock;
 }
 

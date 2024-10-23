@@ -1,14 +1,12 @@
 #ifndef _PLAYER_INCLUDE
 #define _PLAYER_INCLUDE
 
-
 #include "Sprite.h"
 #include "TileMap.h"
 
-
-// Player is basically a Sprite that represents the player. As such it has
-// all properties it needs to track its movement, jumping, and collisions.
-
+enum FaceDir {
+	LEFT, RIGHT
+};
 
 class Player {
 public:
@@ -24,6 +22,8 @@ public:
 	glm::vec2 getSizeCollision() const;
 
 	glm::vec2 getVelocity() const;
+
+	FaceDir getFacingDir() const;
 
 	bool isFallingAss() const;
 
@@ -52,6 +52,8 @@ private:
 	glm::ivec2 sizeCollision;
 
 	glm::ivec2 tileMapDispl;
+
+	bool isHoldingObj;
 
 	bool hasAppliedJump;
 

@@ -11,7 +11,6 @@ enum PlayerAnims
 	CROUCH_LEFT, CROUCH_RIGHT,
 	JUMP_LEFT, JUMP_RIGHT,
 	FALL_ASS_LEFT, FALL_ASS_RIGHT,
-	DRIFT_LEFT, DRIFT_RIGHT,
 	STAND_OBJ_LEFT, STAND_OBJ_RIGHT,
 	MOVE_OBJ_LEFT, MOVE_OBJ_RIGHT,
 	JUMP_OBJ_LEFT, JUMP_OBJ_RIGHT,
@@ -149,11 +148,11 @@ void Player::update(int deltaTime)
 	posPlayer.x += velPlayer.x;
 
 	// COLISIONS HORITZONTALS
-	if (velPlayer.x < 0 && map->collisionMoveLeft(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision, PlayerType))
+	if (velPlayer.x < 0 && map->collisionMoveLeft(posPlayer, posCollision, sizeCollision, PlayerType))
 	{
 		if (sprite->animation() == MOVE_LEFT) sprite->changeAnimation(STAND_LEFT);
 	}
-	else if (velPlayer.x > 0 && map->collisionMoveRight(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision, PlayerType))
+	else if (velPlayer.x > 0 && map->collisionMoveRight(posPlayer, posCollision, sizeCollision, PlayerType))
 	{
 		if (sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(STAND_RIGHT);
 	}
@@ -194,11 +193,11 @@ void Player::update(int deltaTime)
 	posPlayer.y += velPlayer.y;
 
 	// COLISIONS VERTICALS
-	if (velPlayer.y < 0 && map->collisionMoveUp(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision, PlayerType)) // Es mou cap a dalt
+	if (velPlayer.y < 0 && map->collisionMoveUp(posPlayer, posCollision, sizeCollision, PlayerType)) // Es mou cap a dalt
 	{
 		velPlayer.y = 0;
 	}
-	else if (velPlayer.y > 0 && map->collisionMoveDown(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision, PlayerType)) // Es mou cap a baix
+	else if (velPlayer.y > 0 && map->collisionMoveDown(posPlayer, posCollision, sizeCollision, PlayerType)) // Es mou cap a baix
 	{
 		velPlayer.y = 0;
 		isGrounded = true;
@@ -213,7 +212,7 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(STAND_RIGHT);
 		}
 	}
-	else if (isGrounded && !map->collisionMoveDown(posPlayer, posCollision, glm::ivec2(96, 96), sizeCollision, PlayerType))
+	else if (isGrounded && !map->collisionMoveDown(posPlayer, posCollision, sizeCollision, PlayerType))
 	{
 		isGrounded = false;
 	}
@@ -284,6 +283,13 @@ void Player::hasGrounded()
 	velPlayer.y = 0;
 	isGrounded = true;
 	if (hasAppliedJump) hasAppliedJump = false;
+}
+
+FaceDir Player::getFacingDir() const {
+	if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT || sprite->animation() == CROUCH_LEFT || sprite->animation() == JUMP_LEFT || sprite->animation() == FALL_ASS_LEFT || sprite->animation() == STAND_OBJ_LEFT || sprite->animation() == MOVE_OBJ_LEFT || sprite->animation() == JUMP_OBJ_LEFT)
+		return LEFT;
+	else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT || sprite->animation() == CROUCH_RIGHT || sprite->animation() == JUMP_RIGHT || sprite->animation() == FALL_ASS_RIGHT || sprite->animation() == STAND_OBJ_RIGHT || sprite->animation() == MOVE_OBJ_RIGHT || sprite->animation() == JUMP_OBJ_RIGHT)
+		return RIGHT;
 }
 
 void Player::render()

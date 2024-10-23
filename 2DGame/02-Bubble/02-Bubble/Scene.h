@@ -16,7 +16,7 @@
 // Scene contains all the entities of our game.
 // It is responsible for updating and render them.
 
-#define NUM_ROCKS 12
+#define NUM_ROCKS 1
 #define NUM_OGRES 8
 #define NUM_BATS 4
 

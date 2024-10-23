@@ -117,7 +117,7 @@ void OgreEnemy::update(int deltaTime)
 		
 		// Moviment a l'esquerra
 		if (moveDirection == -1) {
-			if (map->collisionMoveLeft(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision, EnemyType)) {
+			if (map->collisionMoveLeft(posEnemy, posCollision, sizeCollision, EnemyType)) {
 				posEnemy.x += moveSpeed;
 				moveDirection = 1;
 				sprite->changeAnimation(MOVE_RIGHT);
@@ -125,7 +125,7 @@ void OgreEnemy::update(int deltaTime)
 		}
 		// Moviment a la dreta
 		else {
-			if (map->collisionMoveRight(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision, EnemyType)) {
+			if (map->collisionMoveRight(posEnemy, posCollision, sizeCollision, EnemyType)) {
 				posEnemy.x -= moveSpeed;
 				moveDirection = -1;
 				sprite->changeAnimation(MOVE_LEFT);
@@ -135,7 +135,7 @@ void OgreEnemy::update(int deltaTime)
 
 	posEnemy.y += FALL_STEP;
 
-	if (map->collisionMoveDown(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision, EnemyType)) {}
+	if (map->collisionMoveDown(posEnemy, posCollision, sizeCollision, EnemyType)) {}
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
 }
