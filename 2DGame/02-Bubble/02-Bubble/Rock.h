@@ -6,12 +6,7 @@
 #include "TileMap.h"
 
 
-// Player is basically a Sprite that represents a enemy. As such it has
-// all properties it needs to track its movement, and collisions.
-
-
-class Rock
-{
+class Rock {
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	void update(int deltaTime);

@@ -114,7 +114,7 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 
-	manageCollision();
+	//manageCollision();
 
 	player->update(deltaTime);
 
@@ -129,6 +129,8 @@ void Scene::update(int deltaTime)
 		bat[i]->setPlayerPosition(player->getPosition());
 		bat[i]->update(deltaTime);
 	}
+
+	manageCollision();
 
 
 	float halfWidth = SCREEN_WIDTH / 2.0f;
@@ -223,7 +225,7 @@ CollisionDir Scene::checkCollision(const glm::fvec2 &entityPos1, const glm::fvec
 	if (collisionX && collisionY)
 	{
 		float overlapX = std::min(right1 - left2, right2 - left1);
-		float overlapY = std::min(bottom1 - top2, bottom2 - top1) * 0.5f; // factor para priorizar caidas por encima/debajo
+		float overlapY = std::min(bottom1 - top2, bottom2 - top1) * 0.3f; // factor para priorizar caidas por encima/debajo
 
 		if (overlapX < overlapY)
 		{
@@ -244,36 +246,74 @@ void Scene::manageCollision()
 	for (int i = 0; i < rock.size(); ++i) {
 		CollisionDir dir;
 
+		cout << player->getVelocity().x << " " << player->getVelocity().y << " | ";
+
 		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), rock[i]->getPosition(), rock[i]->getPosCollision(), rock[i]->getSizeCollision()))
 		{
+			float x, y;
+			float playerSide, rockSide;
 			switch (dir)
 			{
-			case LEFT_COLLISION:
-				cout << "LEFT_COLLISION" << endl;
-				break;
-			case RIGHT_COLLISION:
-				cout << "RIGHT_COLLISION" << endl;
-				break;
-			case TOP_COLLISION:
-				cout << "TOP_COLLISION" << endl;
-				break;
-			case BOTTOM_COLLISION:
-				cout << "BOTTOM_COLLISION" << endl;
-				break;
-			default:
-				break;
-			}
+				case RIGHT_COLLISION:
+					//cout << "RIGHT_COLLISION" << endl;
+					if (player->getVelocity().x > 0) {
+						// Right player side
+						playerSide = player->getPosition().x + player->getPosCollision().x + player->getSizeCollision().x;
+						// Left rock side
+						rockSide = rock[i]->getPosition().x + rock[i]->getPosCollision().x;
 
-			if (dir == BOTTOM_COLLISION)
-			{
-				// ogre[i] mor
-				// aplica salt al player
-			}
-			else
-			{
-				// player perd una vida
+						x = player->getPosition().x - (playerSide - rockSide);
+						y = player->getPosition().y;
+
+						player->setPosition(glm::vec2(x, y));
+					}
+					break;
+				case LEFT_COLLISION:
+					//cout << "LEFT_COLLISION" << endl;
+					if (player->getVelocity().x < 0) {
+						// Left player side
+						playerSide = player->getPosition().x + player->getPosCollision().x;
+						// Right rock side
+						rockSide = rock[i]->getPosition().x + rock[i]->getPosCollision().x + rock[i]->getSizeCollision().x;
+
+						x = player->getPosition().x - (playerSide - rockSide);
+						y = player->getPosition().y;
+
+						player->setPosition(glm::vec2(x, y));
+					}
+					break;
+				case BOTTOM_COLLISION:
+					//cout << "BOTTOM_COLLISION" << endl;
+					if (player->getVelocity().y > 0) {
+						// Bottom player side
+						playerSide = player->getPosition().y + player->getPosCollision().y + player->getSizeCollision().y;
+						// Top rock side
+						rockSide = rock[i]->getPosition().y + rock[i]->getPosCollision().y;
+
+						x = player->getPosition().x;
+						y = player->getPosition().y - (playerSide - rockSide);
+
+						player->setPosition(glm::vec2(x, y));
+						player->hasGrounded();
+					}
+					break;
+				case TOP_COLLISION:
+					//cout << "TOP_COLLISION" << endl;
+					if (player->getVelocity().y < 0) {
+						// Top player side
+						playerSide = player->getPosition().y + player->getPosCollision().y;
+						// Bottom rock side
+						rockSide = rock[i]->getPosition().y + rock[i]->getPosCollision().y + rock[i]->getSizeCollision().y;
+
+						x = player->getPosition().x;
+						y = player->getPosition().y - (playerSide - rockSide);
+
+						player->setPosition(glm::vec2(x, y));
+					}
+					break;
 			}
 		}
+		cout << player->getVelocity().x << " " << player->getVelocity().y << endl;
 	}
 
 	// PLAYER x OGRE
@@ -282,32 +322,32 @@ void Scene::manageCollision()
 
 		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), ogre[i]->getPosition(), ogre[i]->getPosCollision(), ogre[i]->getSizeCollision()))
 		{
-			switch (dir)
-			{
-			case LEFT_COLLISION:
-				cout << "LEFT_COLLISION" << endl;
-				break;
-			case RIGHT_COLLISION:
-				cout << "RIGHT_COLLISION" << endl;
-				break;
-			case TOP_COLLISION:
-				cout << "TOP_COLLISION" << endl;
-				break;
-			case BOTTOM_COLLISION:
-				cout << "BOTTOM_COLLISION" << endl;
-				break;
-			default:
-				break;
-			}
-
 			if (dir == BOTTOM_COLLISION && player->isFallingAss())
 			{
 				ogre[i]->die();
-				// aplica salt al player
+				player->applyJump();
 			}
 			else
 			{
 				if (player->canTakeDamage() && !ogre[i]->isEnemyDead()) player->takeDamage();
+			}
+		}
+	}
+
+	// PLAYER x BAT
+	for (int i = 0; i < bat.size(); ++i) {
+		CollisionDir dir;
+
+		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), bat[i]->getPosition(), bat[i]->getPosCollision(), bat[i]->getSizeCollision()))
+		{
+			if (dir == BOTTOM_COLLISION && player->isFallingAss())
+			{
+				bat[i]->die();
+				player->applyJump();
+			}
+			else
+			{
+				if (player->canTakeDamage() && !bat[i]->isEnemyDead()) player->takeDamage();
 			}
 		}
 	}

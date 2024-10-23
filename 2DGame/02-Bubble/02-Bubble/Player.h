@@ -10,8 +10,7 @@
 // all properties it needs to track its movement, jumping, and collisions.
 
 
-class Player
-{
+class Player {
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	void update(int deltaTime);
@@ -24,16 +23,23 @@ public:
 	glm::vec2 getPosCollision() const;
 	glm::vec2 getSizeCollision() const;
 
+	glm::vec2 getVelocity() const;
+
 	bool isFallingAss() const;
 
 	void takeDamage();
 	bool canTakeDamage() const;
+
+	void applyJump();
+	void hasGrounded();
 
 private:
 	bool isGrounded;
 	glm::fvec2 posPlayer, velPlayer, posCollision;
 	glm::ivec2 sizeCollision;
 	glm::ivec2 tileMapDispl;
+
+	bool hasAppliedJump;
 
 	int lives;
 	float damageTakenTime;

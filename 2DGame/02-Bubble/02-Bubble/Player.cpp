@@ -106,7 +106,7 @@ void Player::update(int deltaTime)
 	const float maxFallPlayer = 30.f;
 
 	// MOVIMENT HORITZONTAL
-	if (Game::instance().getKey(GLFW_KEY_LEFT) && !(Game::instance().getKey(GLFW_KEY_DOWN)))
+	if ((Game::instance().getKey(GLFW_KEY_LEFT) || Game::instance().getKey(GLFW_KEY_A)) && !((Game::instance().getKey(GLFW_KEY_DOWN) || Game::instance().getKey(GLFW_KEY_S))))
 	{
 		if (velPlayer.x > 0) velPlayer.x -= acceleration * 2;
 		else velPlayer.x -= acceleration;
@@ -122,7 +122,7 @@ void Player::update(int deltaTime)
 			if (sprite->animation() != JUMP_LEFT) sprite->changeAnimation(JUMP_LEFT);
 		}
 	}
-	else if (Game::instance().getKey(GLFW_KEY_RIGHT) && !(Game::instance().getKey(GLFW_KEY_DOWN)))
+	else if ((Game::instance().getKey(GLFW_KEY_RIGHT) || Game::instance().getKey(GLFW_KEY_D)) && !((Game::instance().getKey(GLFW_KEY_DOWN) || Game::instance().getKey(GLFW_KEY_S))))
 	{
 		if (velPlayer.x < 0) velPlayer.x += acceleration * 2;
 		else velPlayer.x += acceleration;
@@ -146,7 +146,7 @@ void Player::update(int deltaTime)
 
 		if (isGrounded)
 		{
-			if (Game::instance().getKey(GLFW_KEY_DOWN))
+			if (Game::instance().getKey(GLFW_KEY_DOWN) || Game::instance().getKey(GLFW_KEY_S))
 			{
 				if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) sprite->changeAnimation(CROUCH_LEFT);
 				else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(CROUCH_RIGHT);
@@ -174,7 +174,7 @@ void Player::update(int deltaTime)
 	// MOVIMENT VERTICAL
 	if (isGrounded)
 	{
-		if (Game::instance().getKey(GLFW_KEY_UP))
+		if (Game::instance().getKey(GLFW_KEY_UP) || Game::instance().getKey(GLFW_KEY_W))
 		{
 			velPlayer.y = -jumpForce;
 			isGrounded = false;
@@ -183,7 +183,7 @@ void Player::update(int deltaTime)
 	else
 	{
 		// Si estamos en el aire y se presiona la tecla DOWN, cambia a la animación de caer de culo
-		if (Game::instance().getKey(GLFW_KEY_DOWN))
+		if ((Game::instance().getKey(GLFW_KEY_DOWN) || Game::instance().getKey(GLFW_KEY_S)) && !hasAppliedJump)
 		{
 			velPlayer.y += gravity * 5; // Caída más rápida si se presiona DOWN
 
@@ -215,6 +215,7 @@ void Player::update(int deltaTime)
 	{
 		velPlayer.y = 0;
 		isGrounded = true;
+		if (hasAppliedJump) hasAppliedJump = false;
 
 		if (sprite->animation() == JUMP_LEFT || sprite->animation() == FALL_ASS_LEFT)
 		{
@@ -239,12 +240,18 @@ void Player::update(int deltaTime)
 		takeDamage();
 	}
 
+	if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 119)
+	{
+		lives = 0;
+	}
+
 	//cout << map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) << endl;
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
-bool Player::isFallingAss() const {
+bool Player::isFallingAss() const
+{
 	return (sprite->animation() == FALL_ASS_LEFT || sprite->animation() == FALL_ASS_RIGHT);
 }
 
@@ -259,6 +266,19 @@ void Player::takeDamage()
 bool Player::canTakeDamage() const
 {
 	return damageTakenTime <= 0.f;
+}
+
+void Player::applyJump()
+{
+	velPlayer.y = -10.f;
+	hasAppliedJump = true;
+}
+
+void Player::hasGrounded()
+{
+	velPlayer.y = 0;
+	isGrounded = true;
+	if (hasAppliedJump) hasAppliedJump = false;
 }
 
 void Player::render()
@@ -291,4 +311,9 @@ glm::vec2 Player::getPosCollision() const
 glm::vec2 Player::getSizeCollision() const
 {
 	return sizeCollision;
+}
+
+glm::vec2 Player::getVelocity() const
+{
+	return velPlayer;
 }

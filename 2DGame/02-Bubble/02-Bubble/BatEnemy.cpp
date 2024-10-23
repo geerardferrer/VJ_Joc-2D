@@ -15,7 +15,6 @@ enum BatEnemyAnims
 void BatEnemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	moveSpeed = 0.0f; // Velocitat de moviment
-	//flySpeed = 2.5f;  // Velocitat de vol
 	moveDirection = -1;
 
 	spritesheet.loadFromFile("images/Enemy_Bat_Sprites.png", TEXTURE_PIXEL_FORMAT_RGBA); // Textura del bat
@@ -39,6 +38,8 @@ void BatEnemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->addKeyframe(DIE, glm::vec2(0.375f, 0.5f));
 	sprite->addKeyframe(DIE, glm::vec2(0.5f, 0.5f));
 	sprite->addKeyframe(DIE, glm::vec2(0.625f, 0.5f));
+	sprite->addKeyframe(DIE, glm::vec2(0.625f, 0.5f));
+	sprite->addKeyframe(DIE, glm::vec2(0.625f, 0.5f));
 	
 	sprite->changeAnimation(FLY); // Animació inicial
 
@@ -55,24 +56,20 @@ void BatEnemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 void BatEnemy::update(int deltaTime)
 {
-
 	sprite->update(deltaTime);
 	
-	if (isDead)
-	{
+	if (isDead) {
 		deathTime += deltaTime / 1000.0f;
-		if (deathTime >= 2.0f)
-		{
-			moveSpeed = 0;
-		}
+
+		if (deathTime >= 2.0f)moveSpeed = 0;
+
 		return;
 	}
 
 	posEnemy.y += moveDirection * moveSpeed;
 
-	// Detectar col·lisions i canviar de direcció si és necessari
-	if (moveDirection == -1) // Moviment a dalt
-	{
+	// Moviment a dalt
+	if (moveDirection == -1) {
 		if (map->collisionMoveUp(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision, EnemyType))
 		{
 			posEnemy.y += moveSpeed;  // Revertir el moviment
@@ -80,10 +77,9 @@ void BatEnemy::update(int deltaTime)
 		
 		}
 	}
-	else // Moviment a baix
-	{
-		if (map->collisionMoveDown(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision, EnemyType))
-		{
+	// Moviment a baix
+	else {
+		if (map->collisionMoveDown(posEnemy, posCollision, glm::ivec2(64, 64), sizeCollision, EnemyType)) {
 			posEnemy.y -= moveSpeed;  // Revertir el moviment
 			moveDirection = -1;       // Canviar direcció cap a l'esquerra
 		}
@@ -98,12 +94,15 @@ void BatEnemy::die()
 	startDeathAnimation();
 }
 
+bool BatEnemy::isEnemyDead()
+{
+	return isDead;
+}
+
 void BatEnemy::render()
 {
 	if (!isDead || deathTime < 1.75f)
-	{
 		sprite->render();
-	}
 }
 
 void BatEnemy::setTileMap(TileMap *tileMap)

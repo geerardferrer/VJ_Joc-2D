@@ -4,10 +4,7 @@
 #include "Sprite.h"
 #include "TileMap.h"
 
-// BatEnemy és un Sprite que representa un enemic. Té propietats per gestionar el seu moviment, vol i col·lisions.
-
-class BatEnemy
-{
+class BatEnemy {
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	void update(int deltaTime);
@@ -17,13 +14,14 @@ public:
 	void setPosition(const glm::vec2 &pos);
 
 	void setPlayerPosition(const glm::vec2 &playerPos);
-	void startDeathAnimation();
 
 	glm::vec2 getPosition() const;
 	glm::vec2 getPosCollision() const;
 	glm::vec2 getSizeCollision() const;
 
 	void die();
+	bool isEnemyDead();
+	void startDeathAnimation();
 
 private:
 	glm::fvec2 posEnemy, posCollision;

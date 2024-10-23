@@ -1,17 +1,10 @@
 #ifndef _OGRE_ENEMY_INCLUDE
 #define _OGRE_ENEMY_INCLUDE
 
-
 #include "Sprite.h"
 #include "TileMap.h"
 
-
-// Player is basically a Sprite that represents a enemy. As such it has
-// all properties it needs to track its movement, and collisions.
-
-
-class OgreEnemy
-{
+class OgreEnemy {
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	void update(int deltaTime);
@@ -21,7 +14,6 @@ public:
 	void setPosition(const glm::vec2 &pos);
 
 	void setPlayerPosition(const glm::vec2 &playerPos);
-	void startDeathAnimation();
 
 	glm::vec2 getPosition() const;
 	glm::vec2 getPosCollision() const;
@@ -29,6 +21,7 @@ public:
 
 	void die();
 	bool isEnemyDead();
+	void startDeathAnimation();
 
 private:
 	glm::fvec2 posEnemy, posCollision; 

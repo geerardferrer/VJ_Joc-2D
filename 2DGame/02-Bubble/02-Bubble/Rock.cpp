@@ -47,15 +47,18 @@ void Rock::setPosition(const glm::vec2 &pos)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
 }
 
-glm::vec2 Rock::getPosCollision() const {
+glm::vec2 Rock::getPosCollision() const
+{
 	return posCollision;
 }
 
-glm::vec2 Rock::getSizeCollision() const {
+glm::vec2 Rock::getSizeCollision() const
+{
 	return sizeCollision;
 }
 
-glm::vec2 Rock::getPosition() const {
+glm::vec2 Rock::getPosition() const
+{
 	return posEnemy;
 }
 
