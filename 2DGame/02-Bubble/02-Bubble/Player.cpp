@@ -92,7 +92,7 @@ void Player::update(int deltaTime)
 	sprite->update(deltaTime);
 
 	// MOVIMENT HORITZONTAL
-	if (leftKeyPressed() && !downKeyPressed())
+	if (Game::instance().leftKeyPressed() && !Game::instance().downKeyPressed())
 	{
 		if (velPlayer.x > 0) velPlayer.x -= acceleration * 2;
 		else velPlayer.x -= acceleration;
@@ -108,7 +108,7 @@ void Player::update(int deltaTime)
 			if (sprite->animation() != JUMP_LEFT) sprite->changeAnimation(JUMP_LEFT);
 		}
 	}
-	else if (rightKeyPressed() && !downKeyPressed())
+	else if (Game::instance().rightKeyPressed() && !Game::instance().downKeyPressed())
 	{
 		if (velPlayer.x < 0) velPlayer.x += acceleration * 2;
 		else velPlayer.x += acceleration;
@@ -132,7 +132,7 @@ void Player::update(int deltaTime)
 
 		if (isGrounded)
 		{
-			if (downKeyPressed())
+			if (Game::instance().downKeyPressed())
 			{
 				if (sprite->animation() == STAND_LEFT || sprite->animation() == MOVE_LEFT) sprite->changeAnimation(CROUCH_LEFT);
 				else if (sprite->animation() == STAND_RIGHT || sprite->animation() == MOVE_RIGHT) sprite->changeAnimation(CROUCH_RIGHT);
@@ -160,7 +160,7 @@ void Player::update(int deltaTime)
 	// MOVIMENT VERTICAL
 	if (isGrounded)
 	{
-		if (upKeyPressed())
+		if (Game::instance().upKeyPressed())
 		{
 			velPlayer.y = -jumpForce;
 			isGrounded = false;
@@ -169,7 +169,7 @@ void Player::update(int deltaTime)
 	else
 	{
 		// Si estamos en el aire y se presiona la tecla DOWN, cambia a la animación de caer de culo
-		if (downKeyPressed() && !hasAppliedJump)
+		if (Game::instance().downKeyPressed() && !hasAppliedJump)
 		{
 			velPlayer.y += gravity * 5; // Caída más rápida si se presiona DOWN
 
@@ -272,7 +272,7 @@ bool Player::canTakeDamage() const
 	return damageTakenTime <= 0.f;
 }
 
-void Player::applyJump()
+void Player::applyKillJump()
 {
 	velPlayer.y = -10.f;
 	hasAppliedJump = true;
@@ -300,30 +300,7 @@ void Player::render()
 	}
 }
 
-bool Player::leftKeyPressed() const
-{
-	return (Game::instance().getKey(GLFW_KEY_LEFT) || Game::instance().getKey(GLFW_KEY_A));
-}
 
-bool Player::rightKeyPressed() const
-{
-	return (Game::instance().getKey(GLFW_KEY_RIGHT) || Game::instance().getKey(GLFW_KEY_D));
-}
-
-bool Player::downKeyPressed() const
-{
-	return (Game::instance().getKey(GLFW_KEY_DOWN) || Game::instance().getKey(GLFW_KEY_S));
-}
-
-bool Player::upKeyPressed() const
-{
-	return (Game::instance().getKey(GLFW_KEY_UP) || Game::instance().getKey(GLFW_KEY_W));
-}
-
-bool Player::interactKeyPressed() const
-{
-	return (Game::instance().getKey(GLFW_KEY_SPACE));
-}
 
 glm::vec2 Player::getPosition() const
 {

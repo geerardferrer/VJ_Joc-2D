@@ -9,8 +9,8 @@
 #define SCREEN_X 0
 #define SCREEN_Y 0
 
-#define INIT_PLAYER_X_TILES 4
-#define INIT_PLAYER_Y_TILES 70
+#define INIT_PLAYER_X_TILES 4	//3
+#define INIT_PLAYER_Y_TILES 70	//25
 
 
 
@@ -18,7 +18,6 @@ Scene::Scene()
 {
 	map = NULL;
 	player = NULL;
-	background = NULL;
 }
 
 Scene::~Scene()
@@ -27,8 +26,6 @@ Scene::~Scene()
 		delete map;
 	if(player != NULL)
 		delete player;
-	if (background != NULL)
-		delete background;
 }
 
 
@@ -38,10 +35,6 @@ void Scene::init()
 
 	// TILEMAP
 	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-
-	// BACKGROUND
-	background = Background::createBackground("images/Background.png", glm::vec2(SCREEN_WIDTH, SCREEN_HEIGHT), texProgram);
-	background->setPosition(glm::vec2(4 * map->getTileSize(), 70 * map->getTileSize()));
 
 	// PLAYER
 	player = new Player();
@@ -79,6 +72,7 @@ void Scene::init()
 	{
 		ogre[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 		ogre[i]->setTileMap(map);
+		ogre[i]->setPlayer(player);
 	}
 
 	ogre[0]->setPosition(glm::vec2(37 * map->getTileSize(), (72 * map->getTileSize())));
@@ -100,12 +94,12 @@ void Scene::init()
 	{
 		bat[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 		bat[i]->setTileMap(map);
+		//bat[i]->setPlayer(player);
 	}
 
-	bat[0]->setPosition(glm::vec2(134 * map->getTileSize(), (57 * map->getTileSize())));
-	bat[1]->setPosition(glm::vec2(96 * map->getTileSize(), (57 * map->getTileSize())));
-	bat[2]->setPosition(glm::vec2(131 * map->getTileSize(), (43 * map->getTileSize())));
-	bat[3]->setPosition(glm::vec2(136 * map->getTileSize(), (43 * map->getTileSize())));
+	bat[0]->setPosition(glm::vec2(134 * map->getTileSize(), (59 * map->getTileSize())));
+	bat[1]->setPosition(glm::vec2(96 * map->getTileSize(), (59 * map->getTileSize())));
+	bat[3]->setPosition(glm::vec2(135 * map->getTileSize(), (45 * map->getTileSize())));
 
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH), float(SCREEN_HEIGHT), 0.f);
 	currentTime = 0.0f;
@@ -115,19 +109,15 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 
-	//manageCollision();
-
 	player->update(deltaTime);
 
 	for (int i = 0; i < rock.size(); ++i) rock[i]->update(deltaTime);
 
 	for (int i = 0; i < ogre.size(); ++i) {
-		ogre[i]->setPlayerPosition(player->getPosition());
 		ogre[i]->update(deltaTime);
 	}
 
 	for (int i = 0; i < bat.size(); ++i) {
-		bat[i]->setPlayerPosition(player->getPosition());
 		bat[i]->update(deltaTime);
 	}
 
@@ -161,8 +151,6 @@ void Scene::render()
 	glm::mat4 modelview;
 
 	texProgram.use();
-
-	//background->render();
 
 	texProgram.setUniformMatrix4f("projection", projection);
 	texProgram.setUniform4f("color", 1.0f, 1.0f, 1.0f, 1.0f);
@@ -328,7 +316,7 @@ void Scene::manageCollision()
 				if (dir == BOTTOM_COLLISION && player->isFallingAss())
 				{
 					ogre[i]->die();
-					player->applyJump();
+					player->applyKillJump();
 				}
 				else
 				{
@@ -350,7 +338,7 @@ void Scene::manageCollision()
 				if (dir == BOTTOM_COLLISION && player->isFallingAss())
 				{
 					bat[i]->die();
-					player->applyJump();
+					player->applyKillJump();
 				}
 				else
 				{

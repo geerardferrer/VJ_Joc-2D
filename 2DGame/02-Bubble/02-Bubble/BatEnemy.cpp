@@ -115,11 +115,6 @@ glm::vec2 BatEnemy::getPosition() const
 	return posEnemy;
 }
 
-void BatEnemy::setPlayerPosition(const glm::vec2 &playerPos)
-{
-	this->playerPos = playerPos;
-}
-
 glm::vec2 BatEnemy::getPosCollision() const
 {
 	return posCollision;

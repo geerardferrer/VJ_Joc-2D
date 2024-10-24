@@ -40,6 +40,12 @@ public:
 
 	bool getKey(int key) const;
 
+	bool leftKeyPressed() const;
+	bool rightKeyPressed() const;
+	bool downKeyPressed() const;
+	bool upKeyPressed() const;
+	bool interactKeyPressed() const;
+
 private:
 	bool bPlay; // Continue to play game?
 	bool keys[GLFW_KEY_LAST+1]; // Store key states so that 

@@ -3,6 +3,7 @@
 
 #include "Sprite.h"
 #include "TileMap.h"
+#include "Player.h"
 
 class OgreEnemy {
 public:
@@ -11,9 +12,8 @@ public:
 	void render();
 
 	void setTileMap(TileMap *tileMap);
+	void setPlayer(Player* p);
 	void setPosition(const glm::vec2 &pos);
-
-	void setPlayerPosition(const glm::vec2 &playerPos);
 
 	glm::vec2 getPosition() const;
 	glm::vec2 getPosCollision() const;
@@ -24,13 +24,16 @@ public:
 	void startDeathAnimation();
 
 private:
-	glm::fvec2 posEnemy, posCollision; 
-	glm::vec2 playerPos; //guardem la posicio del Player per calcular la distancia
 	bool isDead;
+	glm::fvec2 posEnemy, posCollision;
+	glm::ivec2 sizeCollision;
+
 	float moveSpeed, distanceToPlayer, deathTime;
 	int moveDirection; // 1 para derecha, -1 para izquierda
-	glm::ivec2 sizeCollision;
+
 	glm::ivec2 tileMapDispl;
+
+	Player* player;
 
 	Texture spritesheet;
 	Sprite *sprite;

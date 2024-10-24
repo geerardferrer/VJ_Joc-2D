@@ -20,9 +20,7 @@ public:
 	glm::vec2 getPosition() const;
 	glm::vec2 getPosCollision() const;
 	glm::vec2 getSizeCollision() const;
-
 	glm::vec2 getVelocity() const;
-
 	FaceDir getFacingDir() const;
 
 	bool isFallingAss() const;
@@ -30,14 +28,10 @@ public:
 	void takeDamage();
 	bool canTakeDamage() const;
 
-	void applyJump();
+	void applyKillJump();
 	void hasGrounded();
 
-	bool leftKeyPressed() const;
-	bool rightKeyPressed() const;
-	bool downKeyPressed() const;
-	bool upKeyPressed() const;
-	bool interactKeyPressed() const;
+	void throwObject();
 
 private:
 	const float acceleration = 0.3f;

@@ -13,8 +13,6 @@ public:
 	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
 
-	void setPlayerPosition(const glm::vec2 &playerPos);
-
 	glm::vec2 getPosition() const;
 	glm::vec2 getPosCollision() const;
 	glm::vec2 getSizeCollision() const;
@@ -24,12 +22,13 @@ public:
 	void startDeathAnimation();
 
 private:
-	glm::fvec2 posEnemy, posCollision;
-	glm::vec2 playerPos; // Emmagatzema la posició del jugador per calcular la distància
 	bool isDead;
+	glm::fvec2 posEnemy, posCollision;
+	glm::ivec2 sizeCollision;
+
 	float moveSpeed, maxDisplacement, currentDisplacement, deathTime;
 	int moveDirection; // 1 cap a la dreta, -1 cap a l'esquerra
-	glm::ivec2 sizeCollision;
+
 	glm::ivec2 tileMapDispl;
 
 	Texture spritesheet;

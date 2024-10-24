@@ -32,15 +32,15 @@ void Rock::update(int deltaTime)
 	sprite->update(deltaTime);
 
 	if (isThrown) {
-		velRock.x += 0.9f;
+		velRock.x += 0.4f;
 
 		posRock.x += velRock.x;
 
 		if (velRock.x < 0 && map->collisionMoveLeft(posRock, posCollision, sizeCollision, PlayerType)) {
-
+			//break
 		}
 		if (velRock.x > 0 && map->collisionMoveRight(posRock, posCollision, sizeCollision, PlayerType)) {
-
+			//break
 		}
 
 		velRock.y += 0.4f;
@@ -50,6 +50,7 @@ void Rock::update(int deltaTime)
 		if (velRock.y > 0 && map->collisionMoveDown(posRock, posCollision, sizeCollision, PlayerType)) {
 			velRock.y = 0;
 			isThrown = false;
+			//break
 		}
 
 	}

@@ -6,7 +6,6 @@
 #include <vector>
 #include "ShaderProgram.h"
 #include "TileMap.h"
-#include "Background.h"
 #include "Player.h"
 #include "Rock.h"
 #include "OgreEnemy.h"
@@ -48,7 +47,6 @@ private:
 	vector<Rock*> rock;
 	vector<OgreEnemy*> ogre;
 	vector<BatEnemy*> bat;
-	Background *background;
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;

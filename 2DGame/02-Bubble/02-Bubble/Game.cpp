@@ -52,5 +52,28 @@ bool Game::getKey(int key) const
 	return keys[key];
 }
 
+bool Game::leftKeyPressed() const
+{
+	return (keys[GLFW_KEY_LEFT] || keys[GLFW_KEY_A]);
+}
 
+bool Game::rightKeyPressed() const
+{
+	return (keys[GLFW_KEY_RIGHT] || keys[GLFW_KEY_D]);
+}
+
+bool Game::downKeyPressed() const
+{
+	return (keys[GLFW_KEY_DOWN] || keys[GLFW_KEY_S]);
+}
+
+bool Game::upKeyPressed() const
+{
+	return (keys[GLFW_KEY_UP] || keys[GLFW_KEY_W]);
+}
+
+bool Game::interactKeyPressed() const
+{
+	return (keys[GLFW_KEY_SPACE]);
+}
 

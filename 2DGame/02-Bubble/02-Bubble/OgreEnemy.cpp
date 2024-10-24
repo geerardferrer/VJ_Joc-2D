@@ -97,12 +97,12 @@ void OgreEnemy::update(int deltaTime)
 	
 
 	if (moveSpeed == 0) {
-		distanceToPlayer = glm::distance(posEnemy, playerPos);
+		distanceToPlayer = glm::distance(posEnemy, player->getPosition());
 
 		if (distanceToPlayer <= ACTIVATION_RANGE) {
 			moveSpeed = 2;
 
-			if (playerPos.x < posEnemy.x) {
+			if (player->getPosition().x < posEnemy.x) {
 				moveDirection = -1;  // Moure's cap a l'esquerra
 				sprite->changeAnimation(MOVE_LEFT); 
 			}
@@ -165,6 +165,11 @@ void OgreEnemy::setTileMap(TileMap *tileMap)
 	map = tileMap;
 }
 
+void OgreEnemy::setPlayer(Player* p)
+{
+	player = p;
+}
+
 void OgreEnemy::setPosition(const glm::vec2 &pos)
 {
 	posEnemy = pos;
@@ -174,11 +179,6 @@ void OgreEnemy::setPosition(const glm::vec2 &pos)
 glm::vec2 OgreEnemy::getPosition() const
 {
 	return posEnemy;
-}
-
-void OgreEnemy::setPlayerPosition(const glm::vec2 &playerPos)
-{
-	this->playerPos = playerPos;
 }
 
 glm::vec2 OgreEnemy::getPosCollision() const
