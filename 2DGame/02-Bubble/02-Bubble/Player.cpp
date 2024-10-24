@@ -248,10 +248,41 @@ void Player::update(int deltaTime)
 		lives = 0;
 	}
 
+	if (isHoldingObj()) {
+		FaceDir facingDir = getFacingDir();
+
+		if (facingDir == LEFT) holdingObj->setPosition(posPlayer + glm::vec2(8, 48));
+		else if (facingDir == RIGHT) holdingObj->setPosition(posPlayer + glm::vec2(56, 48));
+	}
+
+	if (Game::instance().interactKeyPressed() && isHoldingObj()) {
+		throwObject();
+	}
 
 	//cout << map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) << endl;
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
+}
+
+void Player::pichUpObject(Object *obj)
+{
+	holdingObj = obj;
+	holdingObj->pickUpObject();
+}
+
+void Player::throwObject()
+{
+	if (!isHoldingObj()) return;
+
+	FaceDir dir = getFacingDir();
+	if (dir == LEFT) holdingObj->throwObject(glm::fvec2(-8.f, -10.f));
+	else if (dir == RIGHT) holdingObj->throwObject(glm::fvec2(8.f, -10.f));
+	holdingObj = NULL;
+}
+
+bool Player::isHoldingObj() const
+{
+	return (holdingObj != NULL);
 }
 
 bool Player::isFallingAss() const
@@ -299,8 +330,6 @@ void Player::render()
 		sprite->render();
 	}
 }
-
-
 
 glm::vec2 Player::getPosition() const
 {

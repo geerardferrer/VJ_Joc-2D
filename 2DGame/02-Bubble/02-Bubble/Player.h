@@ -3,6 +3,7 @@
 
 #include "Sprite.h"
 #include "TileMap.h"
+#include "Object.h"
 
 enum FaceDir {
 	LEFT, RIGHT
@@ -31,7 +32,10 @@ public:
 	void applyKillJump();
 	void hasGrounded();
 
+	void pichUpObject(Object *obj);
 	void throwObject();
+
+	bool isHoldingObj() const;
 
 private:
 	const float acceleration = 0.3f;
@@ -47,12 +51,12 @@ private:
 
 	glm::ivec2 tileMapDispl;
 
-	bool isHoldingObj;
-
 	bool hasAppliedJump;
 
 	int lives;
 	float damageTakenTime;
+
+	Object *holdingObj;
 
 	Texture spritesheet;
 	Sprite *sprite;

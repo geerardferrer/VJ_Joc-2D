@@ -5,14 +5,11 @@
 #include "Scene.h"
 #include "Game.h"
 
-
 #define SCREEN_X 0
 #define SCREEN_Y 0
 
 #define INIT_PLAYER_X_TILES 4	//3
 #define INIT_PLAYER_Y_TILES 70	//25
-
-
 
 Scene::Scene()
 {
@@ -42,28 +39,28 @@ void Scene::init()
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
 
-	// ROCKS
-	for (int i = 0; i < NUM_ROCKS; ++i) rock.push_back(new Rock());
+	// ROCK
+	for (int i = 0; i < NUM_OBJECTS; ++i) object.push_back(new Object());
 
-	for (int i = 0; i < rock.size(); ++i)
+	for (int i = 0; i < object.size(); ++i)
 	{
-		rock[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-		rock[i]->setTileMap(map);
-		rock[i]->setPlayer(player);
+		object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, ROCK);
+		object[i]->setTileMap(map);
 	}
+	player->pichUpObject(object[0]);
 	
-	rock[0]->setPosition(glm::vec2(18 * map->getTileSize(), (70 * map->getTileSize())));
-	//rock[1]->setPosition(glm::vec2(28 * map->getTileSize(), (73 * map->getTileSize())));
-	//rock[2]->setPosition(glm::vec2(81 * map->getTileSize(), (89 * map->getTileSize())));
-	//rock[3]->setPosition(glm::vec2(115 * map->getTileSize(), (91 * map->getTileSize())));
-	//rock[4]->setPosition(glm::vec2(157 * map->getTileSize(), (119 * map->getTileSize())));
-	//rock[5]->setPosition(glm::vec2(105 * map->getTileSize(), (131 * map->getTileSize())));
-	//rock[6]->setPosition(glm::vec2(69 * map->getTileSize(), (157 * map->getTileSize())));
-	//rock[7]->setPosition(glm::vec2(48 * map->getTileSize(), (162 * map->getTileSize())));
-	//rock[8]->setPosition(glm::vec2(48 * map->getTileSize(), (161 * map->getTileSize())));
-	//rock[9]->setPosition(glm::vec2(48 * map->getTileSize(), (160 * map->getTileSize())));
-	//rock[10]->setPosition(glm::vec2(22 * map->getTileSize(), (150 * map->getTileSize())));
-	//rock[11]->setPosition(glm::vec2(61 * map->getTileSize(), (176 * map->getTileSize())));
+	object[0]->setPosition(glm::vec2(18 * map->getTileSize(), (70 * map->getTileSize())));
+	object[1]->setPosition(glm::vec2(28 * map->getTileSize(), (73 * map->getTileSize())));
+	object[2]->setPosition(glm::vec2(81 * map->getTileSize(), (89 * map->getTileSize())));
+	object[3]->setPosition(glm::vec2(115 * map->getTileSize(), (91 * map->getTileSize())));
+	object[4]->setPosition(glm::vec2(157 * map->getTileSize(), (119 * map->getTileSize())));
+	object[5]->setPosition(glm::vec2(105 * map->getTileSize(), (131 * map->getTileSize())));
+	object[6]->setPosition(glm::vec2(69 * map->getTileSize(), (157 * map->getTileSize())));
+	object[7]->setPosition(glm::vec2(48 * map->getTileSize(), (162 * map->getTileSize())));
+	object[8]->setPosition(glm::vec2(48 * map->getTileSize(), (161 * map->getTileSize())));
+	object[9]->setPosition(glm::vec2(48 * map->getTileSize(), (160 * map->getTileSize())));
+	object[10]->setPosition(glm::vec2(22 * map->getTileSize(), (150 * map->getTileSize())));
+	object[11]->setPosition(glm::vec2(61 * map->getTileSize(), (176 * map->getTileSize())));
 
 	// OGRES
 	for (int i = 0; i < NUM_OGRES; ++i) ogre.push_back(new OgreEnemy());
@@ -111,15 +108,11 @@ void Scene::update(int deltaTime)
 
 	player->update(deltaTime);
 
-	for (int i = 0; i < rock.size(); ++i) rock[i]->update(deltaTime);
+	for (int i = 0; i < object.size(); ++i) object[i]->update(deltaTime);
 
-	for (int i = 0; i < ogre.size(); ++i) {
-		ogre[i]->update(deltaTime);
-	}
+	for (int i = 0; i < ogre.size(); ++i) ogre[i]->update(deltaTime);
 
-	for (int i = 0; i < bat.size(); ++i) {
-		bat[i]->update(deltaTime);
-	}
+	for (int i = 0; i < bat.size(); ++i) bat[i]->update(deltaTime);
 
 	manageCollision();
 
@@ -128,7 +121,7 @@ void Scene::update(int deltaTime)
 	float halfHeight = SCREEN_HEIGHT / 2.0f;
 
 	// Calcular el ancho del mapa
-	float mapWidth = map->getMapSize().x * map->getTileSize(); // Método para obtener el tamaño del mapa
+	float mapWidth = map->getMapSize().x * map->getTileSize();
 
 
 	glm::vec2 playerPos = player->getPosition();
@@ -163,7 +156,7 @@ void Scene::render()
 	player->render();
 	for (int i = 0; i < ogre.size(); ++i) ogre[i]->render();
 	for (int i = 0; i < bat.size(); ++i) bat[i]->render();
-	for (int i = 0; i < rock.size(); ++i) rock[i]->render();
+	for (int i = 0; i < object.size(); ++i) object[i]->render();
 }
 
 void Scene::initShaders()
@@ -232,13 +225,13 @@ CollisionDir Scene::checkCollision(const glm::fvec2 &entityPos1, const glm::fvec
 void Scene::manageCollision()
 {
 	// PLAYER x ROCK
-	/*
-	for (int i = 0; i < rock.size(); ++i) {
+	
+	for (int i = 0; i < object.size(); ++i) {
+		if (object[i]->isObjPickedUp()) continue;
+
 		CollisionDir dir;
 
-		//cout << player->getVelocity().x << " " << player->getVelocity().y << " | ";
-
-		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), rock[i]->getPosition(), rock[i]->getPosCollision(), rock[i]->getSizeCollision()))
+		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), object[i]->getPosition(), object[i]->getPosCollision(), object[i]->getSizeCollision()))
 		{
 			float x, y;
 			float playerSide, rockSide;
@@ -250,12 +243,16 @@ void Scene::manageCollision()
 						// Right player side
 						playerSide = player->getPosition().x + player->getPosCollision().x + player->getSizeCollision().x;
 						// Left rock side
-						rockSide = rock[i]->getPosition().x + rock[i]->getPosCollision().x;
+						rockSide = object[i]->getPosition().x + object[i]->getPosCollision().x;
 
 						x = player->getPosition().x - (playerSide - rockSide);
 						y = player->getPosition().y;
 
 						player->setPosition(glm::vec2(x, y));
+					}
+
+					if (!player->isHoldingObj() && Game::instance().interactKeyPressed()) {
+						player->pichUpObject(object[i]);
 					}
 					break;
 				case LEFT_COLLISION:
@@ -264,12 +261,16 @@ void Scene::manageCollision()
 						// Left player side
 						playerSide = player->getPosition().x + player->getPosCollision().x;
 						// Right rock side
-						rockSide = rock[i]->getPosition().x + rock[i]->getPosCollision().x + rock[i]->getSizeCollision().x;
+						rockSide = object[i]->getPosition().x + object[i]->getPosCollision().x + object[i]->getSizeCollision().x;
 
 						x = player->getPosition().x - (playerSide - rockSide);
 						y = player->getPosition().y;
 
 						player->setPosition(glm::vec2(x, y));
+					}
+
+					if (!player->isHoldingObj() && Game::instance().interactKeyPressed()) {
+						player->pichUpObject(object[i]);
 					}
 					break;
 				case BOTTOM_COLLISION:
@@ -278,7 +279,7 @@ void Scene::manageCollision()
 						// Bottom player side
 						playerSide = player->getPosition().y + player->getPosCollision().y + player->getSizeCollision().y;
 						// Top rock side
-						rockSide = rock[i]->getPosition().y + rock[i]->getPosCollision().y;
+						rockSide = object[i]->getPosition().y + object[i]->getPosCollision().y;
 
 						x = player->getPosition().x;
 						y = player->getPosition().y - (playerSide - rockSide);
@@ -293,7 +294,7 @@ void Scene::manageCollision()
 						// Top player side
 						playerSide = player->getPosition().y + player->getPosCollision().y;
 						// Bottom rock side
-						rockSide = rock[i]->getPosition().y + rock[i]->getPosCollision().y + rock[i]->getSizeCollision().y;
+						rockSide = object[i]->getPosition().y + object[i]->getPosCollision().y + object[i]->getSizeCollision().y;
 
 						x = player->getPosition().x;
 						y = player->getPosition().y - (playerSide - rockSide);
@@ -305,7 +306,7 @@ void Scene::manageCollision()
 		}
 		//cout << player->getVelocity().x << " " << player->getVelocity().y << endl;
 	}
-	*/
+	
 	// PLAYER x OGRE
 	for (int i = 0; i < ogre.size(); ++i) {
 		if (!ogre[i]->isEnemyDead()) {

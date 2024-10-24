@@ -7,7 +7,7 @@
 #include "ShaderProgram.h"
 #include "TileMap.h"
 #include "Player.h"
-#include "Rock.h"
+#include "Object.h"
 #include "OgreEnemy.h"
 #include "BatEnemy.h"
 
@@ -15,7 +15,7 @@
 // Scene contains all the entities of our game.
 // It is responsible for updating and render them.
 
-#define NUM_ROCKS 1
+#define NUM_OBJECTS 12
 #define NUM_OGRES 8
 #define NUM_BATS 4
 
@@ -44,7 +44,7 @@ private:
 private:
 	TileMap *map;
 	Player *player;
-	vector<Rock*> rock;
+	vector<Object*> object;
 	vector<OgreEnemy*> ogre;
 	vector<BatEnemy*> bat;
 	ShaderProgram texProgram;
