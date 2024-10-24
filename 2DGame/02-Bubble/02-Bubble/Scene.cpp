@@ -47,7 +47,7 @@ void Scene::init()
 		object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, ROCK);
 		object[i]->setTileMap(map);
 	}
-	player->pichUpObject(object[0]);
+	player->pickUpObject(object[0]);
 	
 	object[0]->setPosition(glm::vec2(18 * map->getTileSize(), (70 * map->getTileSize())));
 	object[1]->setPosition(glm::vec2(28 * map->getTileSize(), (73 * map->getTileSize())));
@@ -251,8 +251,8 @@ void Scene::manageCollision()
 						player->setPosition(glm::vec2(x, y));
 					}
 
-					if (!player->isHoldingObj() && Game::instance().interactKeyPressed()) {
-						player->pichUpObject(object[i]);
+					if (!player->isHoldingObj() && player->canPickUpObject() && Game::instance().interactKeyPressed()) {
+						player->pickUpObject(object[i]);
 					}
 					break;
 				case LEFT_COLLISION:
@@ -269,8 +269,8 @@ void Scene::manageCollision()
 						player->setPosition(glm::vec2(x, y));
 					}
 
-					if (!player->isHoldingObj() && Game::instance().interactKeyPressed()) {
-						player->pichUpObject(object[i]);
+					if (!player->isHoldingObj() && player->canPickUpObject() && Game::instance().interactKeyPressed()) {
+						player->pickUpObject(object[i]);
 					}
 					break;
 				case BOTTOM_COLLISION:
@@ -285,8 +285,8 @@ void Scene::manageCollision()
 						y = player->getPosition().y - (playerSide - rockSide);
 
 						player->setPosition(glm::vec2(x, y));
-						player->hasGrounded();
 					}
+					player->hasGrounded();
 					break;
 				case TOP_COLLISION:
 					//cout << "TOP_COLLISION" << endl;

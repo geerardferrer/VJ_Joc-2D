@@ -79,6 +79,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	isGrounded = false;
 	lives = 3;
 	damageTakenTime = 0.f;
+	holdingObjectTime = 0.f;
 }
 
 void Player::update(int deltaTime)
@@ -221,33 +222,39 @@ void Player::update(int deltaTime)
 	{
 		damageTakenTime -= deltaTime / 1000.f;
 
-		// Alternar visibilidad basado en damageTakenTime para hacer que "parpadee"
+		
 		if (int(damageTakenTime * 10) % 2 == 0)
 		{
-			isVisible = false;  // Ocultar temporalmente al jugador
+			isVisible = false;  
 		}
 		else
 		{
-			isVisible = true;   // Mostrar al jugador
+			isVisible = true;  
 		}
 	}
 	else
 	{
-		isVisible = true;  // Siempre visible si no está en estado de daño
-
-						   // Verifica si el jugador está en un tile que causa daño
+		isVisible = true; 			  
 		if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 22 || map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 38)
 		{
-			takeDamage();  // Solo toma daño cuando damageTakenTime es 0 (invulnerabilidad ha terminado)
+			takeDamage(); 
+		}
+		if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 119)
+		{
+			lives = 0;
 		}
 	}
 
-	// Verifica si el jugador ha llegado a un tile específico (ejemplo de final de juego)
-	if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 119)
-	{
-		lives = 0;
-	}
 
+	if (holdingObjectTime > 0.f)
+	{
+		holdingObjectTime -= deltaTime / 1000.0f;
+	}
+	else {
+		if (Game::instance().interactKeyPressed() && isHoldingObj()) {
+			throwObject();
+		}
+	}
 	if (isHoldingObj()) {
 		FaceDir facingDir = getFacingDir();
 
@@ -255,19 +262,19 @@ void Player::update(int deltaTime)
 		else if (facingDir == RIGHT) holdingObj->setPosition(posPlayer + glm::vec2(56, 48));
 	}
 
-	if (Game::instance().interactKeyPressed() && isHoldingObj()) {
-		throwObject();
-	}
+	
 
-	//cout << map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) << endl;
+	
+
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
-void Player::pichUpObject(Object *obj)
+void Player::pickUpObject(Object *obj)
 {
 	holdingObj = obj;
 	holdingObj->pickUpObject();
+	holdingObjectTime = 0.2f;
 }
 
 void Player::throwObject()
@@ -275,9 +282,10 @@ void Player::throwObject()
 	if (!isHoldingObj()) return;
 
 	FaceDir dir = getFacingDir();
-	if (dir == LEFT) holdingObj->throwObject(glm::fvec2(-8.f, -10.f));
-	else if (dir == RIGHT) holdingObj->throwObject(glm::fvec2(8.f, -10.f));
+	if (dir == LEFT) holdingObj->throwObject(glm::fvec2(-12.f, -4.f));
+	else if (dir == RIGHT) holdingObj->throwObject(glm::fvec2(12.f, -4.f));
 	holdingObj = NULL;
+	holdingObjectTime = 0.2f;
 }
 
 bool Player::isHoldingObj() const
@@ -288,6 +296,11 @@ bool Player::isHoldingObj() const
 bool Player::isFallingAss() const
 {
 	return (sprite->animation() == FALL_ASS_LEFT || sprite->animation() == FALL_ASS_RIGHT);
+}
+
+bool Player::canPickUpObject() const
+{
+	return holdingObjectTime <= 0.f;
 }
 
 

@@ -32,8 +32,9 @@ public:
 	void applyKillJump();
 	void hasGrounded();
 
-	void pichUpObject(Object *obj);
+	void pickUpObject(Object *obj);
 	void throwObject();
+	bool canPickUpObject() const;
 
 	bool isHoldingObj() const;
 
@@ -57,6 +58,7 @@ private:
 	float damageTakenTime;
 
 	Object *holdingObj;
+	float holdingObjectTime;
 
 	Texture spritesheet;
 	Sprite *sprite;
