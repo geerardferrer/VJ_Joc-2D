@@ -5,6 +5,9 @@
 #include "TileMap.h"
 #include "Object.h"
 
+
+class Scene;
+
 enum FaceDir {
 	LEFT, RIGHT
 };
@@ -12,7 +15,7 @@ enum FaceDir {
 class Player {
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime);
+	void update(int deltaTime, Scene *scene);
 	void render();
 
 	void setTileMap(TileMap *tileMap);
@@ -38,6 +41,9 @@ public:
 
 	bool isHoldingObj() const;
 
+	void resetPlayer(Scene* scene);
+	int getTries() const;
+
 private:
 	const float acceleration = 0.3f;
 	const float frictionForce = 0.9f;
@@ -47,14 +53,14 @@ private:
 	const float maxFallPlayer = 30.f;
 
 	bool isGrounded, isVisible;
-	glm::fvec2 posPlayer, velPlayer, posCollision;
+	glm::fvec2 posPlayer, velPlayer, posCollision, initialPosition;
 	glm::ivec2 sizeCollision;
 
 	glm::ivec2 tileMapDispl;
 
 	bool hasAppliedJump;
 
-	int lives;
+	int lives, tries = 3, score;
 	float damageTakenTime;
 
 	Object *holdingObj;

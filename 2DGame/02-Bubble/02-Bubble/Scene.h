@@ -34,6 +34,7 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
+	void resetScene();
 
 private:
 	CollisionDir checkCollision(const glm::fvec2 &entityPos1, const glm::fvec2 &entityCollision1, const glm::ivec2 &entitySize1, const glm::fvec2 &entityPos2, const glm::fvec2 &entityCollision2, const glm::ivec2 &entitySize2);

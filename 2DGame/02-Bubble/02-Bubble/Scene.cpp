@@ -106,7 +106,7 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 
-	player->update(deltaTime);
+	player->update(deltaTime, this);
 
 	for (int i = 0; i < object.size(); ++i) object[i]->update(deltaTime);
 
@@ -275,6 +275,7 @@ void Scene::manageCollision()
 					break;
 				case BOTTOM_COLLISION:
 					//cout << "BOTTOM_COLLISION" << endl;
+					
 					if (player->getVelocity().y > 0) {
 						// Bottom player side
 						playerSide = player->getPosition().y + player->getPosCollision().y + player->getSizeCollision().y;
@@ -287,6 +288,8 @@ void Scene::manageCollision()
 						player->setPosition(glm::vec2(x, y));
 					}
 					player->hasGrounded();
+
+
 					break;
 				case TOP_COLLISION:
 					//cout << "TOP_COLLISION" << endl;
@@ -350,6 +353,27 @@ void Scene::manageCollision()
 		}
 	}
 }
+
+void Scene::resetScene()
+{
+	for (int i = 0; i < ogre.size(); ++i) {
+		delete ogre[i];  
+	}
+	ogre.clear(); 
+
+	for (int i = 0; i < object.size(); ++i) {
+		delete object[i];  
+	}
+	object.clear();  
+
+	for (int i = 0; i < bat.size(); ++i) {
+		delete bat[i]; 
+	}
+	bat.clear(); 
+	init();
+
+}
+
 
 
 

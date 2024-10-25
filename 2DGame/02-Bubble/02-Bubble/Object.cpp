@@ -10,8 +10,6 @@ void Object::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, Ob
 	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(1.f, 1.f), &spritesheet, &shaderProgram);
 	spritesheet.setMagFilter(GL_NEAREST);
 
-	cout << "HOLA" << endl;
-
 	tileMapDispl = tileMapPos;
 
 	posCollision = glm::vec2(0, 0);
