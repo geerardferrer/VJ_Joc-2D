@@ -46,6 +46,10 @@ public:
 	int getTries() const;
 	void setTries(int currentTries);
 
+	void toggleGodMode();  
+	void heal();           
+	bool isGodMode() const; 
+
 private:
 	const float acceleration = 0.3f;
 	const float frictionForce = 0.9f;
@@ -63,6 +67,7 @@ private:
 	bool hasAppliedJump;
 
 	int lives, tries = 3, score;
+	bool godMode = false;
 	float damageTakenTime;
 
 	Object *holdingObj;

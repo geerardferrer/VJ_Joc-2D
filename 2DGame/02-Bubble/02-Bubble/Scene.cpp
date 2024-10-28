@@ -240,7 +240,7 @@ void Scene::manageCollision()
 			switch (dir)
 			{
 				case RIGHT_COLLISION:
-					if (player->getVelocity().x > 0) {
+					if (player->getVelocity().y == 0 && player->getVelocity().x > 0) {
 						// Right player side
 						playerSide = player->getPosition().x + player->getPosCollision().x + player->getSizeCollision().x;
 						// Left rock side
@@ -257,7 +257,7 @@ void Scene::manageCollision()
 					}
 					break;
 				case LEFT_COLLISION:
-					if (player->getVelocity().x < 0) {
+					if (player->getVelocity().y == 0 && player->getVelocity().x < 0) {
 						// Left player side
 						playerSide = player->getPosition().x + player->getPosCollision().x;
 						// Right rock side
@@ -530,6 +530,9 @@ void Scene::resetScene()
 
 }
 
+Player* Scene::getPlayer() {
+	return player;
+}
 
 
 

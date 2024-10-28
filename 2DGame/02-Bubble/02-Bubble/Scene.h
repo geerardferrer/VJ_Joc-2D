@@ -38,6 +38,8 @@ public:
 	void render();
 	void resetScene();
 
+	Player* getPlayer();
+
 private:
 	CollisionDir checkCollision(const glm::fvec2 &entityPos1, const glm::fvec2 &entityCollision1, const glm::ivec2 &entitySize1, const glm::fvec2 &entityPos2, const glm::fvec2 &entityCollision2, const glm::ivec2 &entitySize2);
 	void manageCollision();

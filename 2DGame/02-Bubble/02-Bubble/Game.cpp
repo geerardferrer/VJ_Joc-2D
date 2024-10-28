@@ -50,6 +50,13 @@ void Game::keyPressed(int key)
 	if(key == GLFW_KEY_ESCAPE) // Escape code
 		bPlay = false;
 	keys[key] = true;
+
+	if (key == GLFW_KEY_G) {
+		scene.getPlayer()->toggleGodMode();  // Activa/desactiva el God Mode
+	}
+	else if (key == GLFW_KEY_H) {
+		scene.getPlayer()->heal();  // Restaura la salut
+	}
 }
 
 void Game::keyReleased(int key)

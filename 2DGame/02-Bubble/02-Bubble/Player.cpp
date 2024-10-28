@@ -336,7 +336,7 @@ void Player::update(int deltaTime, Scene *scene)
 		else if (facingDir == RIGHT) holdingObj->setPosition(posPlayer + glm::vec2(56, 48));
 	}
 
-	cout << posPlayer.x/32 << " " << posPlayer.y/32 << endl;
+	//cout << posPlayer.x/32 << " " << posPlayer.y/32 << endl;
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
@@ -409,6 +409,10 @@ bool Player::canPickUpObject() const
 
 void Player::takeDamage()
 {
+	if (godMode) {
+		std::cout << "No damage taken (God Mode)" << std::endl;
+		return;
+	}
 	--lives;
 	damageTakenTime = 2.f;
 	cout << lives << endl;
@@ -509,4 +513,18 @@ int Player::getTries() const {
 
 void Player::setTries(int currentTries) {
 	tries = currentTries;
+}
+
+void Player::toggleGodMode() {
+	godMode = !godMode;
+	cout << (godMode ? "God Mode activated!" : "God Mode deactivated!") << endl;
+}
+
+void Player::heal() {
+	lives = 3;
+	cout << "Health restored to maximum!" << endl;
+}
+
+bool Player::isGodMode() const {
+	return godMode;
 }
