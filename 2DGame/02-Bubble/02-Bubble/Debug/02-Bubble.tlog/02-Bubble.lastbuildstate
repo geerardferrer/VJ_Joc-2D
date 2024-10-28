@@ -1,2 +1,2 @@
-#TargetFrameworkVersion=:PlatformToolSet=v140:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=8.1
-Debug|Win32|C:\Users\Pau\Documents\GitHub\VJ_Joc-2D\2DGame\02-Bubble\|
+#TargetFrameworkVersion=v4.0:PlatformToolSet=v140:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit
+Debug|Win32|C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\|

@@ -103,7 +103,6 @@ void Player::update(int deltaTime, Scene *scene)
 {
 	if (lives <= 0)
 	{
-		sprite->changeAnimation(VICTORY_STAND);
 		resetPlayer(scene);
 		return;
 	}
@@ -122,7 +121,11 @@ void Player::update(int deltaTime, Scene *scene)
 		{
 			if (isHoldingObj())
 			{
-				if (sprite->animation() != MOVE_OBJ_LEFT) sprite->changeAnimation(MOVE_OBJ_LEFT);
+				cout << sprite->animation() << endl;
+				if (sprite->animation() != MOVE_OBJ_LEFT) {
+					cout << "He entrat" << endl;
+					sprite->changeAnimation(MOVE_OBJ_LEFT);
+				}
 			}
 			else
 			{
@@ -496,16 +499,18 @@ glm::vec2 Player::getVelocity() const
 
 void Player::resetPlayer(Scene *scene)
 {
-	tries -= 1;
-	cout << tries << endl;
-	if (tries > 0) {
+	if (tries > 1) {
 		scene->resetScene();
 	}
 	else {
-		//Game::instance().gameOver();
+		Game::instance().gameOver();
 	}
 }
 
 int Player::getTries() const {
 	return tries;
+}
+
+void Player::setTries(int currentTries) {
+	tries = currentTries;
 }

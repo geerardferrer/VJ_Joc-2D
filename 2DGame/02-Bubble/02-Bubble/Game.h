@@ -4,6 +4,7 @@
 
 #include <GLFW/glfw3.h>
 #include "Scene.h"
+#include "Texture.h"
 
 
 #define SCREEN_WIDTH 1024
@@ -11,6 +12,14 @@
 
 
 // Game is a singleton (a class with a single instance) that represents our whole application
+
+enum GameState {
+	PLAYING,
+	GAME_OVER, 
+	MENU,
+	CREDITS, 
+	INSTRUCTIONS
+};
 
 
 class Game
@@ -30,6 +39,7 @@ public:
 	void init();
 	bool update(int deltaTime);
 	void render();
+	void gameOver();
 	
 	// Input callback methods
 	void keyPressed(int key);
@@ -45,12 +55,19 @@ public:
 	bool downKeyPressed() const;
 	bool upKeyPressed() const;
 	bool interactKeyPressed() const;
+	bool restartKeyPressed() const;
+	bool menuKeyPressed() const;
+
+
+	void renderGameOverScreen();
 
 private:
 	bool bPlay; // Continue to play game?
 	bool keys[GLFW_KEY_LAST+1]; // Store key states so that 
 							    // we can have access at any time
 	Scene scene;
+	Texture spritesheet;
+	GameState state;
 
 };
 

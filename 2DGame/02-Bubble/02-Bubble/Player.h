@@ -43,6 +43,7 @@ public:
 
 	void resetPlayer(Scene* scene);
 	int getTries() const;
+	void setTries(int currentTries);
 
 private:
 	const float acceleration = 0.3f;

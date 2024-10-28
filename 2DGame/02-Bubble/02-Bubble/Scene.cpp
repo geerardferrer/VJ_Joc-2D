@@ -453,7 +453,10 @@ void Scene::resetScene()
 		delete bat[i]; 
 	}
 	bat.clear(); 
+	int currentTries = player->getTries() - 1;
 	init();
+	player->setTries(currentTries);
+
 }
 
 
