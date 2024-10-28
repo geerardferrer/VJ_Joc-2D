@@ -51,6 +51,7 @@ void Object::update(int deltaTime)
 
 		if (velObj.y > 0 && map->collisionMoveDown(posObj, posCollision, sizeCollision, PlayerType)) {
 			velObj.y = 0;
+			velObj.x = 0;
 			isThrown = false;
 		}
 
@@ -81,6 +82,11 @@ void Object::throwObject(const glm::fvec2 &velocity)
 bool Object::isObjPickedUp() const
 {
 	return isPickedUp;
+}
+
+glm::vec2 Object::getVelocity() const
+{
+	return velObj;
 }
 
 void Object::setTileMap(TileMap *tileMap)

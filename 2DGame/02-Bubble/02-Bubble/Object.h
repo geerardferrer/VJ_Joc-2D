@@ -22,6 +22,7 @@ public:
 	glm::vec2 getPosition() const;
 	glm::vec2 getPosCollision() const;
 	glm::vec2 getSizeCollision() const;
+	glm::vec2 getVelocity() const;
 
 	void pickUpObject();
 	void throwObject(const glm::fvec2 &velocity);

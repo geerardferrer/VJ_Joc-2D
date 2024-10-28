@@ -7,48 +7,24 @@
       "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\BatEnemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\BatEnemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Rock.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Rock.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Rock.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Rock.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Object.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Object.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\OgreEnemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\OgreEnemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\BatEnemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\BatEnemy.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\OgreEnemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\OgreEnemy.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Scene.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -57,85 +33,72 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 226,
-          "SelectedChildIndex": 6,
+          "DockedWidth": 197,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Scene.h",
-              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.h",
-              "RelativeDocumentMoniker": "02-Bubble\\Scene.h",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.h",
-              "RelativeToolTip": "02-Bubble\\Scene.h",
-              "ViewState": "AgIAAB0AAAAAAAAAAADgvzAAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-24T10:59:32.011Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Game.cpp",
-              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Game.cpp",
-              "RelativeDocumentMoniker": "02-Bubble\\Game.cpp",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Game.cpp",
-              "RelativeToolTip": "02-Bubble\\Game.cpp",
-              "ViewState": "AgIAACYAAAAAAAAAAADwv0MAAAABAAAAAAAAAA==",
+              "Title": "Player.cpp",
+              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Player.cpp",
+              "RelativeDocumentMoniker": "02-Bubble\\Player.cpp",
+              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Player.cpp",
+              "RelativeToolTip": "02-Bubble\\Player.cpp",
+              "ViewState": "AgIAAGgBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-24T10:17:15.054Z",
+              "WhenOpened": "2024-10-28T09:26:13.968Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 2,
+              "Title": "Object.cpp",
+              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Object.cpp",
+              "RelativeDocumentMoniker": "02-Bubble\\Object.cpp",
+              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Object.cpp",
+              "RelativeToolTip": "02-Bubble\\Object.cpp",
+              "ViewState": "AgIAADMAAAAAAAAAAAAAACEAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-10-28T09:15:16.138Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OgreEnemy.h",
+              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\OgreEnemy.h",
+              "RelativeDocumentMoniker": "02-Bubble\\OgreEnemy.h",
+              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\OgreEnemy.h",
+              "RelativeToolTip": "02-Bubble\\OgreEnemy.h",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-10-28T08:45:50.39Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "OgreEnemy.cpp",
               "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\OgreEnemy.cpp",
               "RelativeDocumentMoniker": "02-Bubble\\OgreEnemy.cpp",
               "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\OgreEnemy.cpp",
               "RelativeToolTip": "02-Bubble\\OgreEnemy.cpp",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAAAGYAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAAAJkAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-24T10:05:02.377Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Player.h",
-              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Player.h",
-              "RelativeDocumentMoniker": "02-Bubble\\Player.h",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Player.h",
-              "RelativeToolTip": "02-Bubble\\Player.h",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB8AAAAUAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Scene.h",
+              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.h",
+              "RelativeDocumentMoniker": "02-Bubble\\Scene.h",
+              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.h",
+              "RelativeToolTip": "02-Bubble\\Scene.h",
+              "ViewState": "AgIAABEAAAAAAAAAAADgvyQAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-24T10:01:43.714Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Player.cpp",
-              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Player.cpp",
-              "RelativeDocumentMoniker": "02-Bubble\\Player.cpp",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Player.cpp",
-              "RelativeToolTip": "02-Bubble\\Player.cpp",
-              "ViewState": "AgIAAJcAAAAAAAAAAAAAAKsAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-24T10:01:41.932Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BatEnemy.h",
-              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\BatEnemy.h",
-              "RelativeDocumentMoniker": "02-Bubble\\BatEnemy.h",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\BatEnemy.h",
-              "RelativeToolTip": "02-Bubble\\BatEnemy.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-24T10:01:39.636Z",
+              "WhenOpened": "2024-10-24T10:59:32.011Z",
               "EditorCaption": ""
             },
             {
@@ -144,82 +107,11 @@
               "Title": "Scene.cpp",
               "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.cpp",
               "RelativeDocumentMoniker": "02-Bubble\\Scene.cpp",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.cpp*",
-              "RelativeToolTip": "02-Bubble\\Scene.cpp*",
-              "ViewState": "AgIAADYAAAAAAAAAAADgvyUAAAAAAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.cpp",
+              "RelativeToolTip": "02-Bubble\\Scene.cpp",
+              "ViewState": "AgIAAFQBAAAAAAAAAADgv2kBAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-24T10:01:48.791Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Game.h",
-              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Game.h",
-              "RelativeDocumentMoniker": "02-Bubble\\Game.h",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Game.h",
-              "RelativeToolTip": "02-Bubble\\Game.h",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-24T10:17:19.695Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "OgreEnemy.h",
-              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\OgreEnemy.h",
-              "RelativeDocumentMoniker": "02-Bubble\\OgreEnemy.h",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\OgreEnemy.h",
-              "RelativeToolTip": "02-Bubble\\OgreEnemy.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-24T10:05:04.397Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "BatEnemy.cpp",
-              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\BatEnemy.cpp",
-              "RelativeDocumentMoniker": "02-Bubble\\BatEnemy.cpp",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\BatEnemy.cpp",
-              "RelativeToolTip": "02-Bubble\\BatEnemy.cpp",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAAAHUAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-24T10:01:36.218Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 174,
-          "SelectedChildIndex": 1,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Rock.h",
-              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Rock.h",
-              "RelativeDocumentMoniker": "02-Bubble\\Rock.h",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Rock.h",
-              "RelativeToolTip": "02-Bubble\\Rock.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-24T10:01:46.122Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Rock.cpp",
-              "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Rock.cpp",
-              "RelativeDocumentMoniker": "02-Bubble\\Rock.cpp",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Rock.cpp",
-              "RelativeToolTip": "02-Bubble\\Rock.cpp",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAACEAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-24T10:01:45.248Z",
               "EditorCaption": ""
             }
           ]

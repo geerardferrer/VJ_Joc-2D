@@ -238,7 +238,6 @@ void Scene::manageCollision()
 			switch (dir)
 			{
 				case RIGHT_COLLISION:
-					//cout << "RIGHT_COLLISION" << endl;
 					if (player->getVelocity().x > 0) {
 						// Right player side
 						playerSide = player->getPosition().x + player->getPosCollision().x + player->getSizeCollision().x;
@@ -256,7 +255,6 @@ void Scene::manageCollision()
 					}
 					break;
 				case LEFT_COLLISION:
-					//cout << "LEFT_COLLISION" << endl;
 					if (player->getVelocity().x < 0) {
 						// Left player side
 						playerSide = player->getPosition().x + player->getPosCollision().x;
@@ -273,9 +271,7 @@ void Scene::manageCollision()
 						player->pickUpObject(object[i]);
 					}
 					break;
-				case BOTTOM_COLLISION:
-					//cout << "BOTTOM_COLLISION" << endl;
-					
+				case BOTTOM_COLLISION:					
 					if (player->getVelocity().y > 0) {
 						// Bottom player side
 						playerSide = player->getPosition().y + player->getPosCollision().y + player->getSizeCollision().y;
@@ -292,7 +288,6 @@ void Scene::manageCollision()
 
 					break;
 				case TOP_COLLISION:
-					//cout << "TOP_COLLISION" << endl;
 					if (player->getVelocity().y < 0) {
 						// Top player side
 						playerSide = player->getPosition().y + player->getPosCollision().y;
@@ -307,7 +302,6 @@ void Scene::manageCollision()
 					break;
 			}
 		}
-		//cout << player->getVelocity().x << " " << player->getVelocity().y << endl;
 	}
 	
 	// PLAYER x OGRE
@@ -352,6 +346,95 @@ void Scene::manageCollision()
 			}
 		}
 	}
+
+	// ROCK x OGRE
+	for (int i = 0; i < ogre.size(); ++i) {
+		for (int j = 0; j < object.size(); j++) {
+			if (object[i]->isObjPickedUp()) continue;
+
+			CollisionDir dir;
+
+			if (dir = checkCollision(ogre[i]->getPosition(), ogre[i]->getPosCollision(), ogre[i]->getSizeCollision(), object[j]->getPosition(), object[j]->getPosCollision(), object[j]->getSizeCollision()))
+			{
+				float x, y;
+				float ogreSide, rockSide;
+
+				cout << object[j]->isObjPickedUp() << endl;
+
+				switch (dir)
+				{
+				case RIGHT_COLLISION:
+					if (object[j]->getVelocity().x != 0) {
+						ogre[i]->die();
+					}
+					else {
+						// Right ogre side
+						ogreSide = ogre[i]->getPosition().x + ogre[i]->getPosCollision().x + ogre[i]->getSizeCollision().x;
+						// Left rock side
+						rockSide = object[j]->getPosition().x + object[j]->getPosCollision().x;
+
+						x = ogre[i]->getPosition().x - (ogreSide - rockSide);
+						y = ogre[i]->getPosition().y;
+
+						ogre[i]->setPosition(glm::vec2(x, y));
+
+						ogre[i]->setMoveDir(LEFT);
+					}
+					break;
+				case LEFT_COLLISION:
+					if (object[j]->getVelocity().x != 0) {
+						ogre[i]->die();
+					}
+					else {
+						// Left ogre side
+						ogreSide = ogre[i]->getPosition().x + ogre[i]->getPosCollision().x;
+						// Right rock side
+						rockSide = object[j]->getPosition().x + object[j]->getPosCollision().x + object[j]->getSizeCollision().x;
+
+						x = ogre[i]->getPosition().x - (ogreSide - rockSide);
+						y = ogre[i]->getPosition().y;
+
+						ogre[i]->setPosition(glm::vec2(x, y));
+
+						ogre[i]->setMoveDir(RIGHT);
+					}
+					break;
+				case BOTTOM_COLLISION:
+					if (object[j]->getVelocity().y != 0) {
+						ogre[i]->die();
+					}
+					else {
+						// Bottom ogre side
+						ogreSide = ogre[i]->getPosition().y + ogre[i]->getPosCollision().y + ogre[i]->getSizeCollision().y;
+						// Top rock side
+						rockSide = object[j]->getPosition().y + object[j]->getPosCollision().y;
+
+						x = ogre[i]->getPosition().x;
+						y = ogre[i]->getPosition().y - (ogreSide - rockSide);
+
+						ogre[i]->setPosition(glm::vec2(x, y));
+					}
+					break;
+				case TOP_COLLISION:
+					if (object[j]->getVelocity().y != 0) {
+						ogre[i]->die();
+					}
+					else {
+						// Top ogre side
+						ogreSide = ogre[i]->getPosition().y + ogre[i]->getPosCollision().y;
+						// Bottom rock side
+						rockSide = object[j]->getPosition().y + object[j]->getPosCollision().y + object[j]->getSizeCollision().y;
+
+						x = ogre[i]->getPosition().x;
+						y = ogre[i]->getPosition().y - (ogreSide - rockSide);
+
+						ogre[i]->setPosition(glm::vec2(x, y));
+					}
+					break;
+				}
+			}
+		}
+	}
 }
 
 void Scene::resetScene()
@@ -371,7 +454,6 @@ void Scene::resetScene()
 	}
 	bat.clear(); 
 	init();
-
 }
 
 

@@ -19,6 +19,9 @@ public:
 	glm::vec2 getPosCollision() const;
 	glm::vec2 getSizeCollision() const;
 
+	FaceDir getMoveDir() const;
+	void setMoveDir(FaceDir dir);
+
 	void die();
 	bool isEnemyDead();
 	void startDeathAnimation();
@@ -29,7 +32,7 @@ private:
 	glm::ivec2 sizeCollision;
 
 	float moveSpeed, distanceToPlayer, deathTime;
-	int moveDirection; // 1 para derecha, -1 para izquierda
+	FaceDir moveDir;
 
 	glm::ivec2 tileMapDispl;
 

@@ -77,7 +77,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->addKeyframe(MOVE_OBJ_RIGHT, glm::vec2(0.625f, 0.25f));
 
 	sprite->setAnimationSpeed(JUMP_OBJ_LEFT, 8);
-	sprite->addKeyframe(JUMP_OBJ_LEFT, glm::vec2(0.f, 0.f));
+	sprite->addKeyframe(JUMP_OBJ_LEFT, glm::vec2(0.f, 0.25f));
 
 	sprite->setAnimationSpeed(JUMP_OBJ_RIGHT, 8);
 	sprite->addKeyframe(JUMP_OBJ_RIGHT, glm::vec2(0.375f, 0.25f));
@@ -319,11 +319,11 @@ void Player::update(int deltaTime, Scene *scene)
 	else
 	{
 		isVisible = true; 			  
-		if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 22 || map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 38)
+		if (map->getTileAt(posPlayer + glm::fvec2(48.f, 90.f)) == 22 || map->getTileAt(posPlayer + glm::fvec2(48.f, 90.f)) == 38)
 		{
 			takeDamage(); 
 		}
-		if (map->getTileAt(posPlayer + glm::fvec2(48.f, 95.f)) == 119)
+		if (map->getTileAt(posPlayer + glm::fvec2(48.f, 90.f)) == 119)
 		{
 			lives = 0;
 		}

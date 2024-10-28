@@ -103,31 +103,32 @@ void OgreEnemy::update(int deltaTime)
 			moveSpeed = 2;
 
 			if (player->getPosition().x < posEnemy.x) {
-				moveDirection = -1;  // Moure's cap a l'esquerra
+				moveDir = LEFT;  // Moure's cap a l'esquerra
 				sprite->changeAnimation(MOVE_LEFT); 
 			}
 			else {
-				moveDirection = 1;   // Moure's cap a la dreta
+				moveDir = RIGHT;   // Moure's cap a la dreta
 				sprite->changeAnimation(MOVE_RIGHT); 
 			}
 		}
 	}
 	else {
-		posEnemy.x += moveDirection * moveSpeed;
+		if (moveDir == LEFT) posEnemy.x -= moveSpeed;
+		else if (moveDir == RIGHT) posEnemy.x += moveSpeed;
 		
 		// Moviment a l'esquerra
-		if (moveDirection == -1) {
+		if (moveDir == LEFT) {
 			if (map->collisionMoveLeft(posEnemy, posCollision, sizeCollision, EnemyType)) {
 				posEnemy.x += moveSpeed;
-				moveDirection = 1;
+				moveDir = RIGHT;
 				sprite->changeAnimation(MOVE_RIGHT);
 			}
 		}
 		// Moviment a la dreta
-		else {
+		else if (moveDir == RIGHT) {
 			if (map->collisionMoveRight(posEnemy, posCollision, sizeCollision, EnemyType)) {
 				posEnemy.x -= moveSpeed;
-				moveDirection = -1;
+				moveDir = LEFT;
 				sprite->changeAnimation(MOVE_LEFT);
 			}
 		}
@@ -138,6 +139,19 @@ void OgreEnemy::update(int deltaTime)
 	if (map->collisionMoveDown(posEnemy, posCollision, sizeCollision, EnemyType)) {}
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEnemy.x), float(tileMapDispl.y + posEnemy.y)));
+}
+
+
+FaceDir OgreEnemy::getMoveDir() const
+{
+	return moveDir;
+}
+
+void OgreEnemy::setMoveDir(FaceDir dir)
+{
+	moveDir = dir;
+	if (moveDir == LEFT) sprite->changeAnimation(MOVE_LEFT);
+	else if (moveDir == RIGHT) sprite->changeAnimation(MOVE_RIGHT);
 }
 
 void OgreEnemy::die()
@@ -192,11 +206,11 @@ glm::vec2 OgreEnemy::getSizeCollision() const {
 
 void OgreEnemy::startDeathAnimation()
 {
-	if (sprite->animation() == MOVE_LEFT)
+	if (sprite->animation() == MOVE_LEFT || sprite->animation() == IDLE_LEFT)
 	{
 		sprite->changeAnimation(DIE_LEFT); // Reprodueix l'animació de mort cap a l'esquerra
 	}
-	else if (sprite->animation() == MOVE_RIGHT)
+	else if (sprite->animation() == MOVE_RIGHT || sprite->animation() == IDLE_RIGHT)
 	{
 		sprite->changeAnimation(DIE_RIGHT); // Reprodueix l'animació de mort cap a la dreta
 	}
