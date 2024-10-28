@@ -40,6 +40,7 @@ public:
 	bool canPickUpObject() const;
 
 	bool isHoldingObj() const;
+	Object* holdingObject() const;
 
 	void resetPlayer(Scene* scene);
 	int getTries() const;

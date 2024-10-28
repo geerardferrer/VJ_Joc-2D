@@ -84,7 +84,6 @@ void OgreEnemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 void OgreEnemy::update(int deltaTime)
 {
-
 	sprite->update(deltaTime);
 
 	if (isDead) {

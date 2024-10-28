@@ -39,28 +39,31 @@ void Scene::init()
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
 
-	// ROCK
+	// OBJECT
 	for (int i = 0; i < NUM_OBJECTS; ++i) object.push_back(new Object());
 
 	for (int i = 0; i < object.size(); ++i)
 	{
-		object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, ROCK);
+		if (i < NUM_ROCKS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, ROCK);
+		else object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, CHEST);
+
 		object[i]->setTileMap(map);
 	}
-	player->pickUpObject(object[0]);
 	
-	object[0]->setPosition(glm::vec2(18 * map->getTileSize(), (70 * map->getTileSize())));
-	object[1]->setPosition(glm::vec2(28 * map->getTileSize(), (73 * map->getTileSize())));
-	object[2]->setPosition(glm::vec2(81 * map->getTileSize(), (89 * map->getTileSize())));
-	object[3]->setPosition(glm::vec2(115 * map->getTileSize(), (91 * map->getTileSize())));
-	object[4]->setPosition(glm::vec2(157 * map->getTileSize(), (119 * map->getTileSize())));
-	object[5]->setPosition(glm::vec2(105 * map->getTileSize(), (131 * map->getTileSize())));
-	object[6]->setPosition(glm::vec2(69 * map->getTileSize(), (157 * map->getTileSize())));
-	object[7]->setPosition(glm::vec2(48 * map->getTileSize(), (162 * map->getTileSize())));
-	object[8]->setPosition(glm::vec2(48 * map->getTileSize(), (161 * map->getTileSize())));
-	object[9]->setPosition(glm::vec2(48 * map->getTileSize(), (160 * map->getTileSize())));
-	object[10]->setPosition(glm::vec2(22 * map->getTileSize(), (150 * map->getTileSize())));
-	object[11]->setPosition(glm::vec2(61 * map->getTileSize(), (176 * map->getTileSize())));
+	// rocks
+	object[0]->setPosition(glm::vec2(28 * map->getTileSize(), (73 * map->getTileSize())));
+	object[1]->setPosition(glm::vec2(81 * map->getTileSize(), (89 * map->getTileSize())));
+	object[2]->setPosition(glm::vec2(115 * map->getTileSize(), (91 * map->getTileSize())));
+	object[3]->setPosition(glm::vec2(157 * map->getTileSize(), (119 * map->getTileSize())));
+	object[4]->setPosition(glm::vec2(105 * map->getTileSize(), (131 * map->getTileSize())));
+	object[5]->setPosition(glm::vec2(69 * map->getTileSize(), (157 * map->getTileSize())));
+	object[6]->setPosition(glm::vec2(20 * map->getTileSize(), (149 * map->getTileSize())));
+	object[7]->setPosition(glm::vec2(61 * map->getTileSize(), (176 * map->getTileSize())));
+
+	//chests
+	object[8]->setPosition(glm::vec2(22 * map->getTileSize(), (56 * map->getTileSize())));
+	object[9]->setPosition(glm::vec2(59 * map->getTileSize(), (88 * map->getTileSize())));
+	object[10]->setPosition(glm::vec2(62 * map->getTileSize(), (176 * map->getTileSize())));
 
 	// OGRES
 	for (int i = 0; i < NUM_OGRES; ++i) ogre.push_back(new OgreEnemy());
@@ -91,7 +94,6 @@ void Scene::init()
 	{
 		bat[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 		bat[i]->setTileMap(map);
-		//bat[i]->setPlayer(player);
 	}
 
 	bat[0]->setPosition(glm::vec2(134 * map->getTileSize(), (59 * map->getTileSize())));
@@ -224,7 +226,7 @@ CollisionDir Scene::checkCollision(const glm::fvec2 &entityPos1, const glm::fvec
 
 void Scene::manageCollision()
 {
-	// PLAYER x ROCK
+	// PLAYER x OBJECT
 	
 	for (int i = 0; i < object.size(); ++i) {
 		if (object[i]->isObjPickedUp()) continue;
@@ -347,10 +349,10 @@ void Scene::manageCollision()
 		}
 	}
 
-	// ROCK x OGRE
+	// OBJECT x OGRE
 	for (int i = 0; i < ogre.size(); ++i) {
 		for (int j = 0; j < object.size(); j++) {
-			if (object[i]->isObjPickedUp()) continue;
+			if (object[j]->isObjPickedUp()) continue;
 
 			CollisionDir dir;
 
@@ -358,8 +360,6 @@ void Scene::manageCollision()
 			{
 				float x, y;
 				float ogreSide, rockSide;
-
-				cout << object[j]->isObjPickedUp() << endl;
 
 				switch (dir)
 				{
@@ -430,6 +430,77 @@ void Scene::manageCollision()
 
 						ogre[i]->setPosition(glm::vec2(x, y));
 					}
+					break;
+				}
+			}
+		}
+	}
+
+	// OBJECT x OBJECT
+	for (int i = 0; i < object.size(); ++i) {
+		for (int j = 0; j < object.size(); j++) {
+			if (i == j) continue;
+			if (object[i]->isObjPickedUp()) continue;
+			if (object[i]->getVelocity().x == 0 && object[i]->getVelocity().y == 0) continue;
+
+			CollisionDir dir;
+
+			if (dir = checkCollision(object[i]->getPosition(), object[i]->getPosCollision(), object[i]->getSizeCollision(), object[j]->getPosition(), object[j]->getPosCollision(), object[j]->getSizeCollision()))
+			{
+				float x, y;
+				float rock1Side, rock2Side;
+
+				switch (dir)
+				{
+				case RIGHT_COLLISION:
+					// Right ogre side
+					rock1Side = object[i]->getPosition().x + object[i]->getPosCollision().x + object[i]->getSizeCollision().x;
+					// Left rock side
+					rock2Side = object[j]->getPosition().x + object[j]->getPosCollision().x;
+
+					x = object[i]->getPosition().x - (rock1Side - rock2Side);
+					y = object[i]->getPosition().y;
+
+					object[i]->setPosition(glm::vec2(x, y));
+
+					break;
+				case LEFT_COLLISION:
+					// Left ogre side
+					rock1Side = object[i]->getPosition().x + object[i]->getPosCollision().x;
+					// Right rock side
+					rock2Side = object[j]->getPosition().x + object[j]->getPosCollision().x + object[j]->getSizeCollision().x;
+
+					x = object[i]->getPosition().x - (rock1Side - rock2Side);
+					y = object[i]->getPosition().y;
+
+					object[i]->setPosition(glm::vec2(x, y));
+
+					break;
+				case BOTTOM_COLLISION:
+					// Bottom ogre side
+					rock1Side = object[i]->getPosition().y + object[i]->getPosCollision().y + object[i]->getSizeCollision().y;
+					// Top rock side
+					rock2Side = object[j]->getPosition().y + object[j]->getPosCollision().y;
+
+					x = object[i]->getPosition().x;
+					y = object[i]->getPosition().y - (rock1Side - rock2Side);
+
+					object[i]->setPosition(glm::vec2(x, y));
+
+					object[i]->setVelocity(glm::vec2(0.f, 0.f));
+
+					break;
+				case TOP_COLLISION:
+					// Top ogre side
+					rock1Side = object[i]->getPosition().y + object[i]->getPosCollision().y;
+					// Bottom rock side
+					rock2Side = object[j]->getPosition().y + object[j]->getPosCollision().y + object[j]->getSizeCollision().y;
+
+					x = object[i]->getPosition().x;
+					y = object[i]->getPosition().y - (rock1Side - rock2Side);
+
+					object[i]->setPosition(glm::vec2(x, y));
+
 					break;
 				}
 			}

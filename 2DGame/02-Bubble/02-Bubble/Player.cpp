@@ -297,41 +297,28 @@ void Player::update(int deltaTime, Scene *scene)
 			}
 		}
 	}
-	else if (isGrounded && !map->collisionMoveDown(posPlayer, posCollision, sizeCollision, PlayerType))
-	{
+	else if (isGrounded && !map->collisionMoveDown(posPlayer, posCollision, sizeCollision, PlayerType)) {
 		isGrounded = false;
 	}
 
-	if (damageTakenTime > 0.f)
-	{
+	if (damageTakenTime > 0.f) {
 		damageTakenTime -= deltaTime / 1000.f;
 
-		
-		if (int(damageTakenTime * 10) % 2 == 0)
-		{
-			isVisible = false;  
-		}
-		else
-		{
-			isVisible = true;  
-		}
+		if (int(damageTakenTime * 10) % 2 == 0) isVisible = false;
+		else isVisible = true;
 	}
-	else
-	{
+	else {
 		isVisible = true; 			  
-		if (map->getTileAt(posPlayer + glm::fvec2(48.f, 90.f)) == 22 || map->getTileAt(posPlayer + glm::fvec2(48.f, 90.f)) == 38)
-		{
+		if (map->getTileAt(posPlayer + glm::fvec2(48.f, 85.f)) == 22 || map->getTileAt(posPlayer + glm::fvec2(48.f, 85.f)) == 38) {
 			takeDamage(); 
 		}
-		if (map->getTileAt(posPlayer + glm::fvec2(48.f, 90.f)) == 119)
-		{
+		if (map->getTileAt(posPlayer + glm::fvec2(48.f, 85.f)) == 119) {
 			lives = 0;
 		}
 	}
 
 
-	if (holdingObjectTime > 0.f)
-	{
+	if (holdingObjectTime > 0.f) {
 		holdingObjectTime -= deltaTime / 1000.0f;
 	}
 	else {
@@ -345,6 +332,8 @@ void Player::update(int deltaTime, Scene *scene)
 		if (facingDir == LEFT) holdingObj->setPosition(posPlayer + glm::vec2(8, 48));
 		else if (facingDir == RIGHT) holdingObj->setPosition(posPlayer + glm::vec2(56, 48));
 	}
+
+	cout << posPlayer.x/32 << " " << posPlayer.y/32 << endl;
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
@@ -367,7 +356,8 @@ void Player::throwObject()
 	if (!isHoldingObj()) return;
 
 	FaceDir dir = getFacingDir();
-	if (dir == LEFT) holdingObj->throwObject(glm::fvec2(-12.f, -4.f));
+	if (sprite->animation() == STAND_OBJ_LEFT || sprite->animation() == STAND_OBJ_RIGHT) holdingObj->throwObject(glm::fvec2(0.f, 0.f));
+	else if (dir == LEFT) holdingObj->throwObject(glm::fvec2(-12.f, -4.f));
 	else if (dir == RIGHT) holdingObj->throwObject(glm::fvec2(12.f, -4.f));
 	holdingObj = NULL;
 	holdingObjectTime = 0.2f;
@@ -390,6 +380,12 @@ void Player::throwObject()
 		if (dir == LEFT) sprite->changeAnimation(JUMP_LEFT);
 		else sprite->changeAnimation(JUMP_RIGHT);
 	}
+}
+
+
+Object* Player::holdingObject() const
+{
+	return holdingObj;
 }
 
 bool Player::isHoldingObj() const

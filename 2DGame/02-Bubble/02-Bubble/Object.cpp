@@ -6,9 +6,46 @@
 
 void Object::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, ObjectType objType)
 {
-	spritesheet.loadFromFile("images/Rock.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(1.f, 1.f), &spritesheet, &shaderProgram);
+	spritesheet.loadFromFile("images/Objects.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25f, 0.5f), &spritesheet, &shaderProgram);
 	spritesheet.setMagFilter(GL_NEAREST);
+	sprite->setNumberAnimations(5);
+
+	sprite->setAnimationSpeed(COIN, 8);
+	sprite->addKeyframe(COIN, glm::vec2(0.0f, 0.0f));
+
+	sprite->setAnimationSpeed(HEART, 8);
+	sprite->addKeyframe(HEART, glm::vec2(0.25f, 0.0f));
+
+	sprite->setAnimationSpeed(ROCK, 8);
+	sprite->addKeyframe(ROCK, glm::vec2(0.5f, 0.0f));
+
+	sprite->setAnimationSpeed(CHEST, 8);
+	sprite->addKeyframe(CHEST, glm::vec2(0.75f, 0.0f));
+
+	sprite->setAnimationSpeed(OPEN_CHEST, 8);
+	sprite->addKeyframe(OPEN_CHEST, glm::vec2(0.75f, 0.75f));
+
+	switch (objType)
+	{
+	case ROCK:
+		sprite->changeAnimation(ROCK);
+		break;
+	case CHEST:
+		sprite->changeAnimation(CHEST);
+		break;
+	case OPEN_CHEST:
+		sprite->changeAnimation(OPEN_CHEST);
+		break;
+	case COIN:
+		sprite->changeAnimation(COIN);
+		break;
+	case HEART:
+		sprite->changeAnimation(HEART);
+		break;
+	default:
+		break;
+	}
 
 	tileMapDispl = tileMapPos;
 
