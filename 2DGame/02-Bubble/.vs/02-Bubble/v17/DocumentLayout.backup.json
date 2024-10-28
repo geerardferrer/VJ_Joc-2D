@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Object.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Object.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Scene.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Object.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|solutionrelative:02-Bubble\\Object.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5BE6CA2A-E5A8-40CC-9015-047CE0C78036}|02-Bubble\\02-Bubble.vcxproj|C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Object.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -34,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 197,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
@@ -56,20 +56,19 @@
               "RelativeDocumentMoniker": "02-Bubble\\Object.h",
               "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Object.h",
               "RelativeToolTip": "02-Bubble\\Object.h",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB8AAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-28T11:12:24.057Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-28T11:12:24.057Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Object.cpp",
               "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Object.cpp",
               "RelativeDocumentMoniker": "02-Bubble\\Object.cpp",
               "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Object.cpp",
               "RelativeToolTip": "02-Bubble\\Object.cpp",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAAAGkAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAAAHwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-28T09:15:16.138Z",
               "EditorCaption": ""
@@ -100,13 +99,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Scene.cpp",
               "DocumentMoniker": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.cpp",
               "RelativeDocumentMoniker": "02-Bubble\\Scene.cpp",
-              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.cpp",
-              "RelativeToolTip": "02-Bubble\\Scene.cpp",
-              "ViewState": "AgIAADsBAAAAAAAAAAAAAEQAAABFAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Pau\\Documents\\GitHub\\VJ_Joc-2D\\2DGame\\02-Bubble\\02-Bubble\\Scene.cpp*",
+              "RelativeToolTip": "02-Bubble\\Scene.cpp*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-24T10:01:48.791Z",
               "EditorCaption": ""

@@ -1,3 +1,33 @@
-﻿  Object.cpp
+﻿  Scene.cpp
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(45): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(71): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(93): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(113): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(115): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(117): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(126): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(159): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(160): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(161): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(231): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(310): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(331): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(353): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(354): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(440): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(441): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(513): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(518): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(523): warning C4018: '<': no coinciden signed/unsigned
+  Object.cpp
+  Generando código...
+  Compilando...
+  main.cpp
+  Player.cpp
+  OgreEnemy.cpp
+  Game.cpp
+  BatEnemy.cpp
+  Generando código...
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\player.cpp(458): warning C4715: 'Player::getFacingDir': no todas las rutas de acceso de control devuelven un valor
   02-Bubble.vcxproj -> C:\Users\Pau\Documents\GitHub\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe
   02-Bubble.vcxproj -> C:\Users\Pau\Documents\GitHub\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.pdb (Full PDB)
