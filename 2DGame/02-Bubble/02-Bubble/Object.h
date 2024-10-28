@@ -5,7 +5,7 @@
 #include "TileMap.h"
 
 enum ObjectType {
-	ROCK, CHEST
+	ROCK, CHEST, OPEN_CHEST, COIN, HEART
 };
 
 class Object {
