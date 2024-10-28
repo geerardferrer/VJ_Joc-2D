@@ -23,13 +23,21 @@ void Object::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, Ob
 	sprite->setAnimationSpeed(CHEST, 8);
 	sprite->addKeyframe(CHEST, glm::vec2(0.75f, 0.0f));
 
-	sprite->setAnimationSpeed(OPEN_CHEST, 8);
-	sprite->addKeyframe(OPEN_CHEST, glm::vec2(0.75f, 0.75f));
+	sprite->setAnimationSpeed(MINERAL, 8);
+	sprite->addKeyframe(OPEN_CHEST, glm::vec2(0.5f, 0.5f));
 
-	switch (objType)
+	sprite->setAnimationSpeed(OPEN_CHEST, 8);
+	sprite->addKeyframe(OPEN_CHEST, glm::vec2(0.75f, 0.5f));
+
+	objectType = objType;
+
+	switch (objectType)
 	{
 	case ROCK:
 		sprite->changeAnimation(ROCK);
+		break;
+	case MINERAL:
+		sprite->changeAnimation(MINERAL);
 		break;
 	case CHEST:
 		sprite->changeAnimation(CHEST);
@@ -57,14 +65,6 @@ void Object::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, Ob
 	isThrown = false;
 	isPickedUp = false;
 
-	switch (objType)
-	{
-		case ROCK:
-			break;
-		case CHEST:
-			break;
-	}
-
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posObj.x), float(tileMapDispl.y + posObj.y)));
 }
 
@@ -76,10 +76,36 @@ void Object::update(int deltaTime)
 		posObj.x += velObj.x;
 
 		if (velObj.x < 0 && map->collisionMoveLeft(posObj, posCollision, sizeCollision, PlayerType)) {
-			velObj.x = -velObj.x/2;
+			switch (objectType) {
+			case CHEST:
+				objectType = COIN;
+				sprite->changeAnimation(COIN);
+				velObj.y = -8.f;
+				velObj.x = 0.f;
+				break;
+			case ROCK:
+				//break
+				break;
+			case MINERAL:
+				velObj.x = -velObj.x / 2;
+				break;
+			}
 		}
 		if (velObj.x > 0 && map->collisionMoveRight(posObj, posCollision, sizeCollision, PlayerType)) {
-			velObj.x = -velObj.x/2;
+			switch (objectType) {
+			case CHEST:
+				objectType = COIN;
+				sprite->changeAnimation(COIN);
+				velObj.y = -8.f;
+				velObj.x = 0.f;
+				break;
+			case ROCK:
+				//break
+				break;
+			case MINERAL:
+				velObj.x = -velObj.x / 2;
+				break;
+			}
 		}
 
 		velObj.y += 0.4f;
@@ -87,9 +113,24 @@ void Object::update(int deltaTime)
 		posObj.y += velObj.y;
 
 		if (velObj.y > 0 && map->collisionMoveDown(posObj, posCollision, sizeCollision, PlayerType)) {
-			velObj.y = 0;
-			velObj.x = 0;
 			isThrown = false;
+
+			switch (objectType) {
+			case CHEST:
+				objectType = HEART;
+				sprite->changeAnimation(HEART);
+				velObj.y = -8.f;
+				velObj.x = 0.f;
+				break;
+
+			case ROCK:
+				//break
+				break;
+			case MINERAL:
+				velObj.y = 0.f;
+				velObj.x = 0.f;
+				break;
+			}
 		}
 
 	}

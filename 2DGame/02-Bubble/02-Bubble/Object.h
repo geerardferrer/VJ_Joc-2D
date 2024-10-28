@@ -5,7 +5,7 @@
 #include "TileMap.h"
 
 enum ObjectType {
-	ROCK, CHEST, OPEN_CHEST, COIN, HEART
+	ROCK, MINERAL, CHEST, OPEN_CHEST, COIN, HEART
 };
 
 class Object {
@@ -30,6 +30,7 @@ public:
 	bool isObjPickedUp() const;
 
 private:
+	ObjectType objectType;
 	bool isThrown, isPickedUp;
 	glm::fvec2 posObj, velObj, posCollision;
 	glm::ivec2 sizeCollision;
