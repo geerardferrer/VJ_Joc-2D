@@ -19,20 +19,22 @@ void Game::init()
 
 bool Game::update(int deltaTime)
 {
-	if (state == GAME_OVER) {
-		
-		if (restartKeyPressed()) {
-			init();           
-			state = PLAYING;  
-		}
-		else if (menuKeyPressed()) {
+	switch (state) {
+		case PLAYING:
+			scene.update(deltaTime);
+			break;
+		case GAME_OVER:
+			break;
+		case MAIN_MENU:
+			break;
+		case CONTROLS_MENU:
+			break;
+		case CREDITS:
+			break;
+		default:
 			bPlay = false;
-			audio->drop();
-		}
-
-		return bPlay;  
+			break;
 	}
-	scene.update(deltaTime);
 
 	return bPlay;
 }

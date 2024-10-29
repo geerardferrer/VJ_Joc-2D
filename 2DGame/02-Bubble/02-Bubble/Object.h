@@ -28,10 +28,13 @@ public:
 	void throwObject(const glm::fvec2 &velocity);
 
 	bool isObjPickedUp() const;
+	ObjectType getObjectType() const;
+
+	bool canDelete() const;
 
 private:
 	ObjectType objectType;
-	bool isThrown, isPickedUp;
+	bool isThrown, isPickedUp, destroyed;
 	glm::fvec2 posObj, velObj, posCollision;
 	glm::ivec2 sizeCollision;
 

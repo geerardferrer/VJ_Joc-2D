@@ -95,8 +95,7 @@ bool BatEnemy::isEnemyDead()
 
 void BatEnemy::render()
 {
-	if (!isDead || deathTime < 1.0f)
-		sprite->render();
+	sprite->render();
 }
 
 void BatEnemy::setTileMap(TileMap *tileMap)
@@ -130,4 +129,9 @@ void BatEnemy::startDeathAnimation()
 	sprite->changeAnimation(DIE);
 
 	deathTime = 0.0f;
+}
+
+bool BatEnemy::canDelete() const
+{
+	return (isDead && deathTime >= 1.75f);
 }

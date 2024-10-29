@@ -112,20 +112,29 @@ void OgreEnemy::update(int deltaTime)
 		}
 	}
 	else {
-		if (moveDir == LEFT) posEnemy.x -= moveSpeed;
-		else if (moveDir == RIGHT) posEnemy.x += moveSpeed;
-		
-		// Moviment a l'esquerra
-		if (moveDir == LEFT) {
-			if (map->collisionMoveLeft(posEnemy, posCollision, sizeCollision, EnemyType)) {
+		if (!hasGroundInFront()) {
+			// Gira en direcció contrària si no hi ha terra davant
+			if (moveDir == LEFT) {
+				moveDir = RIGHT;
+				sprite->changeAnimation(MOVE_RIGHT);
+			}
+			else if (moveDir == RIGHT) {
+				moveDir = LEFT;
+				sprite->changeAnimation(MOVE_LEFT);
+			}
+		}
+		else {
+			// Moviment normal si hi ha terra davant
+			if (moveDir == LEFT) posEnemy.x -= moveSpeed;
+			else if (moveDir == RIGHT) posEnemy.x += moveSpeed;
+
+			// Col·lisions laterals
+			if (moveDir == LEFT && map->collisionMoveLeft(posEnemy, posCollision, sizeCollision, EnemyType)) {
 				posEnemy.x += moveSpeed;
 				moveDir = RIGHT;
 				sprite->changeAnimation(MOVE_RIGHT);
 			}
-		}
-		// Moviment a la dreta
-		else if (moveDir == RIGHT) {
-			if (map->collisionMoveRight(posEnemy, posCollision, sizeCollision, EnemyType)) {
+			else if (moveDir == RIGHT && map->collisionMoveRight(posEnemy, posCollision, sizeCollision, EnemyType)) {
 				posEnemy.x -= moveSpeed;
 				moveDir = LEFT;
 				sprite->changeAnimation(MOVE_LEFT);
@@ -167,10 +176,7 @@ bool OgreEnemy::isEnemyDead()
 
 void OgreEnemy::render()
 {
-	if (!isDead || deathTime < 1.75f)
-	{
-		sprite->render(); // Només renderitzem si no ha acabat l'animació de mort
-	}
+	sprite->render();
 }
 
 void OgreEnemy::setTileMap(TileMap *tileMap)
@@ -207,12 +213,33 @@ void OgreEnemy::startDeathAnimation()
 {
 	if (sprite->animation() == MOVE_LEFT || sprite->animation() == IDLE_LEFT)
 	{
-		sprite->changeAnimation(DIE_LEFT); // Reprodueix l'animació de mort cap a l'esquerra
+		sprite->changeAnimation(DIE_LEFT); 
 	}
 	else if (sprite->animation() == MOVE_RIGHT || sprite->animation() == IDLE_RIGHT)
 	{
-		sprite->changeAnimation(DIE_RIGHT); // Reprodueix l'animació de mort cap a la dreta
+		sprite->changeAnimation(DIE_RIGHT); 
 	}
 
-	deathTime = 0.0f; // Inicialitza el temporitzador per eliminar l'enemic després de la mort
+	deathTime = 0.0f;
+}
+
+bool OgreEnemy::hasGroundInFront() {
+	glm::vec2 checkPos = posEnemy; 				
+	int offset = 30;
+
+	if (moveDir == LEFT) {
+		checkPos.x -= sizeCollision.x - offset; 
+	}
+	else if (moveDir == RIGHT) {
+		checkPos.x += sizeCollision.x + offset; 
+	}
+	checkPos.y += sizeCollision.y;
+
+	return map->collisionMoveDown(checkPos, glm::ivec2(0, 0), glm::ivec2(1, 1), EnemyType);
+}
+
+
+bool OgreEnemy::canDelete() const
+{
+	return (isDead && deathTime >= 1.75f);
 }

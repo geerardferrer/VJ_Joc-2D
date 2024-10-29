@@ -21,6 +21,10 @@ public:
 	bool isEnemyDead();
 	void startDeathAnimation();
 
+	float getDeathTime() const { return deathTime; }
+
+	bool canDelete() const;
+
 private:
 	bool isDead;
 	glm::fvec2 posEnemy, posCollision;

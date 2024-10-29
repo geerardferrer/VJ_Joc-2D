@@ -31,29 +31,7 @@ void Object::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, Ob
 
 	objectType = objType;
 
-	switch (objectType)
-	{
-	case ROCK:
-		sprite->changeAnimation(ROCK);
-		break;
-	case MINERAL:
-		sprite->changeAnimation(MINERAL);
-		break;
-	case CHEST:
-		sprite->changeAnimation(CHEST);
-		break;
-	case OPEN_CHEST:
-		sprite->changeAnimation(OPEN_CHEST);
-		break;
-	case COIN:
-		sprite->changeAnimation(COIN);
-		break;
-	case HEART:
-		sprite->changeAnimation(HEART);
-		break;
-	default:
-		break;
-	}
+	sprite->changeAnimation(objType);
 
 	tileMapDispl = tileMapPos;
 
@@ -62,6 +40,7 @@ void Object::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, Ob
 
 	velObj = glm::fvec2(0.f, 0.f);
 
+	destroyed = false;
 	isThrown = false;
 	isPickedUp = false;
 
@@ -71,6 +50,8 @@ void Object::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, Ob
 void Object::update(int deltaTime)
 {
 	sprite->update(deltaTime);
+
+	cout << velObj.x << " " << velObj.y << endl;
 
 	if (isThrown) {
 		posObj.x += velObj.x;
@@ -84,7 +65,8 @@ void Object::update(int deltaTime)
 				velObj.x = 0.f;
 				break;
 			case ROCK:
-				//break
+				destroyed = true;
+				break;
 			case MINERAL:
 				velObj.x = -velObj.x / 2;
 				break;
@@ -99,7 +81,8 @@ void Object::update(int deltaTime)
 				velObj.x = 0.f;
 				break;
 			case ROCK:
-				//break
+				destroyed = true;
+				break;
 			case MINERAL:
 				velObj.x = -velObj.x / 2;
 				break;
@@ -107,7 +90,6 @@ void Object::update(int deltaTime)
 		}
 
 		velObj.y += 0.4f;
-
 		posObj.y += velObj.y;
 
 		if (velObj.y > 0 && map->collisionMoveDown(posObj, posCollision, sizeCollision, PlayerType)) {
@@ -120,9 +102,9 @@ void Object::update(int deltaTime)
 				velObj.y = -8.f;
 				velObj.x = 0.f;
 				break;
-
 			case ROCK:
-				//break
+				destroyed = true;
+				break;
 			case MINERAL:
 				velObj.y = 0.f;
 				velObj.x = 0.f;
@@ -159,6 +141,11 @@ bool Object::isObjPickedUp() const
 	return isPickedUp;
 }
 
+ObjectType Object::getObjectType() const
+{
+	return objectType;
+}
+
 glm::vec2 Object::getVelocity() const
 {
 	return velObj;
@@ -193,5 +180,11 @@ glm::vec2 Object::getSizeCollision() const
 glm::vec2 Object::getPosition() const
 {
 	return posObj;
+}
+
+
+bool Object::canDelete() const
+{
+	return destroyed;
 }
 

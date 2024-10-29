@@ -44,7 +44,8 @@ void Scene::init()
 
 	for (int i = 0; i < object.size(); ++i)
 	{
-		if (i < NUM_ROCKS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, MINERAL);
+		if (i < NUM_ROCKS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, ROCK);
+		else if (i < NUM_ROCKS+NUM_MINERALS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, MINERAL);
 		else object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, CHEST);
 
 		object[i]->setTileMap(map);
@@ -54,6 +55,8 @@ void Scene::init()
 	object[0]->setPosition(glm::vec2(28 * map->getTileSize(), (73 * map->getTileSize())));
 	object[1]->setPosition(glm::vec2(81 * map->getTileSize(), (89 * map->getTileSize())));
 	object[2]->setPosition(glm::vec2(115 * map->getTileSize(), (91 * map->getTileSize())));
+
+	// minerals
 	object[3]->setPosition(glm::vec2(157 * map->getTileSize(), (119 * map->getTileSize())));
 	object[4]->setPosition(glm::vec2(105 * map->getTileSize(), (131 * map->getTileSize())));
 	object[5]->setPosition(glm::vec2(69 * map->getTileSize(), (157 * map->getTileSize())));
@@ -98,7 +101,7 @@ void Scene::init()
 
 	bat[0]->setPosition(glm::vec2(134 * map->getTileSize(), (59 * map->getTileSize())));
 	bat[1]->setPosition(glm::vec2(96 * map->getTileSize(), (59 * map->getTileSize())));
-	bat[3]->setPosition(glm::vec2(135 * map->getTileSize(), (45 * map->getTileSize())));
+	bat[2]->setPosition(glm::vec2(135 * map->getTileSize(), (45 * map->getTileSize())));
 
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH), float(SCREEN_HEIGHT), 0.f);
 	currentTime = 0.0f;
@@ -110,11 +113,34 @@ void Scene::update(int deltaTime)
 
 	player->update(deltaTime, this);
 
-	for (int i = 0; i < object.size(); ++i) object[i]->update(deltaTime);
+	for (int i = 0; i < object.size(); ++i) {
+		object[i]->update(deltaTime);
+		if (object[i]->canDelete()) {
+			delete object[i];
+			object.erase(object.begin() + i);
+			--i;
+		}
+	}
 
-	for (int i = 0; i < ogre.size(); ++i) ogre[i]->update(deltaTime);
+	for (int i = 0; i < ogre.size(); ++i) {
+		ogre[i]->update(deltaTime);
 
-	for (int i = 0; i < bat.size(); ++i) bat[i]->update(deltaTime);
+		if (ogre[i]->canDelete()) {
+			delete ogre[i];
+			ogre.erase(ogre.begin() + i);
+			--i;
+		}
+	}
+
+	for (int i = 0; i < bat.size(); ++i) {
+		bat[i]->update(deltaTime);
+
+		if (bat[i]->canDelete()) {
+			delete bat[i];
+			bat.erase(bat.begin() + i);
+			--i;
+		}
+	}
 
 	manageCollision();
 
@@ -235,74 +261,89 @@ void Scene::manageCollision()
 
 		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), object[i]->getPosition(), object[i]->getPosCollision(), object[i]->getSizeCollision()))
 		{
-			float x, y;
-			float playerSide, rockSide;
-			switch (dir)
-			{
-				case RIGHT_COLLISION:
-					if (player->getVelocity().y == 0 && player->getVelocity().x > 0) {
-						// Right player side
-						playerSide = player->getPosition().x + player->getPosCollision().x + player->getSizeCollision().x;
-						// Left rock side
-						rockSide = object[i]->getPosition().x + object[i]->getPosCollision().x;
+			switch (object[i]->getObjectType()) {
+				case ROCK:
+				case MINERAL:
+				case CHEST:
+					float x, y;
+					float playerSide, rockSide;
 
-						x = player->getPosition().x - (playerSide - rockSide);
-						y = player->getPosition().y;
+					switch (dir) {
+						case RIGHT_COLLISION:
+							if (player->getVelocity().y == 0 && player->getVelocity().x > 0) {
+								// Right player side
+								playerSide = player->getPosition().x + player->getPosCollision().x + player->getSizeCollision().x;
+								// Left rock side
+								rockSide = object[i]->getPosition().x + object[i]->getPosCollision().x;
 
-						player->setPosition(glm::vec2(x, y));
-					}
+								x = player->getPosition().x - (playerSide - rockSide);
+								y = player->getPosition().y;
 
-					if (!player->isHoldingObj() && player->canPickUpObject() && Game::instance().interactKeyPressed()) {
-						player->pickUpObject(object[i]);
+								player->setPosition(glm::vec2(x, y));
+							}
+
+							if (!player->isHoldingObj() && player->canPickUpObject() && Game::instance().interactKeyPressed()) {
+								player->pickUpObject(object[i]);
+							}
+							break;
+						case LEFT_COLLISION:
+							if (player->getVelocity().y == 0 && player->getVelocity().x < 0) {
+								// Left player side
+								playerSide = player->getPosition().x + player->getPosCollision().x;
+								// Right rock side
+								rockSide = object[i]->getPosition().x + object[i]->getPosCollision().x + object[i]->getSizeCollision().x;
+
+								x = player->getPosition().x - (playerSide - rockSide);
+								y = player->getPosition().y;
+
+								player->setPosition(glm::vec2(x, y));
+							}
+
+							if (!player->isHoldingObj() && player->canPickUpObject() && Game::instance().interactKeyPressed()) {
+								player->pickUpObject(object[i]);
+							}
+							break;
+						case BOTTOM_COLLISION:
+							if (player->getVelocity().y > 0) {
+								// Bottom player side
+								playerSide = player->getPosition().y + player->getPosCollision().y + player->getSizeCollision().y;
+								// Top rock side
+								rockSide = object[i]->getPosition().y + object[i]->getPosCollision().y;
+
+								x = player->getPosition().x;
+								y = player->getPosition().y - (playerSide - rockSide);
+
+								player->setPosition(glm::vec2(x, y));
+							}
+							player->hasGrounded();
+
+
+							break;
+						case TOP_COLLISION:
+							if (player->getVelocity().y < 0) {
+								// Top player side
+								playerSide = player->getPosition().y + player->getPosCollision().y;
+								// Bottom rock side
+								rockSide = object[i]->getPosition().y + object[i]->getPosCollision().y + object[i]->getSizeCollision().y;
+
+								x = player->getPosition().x;
+								y = player->getPosition().y - (playerSide - rockSide);
+
+								player->setPosition(glm::vec2(x, y));
+							}
+							break;
 					}
 					break;
-				case LEFT_COLLISION:
-					if (player->getVelocity().y == 0 && player->getVelocity().x < 0) {
-						// Left player side
-						playerSide = player->getPosition().x + player->getPosCollision().x;
-						// Right rock side
-						rockSide = object[i]->getPosition().x + object[i]->getPosCollision().x + object[i]->getSizeCollision().x;
-
-						x = player->getPosition().x - (playerSide - rockSide);
-						y = player->getPosition().y;
-
-						player->setPosition(glm::vec2(x, y));
-					}
-
-					if (!player->isHoldingObj() && player->canPickUpObject() && Game::instance().interactKeyPressed()) {
-						player->pickUpObject(object[i]);
-					}
+				case COIN:
+					// sumar puntos player
+					// eliminar objeto
 					break;
-				case BOTTOM_COLLISION:					
-					if (player->getVelocity().y > 0) {
-						// Bottom player side
-						playerSide = player->getPosition().y + player->getPosCollision().y + player->getSizeCollision().y;
-						// Top rock side
-						rockSide = object[i]->getPosition().y + object[i]->getPosCollision().y;
-
-						x = player->getPosition().x;
-						y = player->getPosition().y - (playerSide - rockSide);
-
-						player->setPosition(glm::vec2(x, y));
-					}
-					player->hasGrounded();
-
-
-					break;
-				case TOP_COLLISION:
-					if (player->getVelocity().y < 0) {
-						// Top player side
-						playerSide = player->getPosition().y + player->getPosCollision().y;
-						// Bottom rock side
-						rockSide = object[i]->getPosition().y + object[i]->getPosCollision().y + object[i]->getSizeCollision().y;
-
-						x = player->getPosition().x;
-						y = player->getPosition().y - (playerSide - rockSide);
-
-						player->setPosition(glm::vec2(x, y));
-					}
+				case HEART:
+					// sumar vidas player
+					// eliminar objeto
 					break;
 			}
+
 		}
 	}
 	
@@ -329,7 +370,7 @@ void Scene::manageCollision()
 
 	// PLAYER x BAT
 	for (int i = 0; i < bat.size(); ++i) {
-
+		if (bat[i]->isEnemyDead()) continue;
 		if (!bat[i]->isEnemyDead()) {
 			CollisionDir dir;
 
@@ -351,8 +392,9 @@ void Scene::manageCollision()
 
 	// OBJECT x OGRE
 	for (int i = 0; i < ogre.size(); ++i) {
+		if (ogre[i]->isEnemyDead()) continue;
 		for (int j = 0; j < object.size(); j++) {
-			if (object[j]->isObjPickedUp()) continue;
+			if (object[i]->getObjectType() == CHEST || object[j]->isObjPickedUp()) continue;
 
 			CollisionDir dir;
 
@@ -435,6 +477,7 @@ void Scene::manageCollision()
 			}
 		}
 	}
+
 
 	// OBJECT x OBJECT
 	for (int i = 0; i < object.size(); ++i) {

@@ -22,9 +22,14 @@ public:
 	FaceDir getMoveDir() const;
 	void setMoveDir(FaceDir dir);
 
+	bool hasGroundInFront();
+
 	void die();
 	bool isEnemyDead();
 	void startDeathAnimation();
+	float getDeathTime() const { return deathTime; }
+
+	bool canDelete() const;
 
 private:
 	bool isDead;
