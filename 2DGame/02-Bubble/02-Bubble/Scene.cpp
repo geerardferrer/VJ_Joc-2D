@@ -8,8 +8,8 @@
 #define SCREEN_X 0
 #define SCREEN_Y 0
 
-#define INIT_PLAYER_X_TILES 4	//3
-#define INIT_PLAYER_Y_TILES 70	//25
+#define INIT_PLAYER_X_TILES 4
+#define INIT_PLAYER_Y_TILES 70
 
 Scene::Scene()
 {
@@ -54,9 +54,9 @@ void Scene::init()
 	// rocks
 	object[0]->setPosition(glm::vec2(28 * map->getTileSize(), (73 * map->getTileSize())));
 	object[1]->setPosition(glm::vec2(81 * map->getTileSize(), (89 * map->getTileSize())));
-	object[2]->setPosition(glm::vec2(115 * map->getTileSize(), (91 * map->getTileSize())));
 
 	// minerals
+	object[2]->setPosition(glm::vec2(115 * map->getTileSize(), (91 * map->getTileSize())));
 	object[3]->setPosition(glm::vec2(157 * map->getTileSize(), (119 * map->getTileSize())));
 	object[4]->setPosition(glm::vec2(105 * map->getTileSize(), (131 * map->getTileSize())));
 	object[5]->setPosition(glm::vec2(69 * map->getTileSize(), (157 * map->getTileSize())));
@@ -67,11 +67,10 @@ void Scene::init()
 	object[8]->setPosition(glm::vec2(22 * map->getTileSize(), (56 * map->getTileSize())));
 	object[9]->setPosition(glm::vec2(60 * map->getTileSize(), (88 * map->getTileSize())));
 	object[10]->setPosition(glm::vec2(62 * map->getTileSize(), (176 * map->getTileSize())));
-	object[11]->setPosition(glm::vec2(46 * map->getTileSize(), (79 * map->getTileSize())));
+	object[11]->setPosition(glm::vec2(50 * map->getTileSize(), (79 * map->getTileSize())));
 	object[12]->setPosition(glm::vec2(117 * map->getTileSize(), (55 * map->getTileSize())));
 	object[13]->setPosition(glm::vec2(113 * map->getTileSize(), (61 * map->getTileSize())));
 	object[14]->setPosition(glm::vec2(168 * map->getTileSize(), (41 * map->getTileSize())));
-	object[15]->setPosition(glm::vec2(105 * map->getTileSize(), (121 * map->getTileSize())));
 
 
 	// OGRES
@@ -117,7 +116,7 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 
-	player->update(deltaTime, this);
+	player->update(deltaTime);
 
 	for (int i = 0; i < object.size(); ++i) {
 		object[i]->update(deltaTime);
@@ -223,38 +222,6 @@ void Scene::initShaders()
 	fShader.free();
 }
 
-CollisionDir Scene::checkCollision(const glm::fvec2 &entityPos1, const glm::fvec2 &entityCollision1, const glm::ivec2 &entitySize1, const glm::fvec2 &entityPos2, const glm::fvec2 &entityCollision2, const glm::ivec2 &entitySize2)
-{
-	float left1 = entityPos1.x + entityCollision1.x;
-	float right1 = left1 + float(entitySize1.x);
-	float top1 = entityPos1.y + entityCollision1.y;
-	float bottom1 = top1 + float(entitySize1.y);
-
-	float left2 = entityPos2.x + entityCollision2.x;
-	float right2 = left2 + float(entitySize2.x);
-	float top2 = entityPos2.y + entityCollision2.y;
-	float bottom2 = top2 + float(entitySize2.y);
-
-	bool collisionX = (right1 >= left2) && (left1 <= right2);
-	bool collisionY = (bottom1 >= top2) && (top1 <= bottom2);
-
-	if (collisionX && collisionY)
-	{
-		float overlapX = std::min(right1 - left2, right2 - left1);
-		float overlapY = std::min(bottom1 - top2, bottom2 - top1) * 0.3f; // factor para priorizar caidas por encima/debajo
-
-		if (overlapX < overlapY)
-		{
-			return (right1 - left2 < right2 - left1) ? RIGHT_COLLISION : LEFT_COLLISION;
-		}
-		else
-		{
-			return (bottom1 - top2 < bottom2 - top1) ? BOTTOM_COLLISION : TOP_COLLISION;
-		}
-	}
-	return NO_COLLISION;
-}
-
 
 void Scene::manageCollision()
 {
@@ -265,7 +232,7 @@ void Scene::manageCollision()
 
 		CollisionDir dir;
 
-		if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), object[i]->getPosition(), object[i]->getPosCollision(), object[i]->getSizeCollision()))
+		if (dir = CollisionManager::instance().checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), object[i]->getPosition(), object[i]->getPosCollision(), object[i]->getSizeCollision()))
 		{
 			switch (object[i]->getObjectType()) {
 				case ROCK:
@@ -448,7 +415,7 @@ void Scene::manageCollision()
 		if (!ogre[i]->isEnemyDead()) {
 			CollisionDir dir;
 
-			if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), ogre[i]->getPosition(), ogre[i]->getPosCollision(), ogre[i]->getSizeCollision()))
+			if (dir = CollisionManager::instance().checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), ogre[i]->getPosition(), ogre[i]->getPosCollision(), ogre[i]->getSizeCollision()))
 			{
 				if (dir == BOTTOM_COLLISION && player->isFallingAss())
 				{
@@ -471,7 +438,7 @@ void Scene::manageCollision()
 		if (!bat[i]->isEnemyDead()) {
 			CollisionDir dir;
 
-			if (dir = checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), bat[i]->getPosition(), bat[i]->getPosCollision(), bat[i]->getSizeCollision()))
+			if (dir = CollisionManager::instance().checkCollision(player->getPosition(), player->getPosCollision(), player->getSizeCollision(), bat[i]->getPosition(), bat[i]->getPosCollision(), bat[i]->getSizeCollision()))
 			{
 				if (dir == BOTTOM_COLLISION && player->isFallingAss())
 				{
@@ -496,7 +463,7 @@ void Scene::manageCollision()
 
 			CollisionDir dir;
 
-			if (dir = checkCollision(ogre[i]->getPosition(), ogre[i]->getPosCollision(), ogre[i]->getSizeCollision(), object[j]->getPosition(), object[j]->getPosCollision(), object[j]->getSizeCollision()))
+			if (dir = CollisionManager::instance().checkCollision(ogre[i]->getPosition(), ogre[i]->getPosCollision(), ogre[i]->getSizeCollision(), object[j]->getPosition(), object[j]->getPosCollision(), object[j]->getSizeCollision()))
 			{
 				float x, y;
 				float ogreSide, rockSide;
@@ -589,7 +556,7 @@ void Scene::manageCollision()
 
 			CollisionDir dir;
 
-			if (dir = checkCollision(bat[i]->getPosition(), bat[i]->getPosCollision(), bat[i]->getSizeCollision(), object[j]->getPosition(), object[j]->getPosCollision(), object[j]->getSizeCollision())) {
+			if (dir = CollisionManager::instance().checkCollision(bat[i]->getPosition(), bat[i]->getPosCollision(), bat[i]->getSizeCollision(), object[j]->getPosition(), object[j]->getPosCollision(), object[j]->getSizeCollision())) {
 				if (object[j]->getVelocity().x != 0 || object[j]->getVelocity().y != 0) {
 					bat[i]->die();
 					player->addPoints(80);
@@ -608,7 +575,7 @@ void Scene::manageCollision()
 
 			CollisionDir dir;
 
-			if (dir = checkCollision(object[i]->getPosition(), object[i]->getPosCollision(), object[i]->getSizeCollision(), object[j]->getPosition(), object[j]->getPosCollision(), object[j]->getSizeCollision()))
+			if (dir = CollisionManager::instance().checkCollision(object[i]->getPosition(), object[i]->getPosCollision(), object[i]->getSizeCollision(), object[j]->getPosition(), object[j]->getPosCollision(), object[j]->getSizeCollision()))
 			{
 				float x, y;
 				float rock1Side, rock2Side;
@@ -696,7 +663,4 @@ void Scene::resetScene()
 Player* Scene::getPlayer() {
 	return player;
 }
-
-
-
 

@@ -101,11 +101,10 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 }
 
-void Player::update(int deltaTime, Scene *scene)
+void Player::update(int deltaTime)
 {
 	if (lives <= 0)
 	{
-		resetPlayer(scene);
 		return;
 	}
 
@@ -337,6 +336,8 @@ void Player::update(int deltaTime, Scene *scene)
 		else if (facingDir == RIGHT) holdingObj->setPosition(posPlayer + glm::vec2(56, 48));
 	}
 
+	cout << posPlayer.x / 32 + 2 << " " << posPlayer.y / 32 + 1 << endl;
+
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
@@ -493,16 +494,6 @@ glm::vec2 Player::getSizeCollision() const
 glm::vec2 Player::getVelocity() const
 {
 	return velPlayer;
-}
-
-void Player::resetPlayer(Scene *scene)
-{
-	if (tries > 1) {
-		scene->resetScene();
-	}
-	else {
-		Game::instance().gameOver();
-	}
 }
 
 int Player::getTries() const {

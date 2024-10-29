@@ -5,32 +5,26 @@
 #include <glm/glm.hpp>
 #include <vector>
 #include "ShaderProgram.h"
+#include "CollisionManager.h"
 #include "TileMap.h"
 #include "Player.h"
 #include "Object.h"
 #include "OgreEnemy.h"
 #include "BatEnemy.h"
 
-
-
-
 // Scene contains all the entities of our game.
 // It is responsible for updating and render them.
 
-#define NUM_MINERALS 5
-#define NUM_ROCKS 3
-#define NUM_CHESTS 8
-#define NUM_OBJECTS NUM_MINERALS+NUM_ROCKS+NUM_CHESTS
-#define NUM_OGRES 8
-#define NUM_BATS 3
-
-enum CollisionDir
-{
-	NO_COLLISION, LEFT_COLLISION, RIGHT_COLLISION, TOP_COLLISION, BOTTOM_COLLISION
-};
 
 class Scene
 {
+
+#define NUM_MINERALS 6
+#define NUM_ROCKS 2
+#define NUM_CHESTS 7
+#define NUM_OBJECTS NUM_MINERALS+NUM_ROCKS+NUM_CHESTS
+#define NUM_OGRES 8
+#define NUM_BATS 3
 
 public:
 	Scene();
@@ -44,7 +38,6 @@ public:
 	Player* getPlayer();
 
 private:
-	CollisionDir checkCollision(const glm::fvec2 &entityPos1, const glm::fvec2 &entityCollision1, const glm::ivec2 &entitySize1, const glm::fvec2 &entityPos2, const glm::fvec2 &entityCollision2, const glm::ivec2 &entitySize2);
 	void manageCollision();
 
 	void initShaders();

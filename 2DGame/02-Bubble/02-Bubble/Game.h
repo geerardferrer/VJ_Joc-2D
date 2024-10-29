@@ -4,25 +4,26 @@
 
 #include <GLFW/glfw3.h>
 #include <irrKlang.h>
+#include "MainMenu.h"
 #include "Scene.h"
+#include "Practice.h"
 #include "Texture.h"
 
 using namespace irrklang;
 
-#define SCREEN_WIDTH 1024
+#define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
 
 // Game is a singleton (a class with a single instance) that represents our whole application
 
-enum GameState {
-	PLAYING,
-	GAME_OVER, 
+enum GameScene {
+	GAME_SCENE,
+	PRACTICE_SCENE, 
 	MAIN_MENU,
 	CONTROLS_MENU,
-	CREDITS
+	CREDITS_MENU
 };
-
 
 class Game
 {
@@ -41,7 +42,8 @@ public:
 	void init();
 	bool update(int deltaTime);
 	void render();
-	void gameOver();
+
+	void changeScene(GameScene gameScene);
 	
 	// Input callback methods
 	void keyPressed(int key);
@@ -70,10 +72,13 @@ private:
 	bool keys[GLFW_KEY_LAST+1]; // Store key states so that 
 							    // we can have access at any time
 
-	ISoundEngine* audio;
+	MainMenu mainMenu;
 	Scene scene;
+	Practice practiceScene;
+
+	ISoundEngine* audio;
 	Texture spritesheet;
-	GameState state;
+	GameScene state;
 
 };
 

@@ -8,28 +8,28 @@ void Game::init()
 {
 	bPlay = true;
 	glClearColor(0.529f, 0.808f, 0.922f, 1.0f);
-	scene.init();
-
-	if (!spritesheet.loadFromFile("images/gameover.png", TEXTURE_PIXEL_FORMAT_RGBA)) cout << "No se pudo cargar la textura" << endl;
+	mainMenu.init();
 
 	audio = createIrrKlangDevice();
 
-	state = PLAYING;
+	state = MAIN_MENU;
 }
 
 bool Game::update(int deltaTime)
 {
 	switch (state) {
-		case PLAYING:
+		case GAME_SCENE:
 			scene.update(deltaTime);
 			break;
-		case GAME_OVER:
+		case PRACTICE:
+			practiceScene.update(deltaTime);
 			break;
 		case MAIN_MENU:
+			mainMenu.update(deltaTime);
 			break;
 		case CONTROLS_MENU:
 			break;
-		case CREDITS:
+		case CREDITS_MENU:
 			break;
 		default:
 			bPlay = false;
@@ -43,11 +43,47 @@ void Game::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	if (state == GAME_OVER) {
-		renderGameOverScreen();
-	}
-	else {
+	switch (state) {
+	case GAME_SCENE:
 		scene.render();
+		break;
+	case PRACTICE:
+		practiceScene.render();
+		break;
+	case MAIN_MENU:
+		mainMenu.render();
+		break;
+	case CONTROLS_MENU:
+		break;
+	case CREDITS_MENU:
+		break;
+	default:
+		bPlay = false;
+		break;
+	}
+}
+
+void Game::changeScene(GameScene gameScene)
+{
+	state = gameScene;
+
+	switch (state) {
+	case GAME_SCENE:
+		scene.init();
+		break;
+	case PRACTICE:
+		practiceScene.init();
+		break;
+	case MAIN_MENU:
+		mainMenu.init();
+		break;
+	case CONTROLS_MENU:
+		break;
+	case CREDITS_MENU:
+		break;
+	default:
+		bPlay = false;
+		break;
 	}
 }
 
@@ -122,7 +158,7 @@ bool Game::upKeyPressed() const
 
 bool Game::interactKeyPressed() const
 {
-	return (keys[GLFW_KEY_SPACE]);
+	return (keys[GLFW_KEY_SPACE] || keys[GLFW_KEY_ENTER]);
 }
 
 bool Game::restartKeyPressed() const
@@ -154,9 +190,4 @@ void Game::renderGameOverScreen()
 
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
-}
-
-void Game::gameOver()
-{
-	state = GAME_OVER;
 }
