@@ -1,33 +1,52 @@
-﻿  Scene.cpp
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(45): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(71): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(93): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(113): warning C4018: '<': no coinciden signed/unsigned
+﻿  TileMap.cpp
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(148): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(149): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(173): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(174): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(175): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(207): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(208): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(209): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(241): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(242): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(243): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(275): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(276): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(277): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+  Texture.cpp
+  Sprite.cpp
+  OgreEnemy.cpp
+  ShaderProgram.cpp
+  Shader.cpp
+  Scene.cpp
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(47): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(73): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(95): warning C4018: '<': no coinciden signed/unsigned
 c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(115): warning C4018: '<': no coinciden signed/unsigned
 c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(117): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(126): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(159): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(160): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(119): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(128): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
 c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(161): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(231): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(310): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(331): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(353): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(354): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(440): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(441): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(513): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(518): warning C4018: '<': no coinciden signed/unsigned
-c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(523): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(162): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(163): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(233): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(312): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(333): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(355): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(356): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(442): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(443): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(515): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(520): warning C4018: '<': no coinciden signed/unsigned
+c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(525): warning C4018: '<': no coinciden signed/unsigned
   Object.cpp
-  Generando código...
-  Compilando...
-  main.cpp
   Player.cpp
-  OgreEnemy.cpp
+  main.cpp
   Game.cpp
   BatEnemy.cpp
   Generando código...
 c:\users\pau\documents\github\vj_joc-2d\2dgame\02-bubble\02-bubble\player.cpp(458): warning C4715: 'Player::getFacingDir': no todas las rutas de acceso de control devuelven un valor
-  02-Bubble.vcxproj -> C:\Users\Pau\Documents\GitHub\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe
-  02-Bubble.vcxproj -> C:\Users\Pau\Documents\GitHub\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.pdb (Full PDB)
+LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+Scene.obj : error LNK2019: símbolo externo "__declspec(dllimport) class irrklang::ISoundEngine * __cdecl irrklang::createIrrKlangDevice(enum irrklang::E_SOUND_OUTPUT_DRIVER,int,char const *,char const *)" (__imp_?createIrrKlangDevice@irrklang@@YAPAVISoundEngine@1@W4E_SOUND_OUTPUT_DRIVER@1@HPBD1@Z) sin resolver al que se hace referencia en la función "public: __thiscall Scene::Scene(void)" (??0Scene@@QAE@XZ)
+..\..\..\libs\irrKlang-1.6.0\lib\Winx64-visualStudio\irrKlang.lib : warning LNK4272: el tipo de máquina de biblioteca 'x64' está en conflicto con el tipo de máquina de destino 'X86'
+C:\Users\Pau\Documents\GitHub\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe : fatal error LNK1120: 1 externos sin resolver

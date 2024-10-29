@@ -9,7 +9,7 @@ void Object::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, Ob
 	spritesheet.loadFromFile("images/Objects.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25f, 0.5f), &spritesheet, &shaderProgram);
 	spritesheet.setMagFilter(GL_NEAREST);
-	sprite->setNumberAnimations(5);
+	sprite->setNumberAnimations(6);
 
 	sprite->setAnimationSpeed(COIN, 8);
 	sprite->addKeyframe(COIN, glm::vec2(0.0f, 0.0f));
@@ -24,7 +24,7 @@ void Object::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, Ob
 	sprite->addKeyframe(CHEST, glm::vec2(0.75f, 0.0f));
 
 	sprite->setAnimationSpeed(MINERAL, 8);
-	sprite->addKeyframe(OPEN_CHEST, glm::vec2(0.5f, 0.5f));
+	sprite->addKeyframe(MINERAL, glm::vec2(0.5f, 0.5f));
 
 	sprite->setAnimationSpeed(OPEN_CHEST, 8);
 	sprite->addKeyframe(OPEN_CHEST, glm::vec2(0.75f, 0.5f));
@@ -85,7 +85,6 @@ void Object::update(int deltaTime)
 				break;
 			case ROCK:
 				//break
-				break;
 			case MINERAL:
 				velObj.x = -velObj.x / 2;
 				break;
@@ -101,7 +100,6 @@ void Object::update(int deltaTime)
 				break;
 			case ROCK:
 				//break
-				break;
 			case MINERAL:
 				velObj.x = -velObj.x / 2;
 				break;
@@ -125,7 +123,6 @@ void Object::update(int deltaTime)
 
 			case ROCK:
 				//break
-				break;
 			case MINERAL:
 				velObj.y = 0.f;
 				velObj.x = 0.f;

@@ -3,6 +3,7 @@
 
 
 #include <glm/glm.hpp>
+#include <irrKlang.h>
 #include <vector>
 #include "ShaderProgram.h"
 #include "TileMap.h"

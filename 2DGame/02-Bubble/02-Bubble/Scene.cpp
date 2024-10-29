@@ -8,13 +8,15 @@
 #define SCREEN_X 0
 #define SCREEN_Y 0
 
-#define INIT_PLAYER_X_TILES 3//4	//3
-#define INIT_PLAYER_Y_TILES 25//70	//25
+#define INIT_PLAYER_X_TILES 4	//3
+#define INIT_PLAYER_Y_TILES 70	//25
 
 Scene::Scene()
 {
 	map = NULL;
 	player = NULL;
+
+	irrklang::ISoundEngine* engine = irrklang::createIrrKlangDevice();
 }
 
 Scene::~Scene()
@@ -31,7 +33,7 @@ void Scene::init()
 	initShaders();
 
 	// TILEMAP
-	map = TileMap::createTileMap("levels/practice.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 
 	// PLAYER
 	player = new Player();
@@ -44,7 +46,7 @@ void Scene::init()
 
 	for (int i = 0; i < object.size(); ++i)
 	{
-		if (i < NUM_ROCKS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, ROCK);
+		if (i < NUM_ROCKS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, MINERAL);
 		else object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, CHEST);
 
 		object[i]->setTileMap(map);
