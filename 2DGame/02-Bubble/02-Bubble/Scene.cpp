@@ -15,8 +15,6 @@ Scene::Scene()
 {
 	map = NULL;
 	player = NULL;
-
-	irrklang::ISoundEngine* engine = irrklang::createIrrKlangDevice();
 }
 
 Scene::~Scene()
@@ -64,7 +62,7 @@ void Scene::init()
 
 	//chests
 	object[8]->setPosition(glm::vec2(22 * map->getTileSize(), (56 * map->getTileSize())));
-	object[9]->setPosition(glm::vec2(59 * map->getTileSize(), (88 * map->getTileSize())));
+	object[9]->setPosition(glm::vec2(60 * map->getTileSize(), (88 * map->getTileSize())));
 	object[10]->setPosition(glm::vec2(62 * map->getTileSize(), (176 * map->getTileSize())));
 
 	// OGRES

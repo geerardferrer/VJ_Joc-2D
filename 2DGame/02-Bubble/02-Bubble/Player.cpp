@@ -221,6 +221,7 @@ void Player::update(int deltaTime, Scene *scene)
 		if (Game::instance().upKeyPressed()) {
 			velPlayer.y = -jumpForce;
 			isGrounded = false;
+			Game::instance().playSound("sounds/jump.wav", false);
 
 			if (isHoldingObj())
 			{

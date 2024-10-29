@@ -11,6 +11,9 @@ void Game::init()
 	scene.init();
 
 	if (!spritesheet.loadFromFile("images/gameover.png", TEXTURE_PIXEL_FORMAT_RGBA)) cout << "No se pudo cargar la textura" << endl;
+
+	audio = createIrrKlangDevice();
+
 	state = PLAYING;
 }
 
@@ -23,7 +26,8 @@ bool Game::update(int deltaTime)
 			state = PLAYING;  
 		}
 		else if (menuKeyPressed()) {
-			bPlay = false;   
+			bPlay = false;
+			audio->drop();
 		}
 
 		return bPlay;  
@@ -62,6 +66,19 @@ void Game::keyPressed(int key)
 void Game::keyReleased(int key)
 {
 	keys[key] = false;
+}
+
+ISound* Game::playSound(const char* audioPath, bool loop)
+{
+	ISound *sound = audio->play2D(audioPath, loop, false, true);
+	return sound;
+}
+
+void Game::stopSound(ISound *sound)
+{
+	if (sound == NULL) return;
+
+	sound->stop();
 }
 
 void Game::mouseMove(int x, int y)

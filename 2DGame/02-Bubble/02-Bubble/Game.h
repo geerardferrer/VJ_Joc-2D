@@ -3,9 +3,11 @@
 
 
 #include <GLFW/glfw3.h>
+#include <irrKlang.h>
 #include "Scene.h"
 #include "Texture.h"
 
+using namespace irrklang;
 
 #define SCREEN_WIDTH 1024
 #define SCREEN_HEIGHT 720
@@ -58,6 +60,8 @@ public:
 	bool restartKeyPressed() const;
 	bool menuKeyPressed() const;
 
+	ISound* playSound(const char* audioPath, bool loop);
+	void stopSound(ISound *sound);
 
 	void renderGameOverScreen();
 
@@ -65,6 +69,8 @@ private:
 	bool bPlay; // Continue to play game?
 	bool keys[GLFW_KEY_LAST+1]; // Store key states so that 
 							    // we can have access at any time
+
+	ISoundEngine* audio;
 	Scene scene;
 	Texture spritesheet;
 	GameState state;

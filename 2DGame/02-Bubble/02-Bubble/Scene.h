@@ -3,7 +3,6 @@
 
 
 #include <glm/glm.hpp>
-#include <irrKlang.h>
 #include <vector>
 #include "ShaderProgram.h"
 #include "TileMap.h"
@@ -11,6 +10,8 @@
 #include "Object.h"
 #include "OgreEnemy.h"
 #include "BatEnemy.h"
+
+
 
 
 // Scene contains all the entities of our game.
