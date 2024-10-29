@@ -19,7 +19,7 @@
 
 #define NUM_MINERALS 5
 #define NUM_ROCKS 3
-#define NUM_CHESTS 3
+#define NUM_CHESTS 8
 #define NUM_OBJECTS NUM_MINERALS+NUM_ROCKS+NUM_CHESTS
 #define NUM_OGRES 8
 #define NUM_BATS 3

@@ -1,30 +1,10 @@
-﻿Compilación iniciada a las 29/10/2024 13:33:36.
-     1>Proyecto "C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" en el nodo 2 (Build destinos).
+﻿Compilación iniciada a las 29/10/2024 17:06:04.
+     1>Proyecto "C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"..\..\..\libs\Simple OpenGL Image Library\src" /I"..\..\..\libs\glew-1.13.0\include" /I..\..\..\libs\glm /I"..\..\..\libs\glfw-3.3.8\include" /I"..\..\..\libs\irrKlang-1.6.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Scene.cpp
-         Scene.cpp
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(45): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(74): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(96): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(116): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(125): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(135): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(152): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(185): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(186): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(187): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(257): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(347): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(368): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(390): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(392): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(479): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(480): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(552): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(557): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(562): warning C4018: '<': no coinciden signed/unsigned
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"..\..\..\libs\Simple OpenGL Image Library\src" /I"..\..\..\libs\glew-1.13.0\include" /I..\..\..\libs\glm /I"..\..\..\libs\glfw-3.3.8\include" /I"..\..\..\libs\irrKlang-1.6.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt BatEnemy.cpp
+         BatEnemy.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\..\libs\Simple OpenGL Image Library\projects\VC9\Debug" /LIBPATH:"..\..\..\libs\glew-1.13.0\lib\Release\Win32" /LIBPATH:"..\..\..\libs\glfw-3.3.8\lib-vc2015" /LIBPATH:"..\..\..\libs\irrKlang-1.6.0\lib\Win32-visualStudio" SOIL.lib glew32.lib glfw3.lib opengl32.lib irrKlang.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.lib" /MACHINE:X86 Debug\BatEnemy.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\..\libs\Simple OpenGL Image Library\projects\VC9\Debug" /LIBPATH:"..\..\..\libs\glew-1.13.0\lib\Release\Win32" /LIBPATH:"..\..\..\libs\glfw-3.3.8\lib-vc2015" /LIBPATH:"..\..\..\libs\irrKlang-1.6.0\lib\Win32-visualStudio" SOIL.lib glew32.lib glfw3.lib opengl32.lib irrKlang.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.lib" /MACHINE:X86 Debug\BatEnemy.obj
          Debug\Game.obj
          Debug\main.obj
          Debug\Player.obj
@@ -36,9 +16,14 @@
          Debug\Sprite.obj
          Debug\Texture.obj
          Debug\TileMap.obj
-         02-Bubble.vcxproj -> C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe
-     1>Compilación del proyecto terminada "C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" (Build destinos).
+     1>LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+     1>SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontr¾ PDB 'vc100.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+     1>SOIL.lib(image_helper.obj) : warning LNK4099: no se encontr¾ PDB 'vc100.pdb' con 'SOIL.lib(image_helper.obj)' o en 'C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+     1>SOIL.lib(SOIL.obj) : warning LNK4099: no se encontr¾ PDB 'vc100.pdb' con 'SOIL.lib(SOIL.obj)' o en 'C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+     1>SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontr¾ PDB 'vc100.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vincularß el objeto sin tener en cuenta informaci¾n de depuraci¾n
+         02-Bubble.vcxproj -> C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe
+     1>Compilación del proyecto terminada "C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" (Build destinos).
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:00.82
+Tiempo transcurrido 00:00:01.20

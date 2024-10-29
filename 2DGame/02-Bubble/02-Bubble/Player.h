@@ -36,6 +36,7 @@ public:
 	void hasGrounded();
 
 	void pickUpObject(Object *obj);
+	void dropObject();
 	void throwObject();
 	bool canPickUpObject() const;
 
@@ -43,8 +44,11 @@ public:
 	Object* holdingObject() const;
 
 	void resetPlayer(Scene* scene);
+	
 	int getTries() const;
 	void setTries(int currentTries);
+	void addPoints(int points);
+	void addLife();
 
 	void toggleGodMode();  
 	void heal();           

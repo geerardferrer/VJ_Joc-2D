@@ -24,7 +24,11 @@ public:
 	glm::vec2 getSizeCollision() const;
 	glm::vec2 getVelocity() const;
 
+	void setObjectType(ObjectType newType);
+	void changeAnimation(int anim);
+
 	void pickUpObject();
+	void dropObject();
 	void throwObject(const glm::fvec2 &velocity);
 
 	bool isObjPickedUp() const;
@@ -34,7 +38,7 @@ public:
 
 private:
 	ObjectType objectType;
-	bool isThrown, isPickedUp, destroyed;
+	bool isThrown, isDropped, isPickedUp, destroyed;
 	glm::fvec2 posObj, velObj, posCollision;
 	glm::ivec2 sizeCollision;
 

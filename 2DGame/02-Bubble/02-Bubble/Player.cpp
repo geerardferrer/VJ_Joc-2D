@@ -97,6 +97,8 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	score = 0;
 	damageTakenTime = 0.f;
 	holdingObjectTime = 0.f;
+
+
 }
 
 void Player::update(int deltaTime, Scene *scene)
@@ -121,9 +123,7 @@ void Player::update(int deltaTime, Scene *scene)
 		{
 			if (isHoldingObj())
 			{
-				cout << sprite->animation() << endl;
 				if (sprite->animation() != MOVE_OBJ_LEFT) {
-					cout << "He entrat" << endl;
 					sprite->changeAnimation(MOVE_OBJ_LEFT);
 				}
 			}
@@ -337,8 +337,6 @@ void Player::update(int deltaTime, Scene *scene)
 		else if (facingDir == RIGHT) holdingObj->setPosition(posPlayer + glm::vec2(56, 48));
 	}
 
-	//cout << posPlayer.x/32 << " " << posPlayer.y/32 << endl;
-
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
@@ -360,7 +358,7 @@ void Player::throwObject()
 	if (!isHoldingObj()) return;
 
 	FaceDir dir = getFacingDir();
-	if (sprite->animation() == STAND_OBJ_LEFT || sprite->animation() == STAND_OBJ_RIGHT) holdingObj->throwObject(glm::fvec2(0.f, 0.f));
+	if (sprite->animation() == STAND_OBJ_LEFT || sprite->animation() == STAND_OBJ_RIGHT) holdingObj->dropObject();
 	else if (dir == LEFT) holdingObj->throwObject(glm::fvec2(-12.f, -4.f));
 	else if (dir == RIGHT) holdingObj->throwObject(glm::fvec2(12.f, -4.f));
 	holdingObj = NULL;
@@ -411,12 +409,11 @@ bool Player::canPickUpObject() const
 void Player::takeDamage()
 {
 	if (godMode) {
-		std::cout << "No damage taken (God Mode)" << std::endl;
+		cout << "No damage taken (God Mode)" << endl;
 		return;
 	}
 	--lives;
 	damageTakenTime = 2.f;
-	cout << lives << endl;
 }
 
 bool Player::canTakeDamage() const
@@ -528,4 +525,15 @@ void Player::heal() {
 
 bool Player::isGodMode() const {
 	return godMode;
+}
+
+void Player::addPoints(int points) {
+	score += points;
+	std::cout << "Punts actuals: " << score << std::endl;
+}
+
+void Player::addLife() {
+	if (lives < 3)
+		lives += 1;
+	std::cout << "Vides actuals: " << lives << std::endl;
 }

@@ -1,6 +1,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Game.h"
+#include <ctime>
+#include <cstdlib>
 
 
 #define TARGET_FRAMERATE 60.0f
@@ -36,6 +38,8 @@ int main(void)
 	/* Initialize the library */
 	if (!glfwInit())
 		return -1;
+
+	srand(static_cast<unsigned int>(time(0)));
 
 	/* Create a windowed mode window and its OpenGL context */
 	window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT + 64, "Hello World", NULL, NULL);

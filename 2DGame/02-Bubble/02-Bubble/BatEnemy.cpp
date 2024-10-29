@@ -63,7 +63,7 @@ void BatEnemy::update(int deltaTime)
 	if (isDead) {
 		deathTime += deltaTime / 1000.0f;
 
-		if (deathTime >= 2.0f) {
+		if (deathTime >= 1.f) {
 			moveSpeed = 0;
 			return;
 		}
@@ -133,5 +133,5 @@ void BatEnemy::startDeathAnimation()
 
 bool BatEnemy::canDelete() const
 {
-	return (isDead && deathTime >= 1.75f);
+	return (isDead && deathTime >= 1.f);
 }
