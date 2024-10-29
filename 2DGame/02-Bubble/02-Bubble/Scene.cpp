@@ -28,6 +28,21 @@ Scene::~Scene()
 
 void Scene::init()
 {
+	for (Object* obj : object) {
+		delete obj;
+	}
+	object.clear();
+
+	for (OgreEnemy* ogreEnemy : ogre) {
+		delete ogreEnemy;
+	}
+	ogre.clear();
+
+	for (BatEnemy* batEnemy : bat) {
+		delete batEnemy;
+	}
+	bat.clear();
+
 	initShaders();
 
 	// TILEMAP
@@ -42,11 +57,13 @@ void Scene::init()
 	// OBJECT
 	for (int i = 0; i < NUM_OBJECTS; ++i) object.push_back(new Object());
 
+
 	for (int i = 0; i < object.size(); ++i)
 	{
 		if (i < NUM_ROCKS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, ROCK);
-		else if (i < NUM_ROCKS+NUM_MINERALS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, MINERAL);
-		else object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, CHEST);
+		else if (i < NUM_ROCKS + NUM_MINERALS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, MINERAL);
+		else if (i < NUM_ROCKS + NUM_MINERALS + NUM_CHESTS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, CHEST);
+		else  object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, GEMSTONE);
 
 		object[i]->setTileMap(map);
 	}
@@ -71,6 +88,9 @@ void Scene::init()
 	object[12]->setPosition(glm::vec2(117 * map->getTileSize(), (55 * map->getTileSize())));
 	object[13]->setPosition(glm::vec2(113 * map->getTileSize(), (61 * map->getTileSize())));
 	object[14]->setPosition(glm::vec2(168 * map->getTileSize(), (41 * map->getTileSize())));
+
+	//gemstone
+	object[15]->setPosition(glm::vec2(41 * map->getTileSize(), (153 * map->getTileSize())));
 
 
 	// OGRES
@@ -110,13 +130,20 @@ void Scene::init()
 
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH), float(SCREEN_HEIGHT), 0.f);
 	currentTime = 0.0f;
+	endGameDelay = -1.f;
 }
 
 void Scene::update(int deltaTime)
 {
+	if (gameEnded) return;
 	currentTime += deltaTime;
 
 	player->update(deltaTime);
+
+	if (player->isDead()) {
+		init();
+		return;
+	}
 
 	for (int i = 0; i < object.size(); ++i) {
 		object[i]->update(deltaTime);
@@ -397,13 +424,20 @@ void Scene::manageCollision()
 					object.erase(object.begin() + i);
 					--i;
 					break;
-					break;
 				case HEART:
 					player->addLife();
 					delete object[i];
 					object.erase(object.begin() + i);
 					--i; // Redueix l'índex per evitar saltar un element després de l'eliminació
 					break;
+				case GEMSTONE:
+					player->setVictoryStandAnimation();
+					delete object[i];
+					object.erase(object.begin() + i);
+					--i;
+					gameEnded = true;
+					endGameDelay = 3.f;
+					return;
 					break;
 			}
 
@@ -459,8 +493,7 @@ void Scene::manageCollision()
 	for (int i = 0; i < ogre.size(); ++i) {
 		if (ogre[i]->isEnemyDead()) continue;
 		for (int j = 0; j < object.size(); j++) {
-			if (object[i]->getObjectType() == CHEST || object[j]->isObjPickedUp()) continue;
-
+			if (object[j]->getObjectType() == CHEST || object[j]->isObjPickedUp()) continue;
 			CollisionDir dir;
 
 			if (dir = CollisionManager::instance().checkCollision(ogre[i]->getPosition(), ogre[i]->getPosCollision(), ogre[i]->getSizeCollision(), object[j]->getPosition(), object[j]->getPosCollision(), object[j]->getSizeCollision()))
@@ -552,7 +585,7 @@ void Scene::manageCollision()
 		if (bat[i]->isEnemyDead()) continue;
 
 		for (int j = 0; j < object.size(); ++j) {
-			if (object[j]->getObjectType() != ROCK || object[j]->isObjPickedUp()) continue;
+			if (object[j]->getObjectType() != MINERAL || object[j]->isObjPickedUp()) continue;
 
 			CollisionDir dir;
 
@@ -636,28 +669,6 @@ void Scene::manageCollision()
 			}
 		}
 	}
-}
-
-void Scene::resetScene()
-{
-	for (int i = 0; i < ogre.size(); ++i) {
-		delete ogre[i];  
-	}
-	ogre.clear(); 
-
-	for (int i = 0; i < object.size(); ++i) {
-		delete object[i];  
-	}
-	object.clear();  
-
-	for (int i = 0; i < bat.size(); ++i) {
-		delete bat[i]; 
-	}
-	bat.clear(); 
-	int currentTries = player->getTries() - 1;
-	init();
-	player->setTries(currentTries);
-
 }
 
 Player* Scene::getPlayer() {

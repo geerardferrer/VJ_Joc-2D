@@ -9,27 +9,33 @@
 void Object::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, ObjectType objType)
 {
 	spritesheet.loadFromFile("images/Objects.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25f, 0.5f), &spritesheet, &shaderProgram);
+	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.2f, 0.5f), &spritesheet, &shaderProgram);
 	spritesheet.setMagFilter(GL_NEAREST);
-	sprite->setNumberAnimations(6);
+	sprite->setNumberAnimations(7);
 
 	sprite->setAnimationSpeed(COIN, 8);
 	sprite->addKeyframe(COIN, glm::vec2(0.0f, 0.0f));
 
 	sprite->setAnimationSpeed(HEART, 8);
-	sprite->addKeyframe(HEART, glm::vec2(0.25f, 0.0f));
+	sprite->addKeyframe(HEART, glm::vec2(0.0f, 0.5f));
 
 	sprite->setAnimationSpeed(ROCK, 8);
-	sprite->addKeyframe(ROCK, glm::vec2(0.5f, 0.0f));
+	sprite->addKeyframe(ROCK, glm::vec2(0.2f, 0.0f));
 
 	sprite->setAnimationSpeed(CHEST, 8);
-	sprite->addKeyframe(CHEST, glm::vec2(0.75f, 0.0f));
+	sprite->addKeyframe(CHEST, glm::vec2(0.4f, 0.0f));
 
 	sprite->setAnimationSpeed(MINERAL, 8);
-	sprite->addKeyframe(MINERAL, glm::vec2(0.5f, 0.5f));
+	sprite->addKeyframe(MINERAL, glm::vec2(0.2f, 0.5f));
 
 	sprite->setAnimationSpeed(OPEN_CHEST, 8);
-	sprite->addKeyframe(OPEN_CHEST, glm::vec2(0.75f, 0.5f));
+	sprite->addKeyframe(OPEN_CHEST, glm::vec2(0.4f, 0.5f));
+
+	sprite->setAnimationSpeed(GEMSTONE, 8);
+	sprite->addKeyframe(GEMSTONE, glm::vec2(0.6f, 0.0f));
+	sprite->addKeyframe(GEMSTONE, glm::vec2(0.8f, 0.0f));
+	sprite->addKeyframe(GEMSTONE, glm::vec2(0.6f, 0.5f));
+	sprite->addKeyframe(GEMSTONE, glm::vec2(0.8f, 0.5f));
 
 	objectType = objType;
 

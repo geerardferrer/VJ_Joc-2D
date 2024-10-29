@@ -18,9 +18,10 @@ class Practice
 #define _NUM_MINERALS 1
 #define _NUM_ROCKS 1
 #define _NUM_CHESTS 1
-#define _NUM_OBJECTS _NUM_MINERALS+_NUM_ROCKS+_NUM_CHESTS
+#define _NUM_OBJECTS _NUM_MINERALS+_NUM_ROCKS+_NUM_CHESTS+_NUM_GEMSTONE
 #define _NUM_OGRES 1
 #define _NUM_BATS 1
+#define _NUM_GEMSTONE 1
 
 public:
 	Practice();
@@ -47,6 +48,8 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
+	bool gameEnded;
+	float endGameDelay;
 
 };
 

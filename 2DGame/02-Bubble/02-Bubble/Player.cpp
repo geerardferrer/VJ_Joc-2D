@@ -336,8 +336,6 @@ void Player::update(int deltaTime)
 		else if (facingDir == RIGHT) holdingObj->setPosition(posPlayer + glm::vec2(56, 48));
 	}
 
-	cout << posPlayer.x / 32 + 2 << " " << posPlayer.y / 32 + 1 << endl;
-
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
@@ -518,6 +516,10 @@ bool Player::isGodMode() const {
 	return godMode;
 }
 
+bool Player::isDead() const {
+	return lives <= 0;
+}
+
 void Player::addPoints(int points) {
 	score += points;
 	std::cout << "Punts actuals: " << score << std::endl;
@@ -527,4 +529,8 @@ void Player::addLife() {
 	if (lives < 3)
 		lives += 1;
 	std::cout << "Vides actuals: " << lives << std::endl;
+}
+
+void Player::setVictoryStandAnimation() {
+	sprite->changeAnimation(VICTORY_STAND);
 }

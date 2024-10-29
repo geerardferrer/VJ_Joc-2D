@@ -28,6 +28,21 @@ Practice::~Practice()
 
 void Practice::init()
 {
+	for (Object* obj : object) {
+		delete obj;
+	}
+	object.clear();
+
+	for (OgreEnemy* ogreEnemy : ogre) {
+		delete ogreEnemy;
+	}
+	ogre.clear();
+
+	for (BatEnemy* batEnemy : bat) {
+		delete batEnemy;
+	}
+	bat.clear();
+
 	initShaders();
 
 	// TILEMAP
@@ -46,7 +61,8 @@ void Practice::init()
 	{
 		if (i < _NUM_ROCKS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, ROCK);
 		else if (i < _NUM_ROCKS + _NUM_MINERALS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, MINERAL);
-		else object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, CHEST);
+		else if (i < _NUM_ROCKS + _NUM_MINERALS + _NUM_CHESTS) object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, CHEST);
+		else  object[i]->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, GEMSTONE);
 
 		object[i]->setTileMap(map);
 	}
@@ -59,6 +75,9 @@ void Practice::init()
 
 	//chests
 	object[2]->setPosition(glm::vec2(34 * map->getTileSize(), (39 * map->getTileSize())));
+
+	//gemstone
+	object[3]->setPosition(glm::vec2(22 * map->getTileSize(), (35 * map->getTileSize())));
 
 
 	// OGRES
@@ -89,13 +108,20 @@ void Practice::init()
 
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH), float(SCREEN_HEIGHT), 0.f);
 	currentTime = 0.0f;
+	endGameDelay = -1.f;
 }
 
 void Practice::update(int deltaTime)
 {
+	if (gameEnded) return;
 	currentTime += deltaTime;
 
 	player->update(deltaTime);
+
+	if (player->isDead()) {
+		init();
+		return;
+	}
 
 	for (int i = 0; i < object.size(); ++i) {
 		object[i]->update(deltaTime);
@@ -375,13 +401,20 @@ void Practice::manageCollision()
 				object.erase(object.begin() + i);
 				--i;
 				break;
-				break;
 			case HEART:
 				player->addLife();
 				delete object[i];
 				object.erase(object.begin() + i);
 				--i; // Redueix l'índex per evitar saltar un element després de l'eliminació
 				break;
+			case GEMSTONE:
+				player->setVictoryStandAnimation();
+				delete object[i];
+				object.erase(object.begin() + i);
+				--i;
+				gameEnded = true;
+				endGameDelay = 3.f;
+				return;
 				break;
 			}
 
@@ -437,7 +470,7 @@ void Practice::manageCollision()
 	for (int i = 0; i < ogre.size(); ++i) {
 		if (ogre[i]->isEnemyDead()) continue;
 		for (int j = 0; j < object.size(); j++) {
-			if (object[i]->getObjectType() == CHEST || object[j]->isObjPickedUp()) continue;
+			if (object[j]->getObjectType() == CHEST || object[j]->isObjPickedUp()) continue;
 
 			CollisionDir dir;
 

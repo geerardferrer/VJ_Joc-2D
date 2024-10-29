@@ -22,9 +22,10 @@ class Scene
 #define NUM_MINERALS 6
 #define NUM_ROCKS 2
 #define NUM_CHESTS 7
-#define NUM_OBJECTS NUM_MINERALS+NUM_ROCKS+NUM_CHESTS
+#define NUM_OBJECTS NUM_MINERALS+NUM_ROCKS+NUM_CHESTS+NUM_GEMSTONE
 #define NUM_OGRES 8
 #define NUM_BATS 3
+#define NUM_GEMSTONE 1
 
 public:
 	Scene();
@@ -33,7 +34,7 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
-	void resetScene();
+	void clearScene();
 
 	Player* getPlayer();
 
@@ -51,6 +52,8 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
+	bool gameEnded;
+	float endGameDelay;
 
 };
 

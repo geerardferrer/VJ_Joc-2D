@@ -36,7 +36,6 @@ public:
 	void hasGrounded();
 
 	void pickUpObject(Object *obj);
-	void dropObject();
 	void throwObject();
 	bool canPickUpObject() const;
 
@@ -50,7 +49,9 @@ public:
 
 	void toggleGodMode();  
 	void heal();           
-	bool isGodMode() const; 
+	bool isGodMode() const, isDead() const;
+
+	void setVictoryStandAnimation();
 
 private:
 	const float acceleration = 0.3f;

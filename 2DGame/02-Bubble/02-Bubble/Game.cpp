@@ -20,9 +20,15 @@ bool Game::update(int deltaTime)
 	switch (state) {
 		case GAME_SCENE:
 			scene.update(deltaTime);
+			if (scene.getPlayer()->isDead()) {
+				scene.init();
+			}
 			break;
 		case PRACTICE:
 			practiceScene.update(deltaTime);
+			if (practiceScene.getPlayer()->isDead()) {
+				practiceScene.init();
+			}
 			break;
 		case MAIN_MENU:
 			mainMenu.update(deltaTime);
@@ -89,15 +95,41 @@ void Game::changeScene(GameScene gameScene)
 
 void Game::keyPressed(int key)
 {
-	if(key == GLFW_KEY_ESCAPE) // Escape code
+	if(key == GLFW_KEY_ESCAPE) 
 		bPlay = false;
 	keys[key] = true;
 
+	if (key == GLFW_KEY_Q) {
+		if (state != MAIN_MENU) 
+			changeScene(MAIN_MENU);  
+		return;
+	}
+
+	if (key == GLFW_KEY_R) {
+		if (state == GAME_SCENE) {
+			scene.init();  
+		}
+		else if (state == PRACTICE) {
+			practiceScene.init();  
+		}
+		return;
+	}
+
 	if (key == GLFW_KEY_G) {
-		scene.getPlayer()->toggleGodMode();  // Activa/desactiva el God Mode
+		if (state == GAME_SCENE) {
+			scene.getPlayer()->toggleGodMode();  
+		}
+		else if (state == PRACTICE) {
+			practiceScene.getPlayer()->toggleGodMode(); 
+		}
 	}
 	else if (key == GLFW_KEY_H) {
-		scene.getPlayer()->heal();  // Restaura la salut
+		if (state == GAME_SCENE) {
+			scene.getPlayer()->heal(); 
+		}
+		else if (state == PRACTICE) {
+			practiceScene.getPlayer()->heal();  
+		}
 	}
 }
 
