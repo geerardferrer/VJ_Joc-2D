@@ -17,22 +17,20 @@ void Game::init()
 
 bool Game::update(int deltaTime)
 {
-	if (quit()) {
-		changeScene(MAIN_MENU);
-		return bPlay;
-	}
 	switch (state) {
 		case GAME_SCENE:
 			scene.update(deltaTime);
 			if (scene.getPlayer()->isDead()) {
 				scene.init();
 			}
+			if (quitKeyPressed()) state = MAIN_MENU;
 			break;
 		case PRACTICE:
 			practiceScene.update(deltaTime);
 			if (practiceScene.getPlayer()->isDead()) {
 				practiceScene.init();
 			}
+			if (quitKeyPressed()) state = MAIN_MENU;
 			break;
 		case MAIN_MENU:
 			mainMenu.update(deltaTime);
@@ -184,7 +182,7 @@ bool Game::restartKeyPressed() const
 	return (keys[GLFW_KEY_R]);
 }
 
-bool Game::quit() const
+bool Game::quitKeyPressed() const
 {
 	return (keys[GLFW_KEY_Q]);
 }

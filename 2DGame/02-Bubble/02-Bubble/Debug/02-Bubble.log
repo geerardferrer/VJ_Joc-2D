@@ -1,31 +1,82 @@
-﻿Compilación iniciada a las 30/10/2024 13:28:33.
-     1>Proyecto "C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" en el nodo 2 (Build destinos).
+﻿Compilación iniciada a las 30/10/2024 13:32:55.
+     1>Proyecto "C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"..\..\..\libs\Simple OpenGL Image Library\src" /I"..\..\..\libs\glew-1.13.0\include" /I..\..\..\libs\glm /I"..\..\..\libs\glfw-3.3.8\include" /I"..\..\..\libs\irrKlang-1.6.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt GameUI.cpp Scene.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"..\..\..\libs\Simple OpenGL Image Library\src" /I"..\..\..\libs\glew-1.13.0\include" /I..\..\..\libs\glm /I"..\..\..\libs\glfw-3.3.8\include" /I"..\..\..\libs\irrKlang-1.6.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt BatEnemy.cpp CollisionManager.cpp Game.cpp GameUI.cpp MainMenu.cpp Object.cpp OgreEnemy.cpp Player.cpp Practice.cpp Scene.cpp Shader.cpp ShaderProgram.cpp Sprite.cpp Texture.cpp TileMap.cpp main.cpp
+         main.cpp
+         TileMap.cpp
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(148): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(149): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(173): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(174): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(175): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(207): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(208): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(209): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(241): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(242): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(243): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(275): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(276): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\tilemap.cpp(277): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+         Texture.cpp
+         Sprite.cpp
+         ShaderProgram.cpp
+         Shader.cpp
          Scene.cpp
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(66): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(104): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(126): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(153): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(162): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(172): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(191): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(224): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(225): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(226): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(271): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(462): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(484): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(507): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(509): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(598): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(601): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(617): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(618): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(66): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(104): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(126): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(153): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(162): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(172): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(191): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(224): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(225): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(226): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(271): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(462): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(484): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(507): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(509): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(598): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(601): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(617): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(618): warning C4018: '<': no coinciden signed/unsigned
+         Practice.cpp
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(65): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(91): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(106): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(131): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(140): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(150): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(167): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(200): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(201): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(202): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(239): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(430): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(452): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(475): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(477): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(567): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(570): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(586): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(587): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(659): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(664): warning C4018: '<': no coinciden signed/unsigned
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\practice.cpp(669): warning C4018: '<': no coinciden signed/unsigned
+         Player.cpp
+         OgreEnemy.cpp
+         Object.cpp
+         MainMenu.cpp
          GameUI.cpp
+         Game.cpp
+         CollisionManager.cpp
+         BatEnemy.cpp
          Generando código...
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\player.cpp(457): warning C4715: 'Player::getFacingDir': no todas las rutas de acceso de control devuelven un valor
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\..\libs\Simple OpenGL Image Library\projects\VC9\Debug" /LIBPATH:"..\..\..\libs\glew-1.13.0\lib\Release\Win32" /LIBPATH:"..\..\..\libs\glfw-3.3.8\lib-vc2015" /LIBPATH:"..\..\..\libs\irrKlang-1.6.0\lib\Win32-visualStudio" SOIL.lib glew32.lib glfw3.lib opengl32.lib irrKlang.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.lib" /MACHINE:X86 Debug\BatEnemy.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\..\libs\Simple OpenGL Image Library\projects\VC9\Debug" /LIBPATH:"..\..\..\libs\glew-1.13.0\lib\Release\Win32" /LIBPATH:"..\..\..\libs\glfw-3.3.8\lib-vc2015" /LIBPATH:"..\..\..\libs\irrKlang-1.6.0\lib\Win32-visualStudio" SOIL.lib glew32.lib glfw3.lib opengl32.lib irrKlang.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.lib" /MACHINE:X86 Debug\BatEnemy.obj
          Debug\CollisionManager.obj
          Debug\Game.obj
          Debug\GameUI.obj
@@ -41,9 +92,15 @@
          Debug\Sprite.obj
          Debug\Texture.obj
          Debug\TileMap.obj
-         02-Bubble.vcxproj -> C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe
-     1>Compilación del proyecto terminada "C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" (Build destinos).
+         LINK : no se encontró C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe o no lo generó el último vínculo incremental; ejecutando vínculo completo
+     1>LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
+     1>SOIL.lib(image_DXT.obj) : warning LNK4099: no se encontró PDB 'vc100.pdb' con 'SOIL.lib(image_DXT.obj)' o en 'C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+     1>SOIL.lib(image_helper.obj) : warning LNK4099: no se encontró PDB 'vc100.pdb' con 'SOIL.lib(image_helper.obj)' o en 'C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+     1>SOIL.lib(SOIL.obj) : warning LNK4099: no se encontró PDB 'vc100.pdb' con 'SOIL.lib(SOIL.obj)' o en 'C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+     1>SOIL.lib(stb_image_aug.obj) : warning LNK4099: no se encontró PDB 'vc100.pdb' con 'SOIL.lib(stb_image_aug.obj)' o en 'C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\vc100.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+         02-Bubble.vcxproj -> C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe
+     1>Compilación del proyecto terminada "C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" (Build destinos).
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:01.34
+Tiempo transcurrido 00:00:06.56

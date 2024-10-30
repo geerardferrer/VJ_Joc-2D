@@ -53,11 +53,6 @@ void MainMenu::update(int deltaTime)
 {
 	currentTime += deltaTime;
 
-	if (state == CREDITS_INFO || state == CONTROLS_INFO) {
-		sprite->update(deltaTime);
-		return;
-	}
-
 	if (delayTime <= 0) {
 		if (Game::instance().downKeyPressed() && state != CREDITS) {
 			state = static_cast<MenuState>(static_cast<int>(state) + 1);
@@ -88,6 +83,20 @@ void MainMenu::update(int deltaTime)
 		case CREDITS:
 			sprite->changeAnimation(CREDITS_INFO);
 			state = CREDITS_INFO;
+			break;
+		}
+	}
+
+	if (Game::instance().quitKeyPressed()) {
+		switch (state)
+		{
+		case CONTROLS_INFO:
+			sprite->changeAnimation(CONTROLS);
+			state = CONTROLS;
+			break;
+		case CREDITS_INFO:
+			sprite->changeAnimation(CREDITS);
+			state = CREDITS;
 			break;
 		}
 	}

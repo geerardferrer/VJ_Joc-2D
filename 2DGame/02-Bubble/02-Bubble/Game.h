@@ -58,7 +58,7 @@ public:
 	bool upKeyPressed() const;
 	bool interactKeyPressed() const;
 	bool restartKeyPressed() const;
-	bool quit() const;
+	bool quitKeyPressed() const;
 
 	ISound* playSound(const char* audioPath, bool loop);
 	void stopSound(ISound *sound);
