@@ -28,6 +28,7 @@ public:
 	void setPlayer(Player *p);
 
 private:
+	ShaderProgram *shaderProgram;
 	Texture bg_sheet, lives_sheet, numbers_sheet;
 	Sprite *bg, *lives;
 	vector<Sprite*> tries;

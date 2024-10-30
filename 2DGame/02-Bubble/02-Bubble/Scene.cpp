@@ -225,6 +225,11 @@ void Scene::render()
 	for (int i = 0; i < bat.size(); ++i) bat[i]->render();
 	for (int i = 0; i < object.size(); ++i) object[i]->render();
 
+	glm::mat4 uiProjection = glm::ortho(0.f, float(SCREEN_WIDTH), float(SCREEN_HEIGHT), 0.f);
+	texProgram.setUniformMatrix4f("projection", uiProjection);
+	modelview = glm::mat4(1.0f);
+	texProgram.setUniformMatrix4f("modelview", modelview);
+
 	UI->render();
 }
 
