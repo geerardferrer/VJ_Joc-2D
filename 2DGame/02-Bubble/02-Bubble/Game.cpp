@@ -17,6 +17,10 @@ void Game::init()
 
 bool Game::update(int deltaTime)
 {
+	if (quit()) {
+		changeScene(MAIN_MENU);
+		return bPlay;
+	}
 	switch (state) {
 		case GAME_SCENE:
 			scene.update(deltaTime);
@@ -32,10 +36,6 @@ bool Game::update(int deltaTime)
 			break;
 		case MAIN_MENU:
 			mainMenu.update(deltaTime);
-			break;
-		case CONTROLS_MENU:
-			break;
-		case CREDITS_MENU:
 			break;
 		default:
 			bPlay = false;
@@ -59,10 +59,6 @@ void Game::render()
 	case MAIN_MENU:
 		mainMenu.render();
 		break;
-	case CONTROLS_MENU:
-		break;
-	case CREDITS_MENU:
-		break;
 	default:
 		bPlay = false;
 		break;
@@ -83,10 +79,6 @@ void Game::changeScene(GameScene gameScene)
 	case MAIN_MENU:
 		mainMenu.init();
 		break;
-	case CONTROLS_MENU:
-		break;
-	case CREDITS_MENU:
-		break;
 	default:
 		bPlay = false;
 		break;
@@ -98,12 +90,6 @@ void Game::keyPressed(int key)
 	if(key == GLFW_KEY_ESCAPE) 
 		bPlay = false;
 	keys[key] = true;
-
-	if (key == GLFW_KEY_Q) {
-		if (state != MAIN_MENU) 
-			changeScene(MAIN_MENU);  
-		return;
-	}
 
 	if (key == GLFW_KEY_R) {
 		if (state == GAME_SCENE) {
@@ -198,10 +184,12 @@ bool Game::restartKeyPressed() const
 	return (keys[GLFW_KEY_R]);
 }
 
-bool Game::menuKeyPressed() const
+bool Game::quit() const
 {
-	return (keys[GLFW_KEY_M]);
+	return (keys[GLFW_KEY_Q]);
 }
+
+
 
 void Game::renderGameOverScreen()
 {

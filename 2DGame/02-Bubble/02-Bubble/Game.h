@@ -21,8 +21,6 @@ enum GameScene {
 	GAME_SCENE,
 	PRACTICE_SCENE, 
 	MAIN_MENU,
-	CONTROLS_MENU,
-	CREDITS_MENU
 };
 
 class Game
@@ -60,7 +58,7 @@ public:
 	bool upKeyPressed() const;
 	bool interactKeyPressed() const;
 	bool restartKeyPressed() const;
-	bool menuKeyPressed() const;
+	bool quit() const;
 
 	ISound* playSound(const char* audioPath, bool loop);
 	void stopSound(ISound *sound);

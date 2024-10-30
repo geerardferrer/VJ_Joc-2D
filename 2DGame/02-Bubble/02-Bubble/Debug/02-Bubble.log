@@ -1,37 +1,8 @@
-﻿Compilación iniciada a las 29/10/2024 20:39:59.
+﻿Compilación iniciada a las 30/10/2024 12:54:30.
      1>Proyecto "C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"..\..\..\libs\Simple OpenGL Image Library\src" /I"..\..\..\libs\glew-1.13.0\include" /I..\..\..\libs\glm /I"..\..\..\libs\glfw-3.3.8\include" /I"..\..\..\libs\irrKlang-1.6.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt BatEnemy.cpp Game.cpp MainMenu.cpp Object.cpp OgreEnemy.cpp Player.cpp Practice.cpp Scene.cpp main.cpp
-         main.cpp
-         Scene.cpp
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(61): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(99): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(121): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(148): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(157): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(167): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(184): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(217): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(218): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(219): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(257): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(448): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(470): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(493): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(495): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(584): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(587): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(603): warning C4018: '<': no coinciden signed/unsigned
-     1>c:\users\gerard.ferrer.oriol\vj_joc-2d\2dgame\02-bubble\02-bubble\scene.cpp(604): warning C4018: '<': no coinciden signed/unsigned
-         Object.cpp
-         Game.cpp
-         Generando código...
-         Omitiendo... (no se detectaron cambios relevantes)
-         Practice.cpp
-         Player.cpp
-         OgreEnemy.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"..\..\..\libs\Simple OpenGL Image Library\src" /I"..\..\..\libs\glew-1.13.0\include" /I..\..\..\libs\glm /I"..\..\..\libs\glfw-3.3.8\include" /I"..\..\..\libs\irrKlang-1.6.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt MainMenu.cpp
          MainMenu.cpp
-         BatEnemy.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\..\libs\Simple OpenGL Image Library\projects\VC9\Debug" /LIBPATH:"..\..\..\libs\glew-1.13.0\lib\Release\Win32" /LIBPATH:"..\..\..\libs\glfw-3.3.8\lib-vc2015" /LIBPATH:"..\..\..\libs\irrKlang-1.6.0\lib\Win32-visualStudio" SOIL.lib glew32.lib glfw3.lib opengl32.lib irrKlang.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.lib" /MACHINE:X86 Debug\BatEnemy.obj
          Debug\CollisionManager.obj
@@ -53,4 +24,4 @@
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:02.50
+Tiempo transcurrido 00:00:00.85

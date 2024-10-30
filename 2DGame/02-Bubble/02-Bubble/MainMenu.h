@@ -9,7 +9,7 @@
 
 enum MenuState
 {
-	PLAY, PRACTICE, CONTROLS, CREDITS
+	PLAY, PRACTICE, CONTROLS, CREDITS, CONTROLS_INFO, CREDITS_INFO
 };
 
 // Scene contains all the entities of our game.

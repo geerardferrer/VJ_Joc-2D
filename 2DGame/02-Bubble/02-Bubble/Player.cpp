@@ -108,7 +108,9 @@ void Player::update(int deltaTime)
 		return;
 	}
 
+
 	sprite->update(deltaTime);
+
 
 	// MOVIMENT HORITZONTAL
 	if (Game::instance().leftKeyPressed() && !Game::instance().downKeyPressed())

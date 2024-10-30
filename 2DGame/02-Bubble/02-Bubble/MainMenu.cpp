@@ -22,9 +22,9 @@ void MainMenu::init()
 	currentTime = 0.0f;
 
 	menu.loadFromFile("images/Main_Menu.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(SCREEN_WIDTH, SCREEN_HEIGHT), glm::vec2(0.5f, 0.5f), &menu, &texProgram);
+	sprite = Sprite::createSprite(glm::ivec2(SCREEN_WIDTH, SCREEN_HEIGHT), glm::vec2(0.5f, 0.25f), &menu, &texProgram);
 	menu.setMagFilter(GL_NEAREST);
-	sprite->setNumberAnimations(4);
+	sprite->setNumberAnimations(6);
 
 	sprite->setAnimationSpeed(PLAY, 1);
 	sprite->addKeyframe(PLAY, glm::vec2(0.f, 0.f));
@@ -33,10 +33,16 @@ void MainMenu::init()
 	sprite->addKeyframe(PRACTICE, glm::vec2(0.5f, 0.f));
 
 	sprite->setAnimationSpeed(CONTROLS, 1);
-	sprite->addKeyframe(CONTROLS, glm::vec2(0.f, 0.5f));
+	sprite->addKeyframe(CONTROLS, glm::vec2(0.f, 0.25f));
 
 	sprite->setAnimationSpeed(CREDITS, 1);
-	sprite->addKeyframe(CREDITS, glm::vec2(0.5f, 0.5f));
+	sprite->addKeyframe(CREDITS, glm::vec2(0.5f, 0.25f));
+
+	sprite->setAnimationSpeed(CREDITS_INFO, 1);
+	sprite->addKeyframe(CREDITS_INFO, glm::vec2(0.5f, 0.5f));
+
+	sprite->setAnimationSpeed(CONTROLS_INFO, 1);
+	sprite->addKeyframe(CONTROLS_INFO, glm::vec2(0.0f, 0.5f));
 
 	state = PLAY;
 
@@ -46,6 +52,11 @@ void MainMenu::init()
 void MainMenu::update(int deltaTime)
 {
 	currentTime += deltaTime;
+
+	if (state == CREDITS_INFO || state == CONTROLS_INFO) {
+		sprite->update(deltaTime);
+		return;
+	}
 
 	if (delayTime <= 0) {
 		if (Game::instance().downKeyPressed() && state != CREDITS) {
@@ -71,10 +82,12 @@ void MainMenu::update(int deltaTime)
 			Game::instance().changeScene(PRACTICE_SCENE);
 			break;
 		case CONTROLS:
-			Game::instance().changeScene(CONTROLS_MENU);
+			sprite->changeAnimation(CONTROLS_INFO);
+			state = CONTROLS_INFO;
 			break;
 		case CREDITS:
-			Game::instance().changeScene(CREDITS_MENU);
+			sprite->changeAnimation(CREDITS_INFO);
+			state = CREDITS_INFO;
 			break;
 		}
 	}
@@ -95,6 +108,7 @@ void MainMenu::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 
 	sprite->render();
+
 }
 
 void MainMenu::initShaders()
