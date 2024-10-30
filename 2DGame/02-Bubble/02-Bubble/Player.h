@@ -42,7 +42,9 @@ public:
 	bool isHoldingObj() const;
 	Object* holdingObject() const;
 	
+	int getLives() const;
 	int getTries() const;
+	int getScore() const;
 	void setTries(int currentTries);
 	void addPoints(int points);
 	void addLife();

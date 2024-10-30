@@ -54,6 +54,11 @@ void Scene::init()
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
 
+	// UI
+	UI = GameUI::createGameUI();
+	UI->init(texProgram);
+	UI->setPlayer(player);
+
 	// OBJECT
 	for (int i = 0; i < NUM_OBJECTS; ++i) object.push_back(new Object());
 
@@ -174,6 +179,8 @@ void Scene::update(int deltaTime)
 		}
 	}
 
+	UI->update(deltaTime);
+
 	manageCollision();
 
 
@@ -217,6 +224,8 @@ void Scene::render()
 	for (int i = 0; i < ogre.size(); ++i) ogre[i]->render();
 	for (int i = 0; i < bat.size(); ++i) bat[i]->render();
 	for (int i = 0; i < object.size(); ++i) object[i]->render();
+
+	UI->render();
 }
 
 void Scene::initShaders()

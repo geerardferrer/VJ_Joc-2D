@@ -15,6 +15,7 @@
     <ClInclude Include="BatEnemy.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameUI.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="OgreEnemy.h" />
     <ClInclude Include="Player.h" />
@@ -31,6 +32,7 @@
     <ClCompile Include="BatEnemy.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Player.cpp" />

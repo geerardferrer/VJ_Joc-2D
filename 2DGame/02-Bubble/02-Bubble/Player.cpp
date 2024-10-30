@@ -496,8 +496,16 @@ glm::vec2 Player::getVelocity() const
 	return velPlayer;
 }
 
+int Player::getLives() const {
+	return lives;
+}
+
 int Player::getTries() const {
 	return tries;
+}
+
+int Player::getScore() const {
+	return score;
 }
 
 void Player::setTries(int currentTries) {

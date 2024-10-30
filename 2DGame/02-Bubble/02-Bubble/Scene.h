@@ -7,6 +7,7 @@
 #include "ShaderProgram.h"
 #include "CollisionManager.h"
 #include "TileMap.h"
+#include "GameUI.h"
 #include "Player.h"
 #include "Object.h"
 #include "OgreEnemy.h"
@@ -45,6 +46,7 @@ private:
 
 private:
 	TileMap *map;
+	GameUI *UI;
 	Player *player;
 	vector<Object*> object;
 	vector<OgreEnemy*> ogre;

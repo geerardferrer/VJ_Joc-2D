@@ -1,12 +1,25 @@
-﻿Compilación iniciada a las 30/10/2024 12:54:30.
-     1>Proyecto "C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" en el nodo 2 (Build destinos).
+﻿Compilación iniciada a las 30/10/2024 13:04:16.
+     1>Proyecto "C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"..\..\..\libs\Simple OpenGL Image Library\src" /I"..\..\..\libs\glew-1.13.0\include" /I..\..\..\libs\glm /I"..\..\..\libs\glfw-3.3.8\include" /I"..\..\..\libs\irrKlang-1.6.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt MainMenu.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /I"..\..\..\libs\Simple OpenGL Image Library\src" /I"..\..\..\libs\glew-1.13.0\include" /I..\..\..\libs\glm /I"..\..\..\libs\glfw-3.3.8\include" /I"..\..\..\libs\irrKlang-1.6.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt BatEnemy.cpp Game.cpp GameUI.cpp MainMenu.cpp Object.cpp OgreEnemy.cpp Player.cpp Practice.cpp Scene.cpp main.cpp
+         Player.cpp
+         GameUI.cpp
+         Generando código...
+     1>c:\users\pau.zaragoza\vj_joc-2d\2dgame\02-bubble\02-bubble\player.cpp(457): warning C4715: 'Player::getFacingDir': no todas las rutas de acceso de control devuelven un valor
+         Omitiendo... (no se detectaron cambios relevantes)
+         main.cpp
+         Scene.cpp
+         Practice.cpp
+         OgreEnemy.cpp
+         Object.cpp
          MainMenu.cpp
+         Game.cpp
+         BatEnemy.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\..\libs\Simple OpenGL Image Library\projects\VC9\Debug" /LIBPATH:"..\..\..\libs\glew-1.13.0\lib\Release\Win32" /LIBPATH:"..\..\..\libs\glfw-3.3.8\lib-vc2015" /LIBPATH:"..\..\..\libs\irrKlang-1.6.0\lib\Win32-visualStudio" SOIL.lib glew32.lib glfw3.lib opengl32.lib irrKlang.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.lib" /MACHINE:X86 Debug\BatEnemy.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe" /INCREMENTAL /NOLOGO /LIBPATH:"..\..\..\libs\Simple OpenGL Image Library\projects\VC9\Debug" /LIBPATH:"..\..\..\libs\glew-1.13.0\lib\Release\Win32" /LIBPATH:"..\..\..\libs\glfw-3.3.8\lib-vc2015" /LIBPATH:"..\..\..\libs\irrKlang-1.6.0\lib\Win32-visualStudio" SOIL.lib glew32.lib glfw3.lib opengl32.lib irrKlang.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.lib" /MACHINE:X86 Debug\BatEnemy.obj
          Debug\CollisionManager.obj
          Debug\Game.obj
+         Debug\GameUI.obj
          Debug\main.obj
          Debug\MainMenu.obj
          Debug\Player.obj
@@ -19,9 +32,9 @@
          Debug\Sprite.obj
          Debug\Texture.obj
          Debug\TileMap.obj
-         02-Bubble.vcxproj -> C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe
-     1>Compilación del proyecto terminada "C:\Users\gerard.ferrer.oriol\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" (Build destinos).
+         02-Bubble.vcxproj -> C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\Debug\02-Bubble.exe
+     1>Compilación del proyecto terminada "C:\Users\pau.zaragoza\VJ_Joc-2D\2DGame\02-Bubble\02-Bubble\02-Bubble.vcxproj" (Build destinos).
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:00.85
+Tiempo transcurrido 00:00:01.29
